@@ -56,8 +56,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "./../../Fudge",
-    "./../../Build",
+    "./../Fudge",
+    "./../Build",
     "Source"
   ]
 }
