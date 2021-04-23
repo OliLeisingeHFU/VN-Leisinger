@@ -2,18 +2,8 @@
   "bundle": {
     "commonSourceDirectory": "..",
     "sourceFiles": [
-      "../Source/Base.ts",
-      "../Source/Animation.ts",
-      "../Source/Character.ts",
-      "../Source/Global.ts",
-      "../Source/Inventory.ts",
-      "../Source/Location.ts",
-      "../Source/Menu.ts",
-      "../Source/Progress.ts",
-      "../Source/Sound.ts",
-      "../Source/Speech.ts",
-      "../Source/Text.ts",
-      "../Source/Transition.ts"
+      "../Source/01_Class.ts",
+      "../Source/XMain.ts"
     ],
     "js": {
       "sections": [
@@ -25,7 +15,7 @@
         },
         {
           "pos": 15,
-          "end": 130773,
+          "end": 1973,
           "kind": "text"
         }
       ],
@@ -53,11 +43,11 @@
       "sections": [
         {
           "pos": 0,
-          "end": 18341,
+          "end": 821,
           "kind": "text"
         }
       ]
     }
   },
-  "version": "4.1.5"
+  "version": "4.2.3"
 }

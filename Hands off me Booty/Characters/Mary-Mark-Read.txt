@@ -7,6 +7,7 @@ Personality:
 Acts tougher than she really needs to.
 
 Looks:
+Elf
 Tomboy
 
 Skills:
@@ -14,6 +15,7 @@ Guns
 
 Like:
 Guns
+
 
 Dislikes:
 Swords
