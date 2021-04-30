@@ -14,6 +14,7 @@ var Droidhaven;
             }
         };
         await Droidhaven.ƒS.Location.show(Droidhaven.locations.school);
+        await FudgeStory.update(1);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Thoughts, text.Thoughts.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Thoughts, "You are like a child. Wacht this: S U C C");
     }
@@ -42,7 +43,7 @@ var Droidhaven;
     Droidhaven.locations = {
         school: {
             name: "Droidhaven",
-            background: "./Images/Backgrounds/Glitch.jpg"
+            background: "Images/Backgrounds/Glitch.jpg"
         }
     };
     //define characters

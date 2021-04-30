@@ -1,0 +1,39 @@
+https://www.youtube.com/watch?v=R4Liy6q_Gq4
+
+Storyfinding:
+						Trap Pirates singing Sea Shanties. also space, apparently 
+						Kaguya-sama like game. After every Episode it says "X wins - because ...".
+Winner: Cyberpunk Mechanic Action. VA11-HALL-A except its about a mechanic in Motor City.
+
+
+Genre:
+Slice-of-Life, Cyberpunk, big sad
+
+Profile/Steckbriefe/Character Concepts:
+Siehe Character folder
+
+Unterhaltung:
+Verfolgt vn ein Ziel?
+explore life in Motor City and pay all your bills.
+
+hat story sinn?
+den Spieler traurig zu machen (hoffentlich)
+
+welche unterhaltungselemente sollen eingesetzt werden
+Musik, Minigames, 
+
+Ziele definieren:
+- Alle Rechnungen zahlen
+- Dafür sorgen, dass die Garage nicht schließen muss
+
+Endings:
+- Worst Ending: [Name] verliert die Garage. Stays Alone.
+- Bad Ending: [Name] verliert die Garage. Bekommt Freund/Freundin.
+- Neutral Ending: kann garage behalten, still alone tho.
+- Good Ending: kann garage behalten, bekommt GF/BF.
+- Best Ending: Garage wird einiges bekannter.
+
+Also:
+Hintergründe sammeln
+Musik und Sound
+Scribbles auf GitHub

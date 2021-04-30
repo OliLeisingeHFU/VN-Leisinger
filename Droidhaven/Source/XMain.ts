@@ -24,7 +24,7 @@ namespace Droidhaven {
   export let locations = {
     school: {
       name: "Droidhaven",
-      background: "./Images/Backgrounds/Glitch.jpg"
+      background: "Images/Backgrounds/Glitch.jpg"
 
     }
   };
