@@ -22,17 +22,16 @@ namespace Droidhaven {
 
   //define Locations
   export let locations = {
-    school: {
+    school_outside: {
       name: "Droidhaven",
-      background: "Images/Backgrounds/Glitch.jpg"
-
+      background: "Images/Backgrounds/school_outside.png"
     }
   };
 
   //define characters
   export let characters = {
     Thoughts: {
-      name: ""
+      name: "Thoughts"
     },
     Protagonist: {
       name: "Fumio"

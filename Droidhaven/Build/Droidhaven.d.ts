@@ -16,7 +16,7 @@ declare namespace Droidhaven {
         click: string;
     };
     let locations: {
-        school: {
+        school_outside: {
             name: string;
             background: string;
         };

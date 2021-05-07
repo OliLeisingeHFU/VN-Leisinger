@@ -593,6 +593,25 @@ var FudgeStory;
             Progress.data = _data;
         }
         /**
+         * Returns an object to use to track logical data like score, states, textual inputs given by the play etc.
+         */
+        static setDataInterface(_data, _dom) {
+            Progress.setData(_data); // test if this is sufficient to support previous save/load functionality
+            let hndProxy = {
+                set: function (_target, _prop, _value) {
+                    console.log("ProgressData: " + _prop.toString() + " = " + _value);
+                    Reflect.set(_target, _prop, _value);
+                    Progress.updateInterface(_dom);
+                    return true;
+                }
+                // get: function (_target: Object, _prop: PropertyKey): Object {
+                //   return "Hallo";
+                // }
+            };
+            let proxy = new Proxy(Progress.data, hndProxy);
+            return proxy;
+        }
+        /**
          * Opens a dialog for file selection, loads selected file and restarts the program with its contents as url-searchstring
          */
         static async load() {
@@ -660,6 +679,13 @@ var FudgeStory;
                 sound: FudgeStory.Sound.serialize()
             };
             console.log("Stored", Progress.serialization);
+        }
+        static updateInterface(_dom) {
+            for (let prop in Progress.data) {
+                let elements = _dom.querySelectorAll("[name=" + prop + "]");
+                for (let element of elements)
+                    element.value = Reflect.get(Progress.data, prop).toString();
+            }
         }
         static async splash(_text) {
             console.log("Splash");
