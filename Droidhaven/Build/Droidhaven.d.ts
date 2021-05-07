@@ -28,7 +28,7 @@ declare namespace Droidhaven {
         Protagonist: {
             name: string;
         };
-        Nanako: {
+        Dorothy: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {

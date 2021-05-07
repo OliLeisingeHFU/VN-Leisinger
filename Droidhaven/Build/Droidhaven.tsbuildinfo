@@ -3,7 +3,7 @@
     "commonSourceDirectory": "..",
     "sourceFiles": [
       "../Source/01_Class.ts",
-      "../Source/XMain.ts"
+      "../Source/Main.ts"
     ],
     "js": {
       "sections": [
@@ -15,7 +15,7 @@
         },
         {
           "pos": 15,
-          "end": 2596,
+          "end": 5342,
           "kind": "text"
         }
       ],
@@ -43,7 +43,7 @@
       "sections": [
         {
           "pos": 0,
-          "end": 878,
+          "end": 879,
           "kind": "text"
         }
       ]

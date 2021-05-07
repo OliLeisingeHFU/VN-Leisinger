@@ -37,12 +37,12 @@ namespace Droidhaven {
     Protagonist: {
       name: "Fumio"
     },
-    Nanako: {
-      name:"Nanako",
-      origin: ƒ.ORIGIN2D.BOTTOMRIGHT,
+    Dorothy: {
+      name:"Dorothy",
+      origin: ƒS.ORIGIN.BOTTOMRIGHT,
       pose: {
         normal: "",
-        smile: ""
+        smile: "Images/Characters/Dorothy.png"
       }
     }
   };
