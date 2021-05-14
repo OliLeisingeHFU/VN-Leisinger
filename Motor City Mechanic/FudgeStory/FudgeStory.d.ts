@@ -344,6 +344,10 @@ declare namespace FudgeStory {
          */
         static setData(_data: Object): void;
         /**
+         * Returns an object to use to track logical data like score, states, textual inputs given by the play etc.
+         */
+        static setDataInterface<T>(_data: T, _dom: HTMLElement): T;
+        /**
          * Opens a dialog for file selection, loads selected file and restarts the program with its contents as url-searchstring
          */
         static load(): Promise<void>;
@@ -371,6 +375,7 @@ declare namespace FudgeStory {
         private static start;
         private static restoreData;
         private static storeData;
+        private static updateInterface;
         private static splash;
         private static splashBlob;
     }
@@ -423,11 +428,11 @@ declare namespace FudgeStory {
         /**
          * Displays the [[Character]]s name and the given text at once
          */
-        static set(_character: Object, _text: string): void;
+        static set(_character: Object, _text: string, _class?: string): void;
         /**
          * Displays the [[Character]]s name and slowly writes the text letter by letter
          */
-        static tell(_character: Object, _text: string, _waitForSignalNext?: boolean): Promise<void>;
+        static tell(_character: Object, _text: string, _waitForSignalNext?: boolean, _class?: string): Promise<void>;
         /**
          * Defines the pauses used by ticker between letters and before a paragraph in milliseconds
          */

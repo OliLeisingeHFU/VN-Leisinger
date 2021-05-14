@@ -2,6 +2,9 @@ declare namespace Droidhaven {
     function Text(): ƒS.SceneReturn;
 }
 declare namespace Droidhaven {
+    function firstClass(): ƒS.SceneReturn;
+}
+declare namespace Droidhaven {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
     let transitions: {
@@ -17,6 +20,14 @@ declare namespace Droidhaven {
     };
     let locations: {
         school_outside: {
+            name: string;
+            background: string;
+        };
+        teacherroom_outside: {
+            name: string;
+            background: string;
+        };
+        classroom_front: {
             name: string;
             background: string;
         };
@@ -36,5 +47,14 @@ declare namespace Droidhaven {
                 smile: string;
             };
         };
+        Nanako: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                normal: string;
+                smile: string;
+            };
+        };
     };
+    let playerClass: string;
 }

@@ -25,6 +25,14 @@ namespace Droidhaven {
     school_outside: {
       name: "Droidhaven",
       background: "Images/Backgrounds/school_outside.png"
+    },
+    teacherroom_outside: {
+      name: "Teachers Room",
+      background: "Images/Backgrounds/Teacherroom_front.png"
+    },
+    classroom_front: {
+      name: "Classroom",
+      background: "Images/Backgrounds/classroom_frontview.png"
     }
   };
 
@@ -43,8 +51,18 @@ namespace Droidhaven {
         normal: "",
         smile: "Images/Characters/Dorothy.png"
       }
+    },
+    Nanako: {
+      name: "Nanako",
+      origin: ƒS.ORIGIN.BOTTOMRIGHT,
+      pose: {
+        normal: "",
+        smile: "Images/Characters/Dorothy.png"
+      }
     }
   };
+
+  export let playerClass: string;
 
   document.addEventListener("keydown", hndKeyPress);
 
@@ -67,7 +85,8 @@ namespace Droidhaven {
   function start(_event: Event): void {
     //define sequence of scenes
     let scenes: ƒS.Scenes = [
-      { scene: Text, name: "Scene" }
+      { scene: Text, name: "Scene" },
+      { scene: firstClass, name: "FirstClass"}
     ];
 
     // start the sequence

@@ -593,6 +593,25 @@ var FudgeStory;
             Progress.data = _data;
         }
         /**
+         * Returns an object to use to track logical data like score, states, textual inputs given by the play etc.
+         */
+        static setDataInterface(_data, _dom) {
+            Progress.setData(_data); // test if this is sufficient to support previous save/load functionality
+            let hndProxy = {
+                set: function (_target, _prop, _value) {
+                    console.log("ProgressData: " + _prop.toString() + " = " + _value);
+                    Reflect.set(_target, _prop, _value);
+                    Progress.updateInterface(_dom);
+                    return true;
+                }
+                // get: function (_target: Object, _prop: PropertyKey): Object {
+                //   return "Hallo";
+                // }
+            };
+            let proxy = new Proxy(Progress.data, hndProxy);
+            return proxy;
+        }
+        /**
          * Opens a dialog for file selection, loads selected file and restarts the program with its contents as url-searchstring
          */
         static async load() {
@@ -660,6 +679,13 @@ var FudgeStory;
                 sound: FudgeStory.Sound.serialize()
             };
             console.log("Stored", Progress.serialization);
+        }
+        static updateInterface(_dom) {
+            for (let prop in Progress.data) {
+                let elements = _dom.querySelectorAll("[name=" + prop + "]");
+                for (let element of elements)
+                    element.value = Reflect.get(Progress.data, prop).toString();
+            }
         }
         static async splash(_text) {
             console.log("Splash");
@@ -795,13 +821,13 @@ var FudgeStory;
         /**
          * Displays the [[Character]]s name and the given text at once
          */
-        static set(_character, _text) {
+        static set(_character, _text, _class) {
             Speech.show();
             let name = _character ? Reflect.get(_character, "name") : "";
             let nameTag = Speech.div.querySelector("name");
             let textTag = Speech.div.querySelector("content");
             nameTag.innerHTML = "";
-            Speech.div.className = name;
+            Speech.div.className = _class || name;
             if (name) {
                 nameTag.innerHTML = name;
             }
@@ -810,10 +836,10 @@ var FudgeStory;
         /**
          * Displays the [[Character]]s name and slowly writes the text letter by letter
          */
-        static async tell(_character, _text, _waitForSignalNext = true) {
+        static async tell(_character, _text, _waitForSignalNext = true, _class) {
             Speech.show();
             let done = false;
-            Speech.set(_character, "");
+            Speech.set(_character, "", _class);
             let buffer = document.createElement("div");
             let textTag = Speech.div.querySelector("content");
             buffer.innerHTML = _text;

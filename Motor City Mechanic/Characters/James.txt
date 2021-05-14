@@ -21,6 +21,7 @@ Beer
 Cars
 Videogames
 Racing
+MTG
 
 Dislikes:
 arrogant people
