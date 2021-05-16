@@ -40,6 +40,7 @@ var Droidhaven;
         await Droidhaven.ƒS.Location.show(Droidhaven.locations.teacherroom_outside);
         await Droidhaven.ƒS.Character.show(Droidhaven.characters.Dorothy, Droidhaven.characters.Dorothy.pose.smile, Droidhaven.ƒS.positions.bottomcenter);
         await Droidhaven.ƒS.update(1);
+        await Droidhaven.signalDelay(10);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Protagonist, text.Protagonist.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0001);
@@ -47,7 +48,7 @@ var Droidhaven;
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Thoughts, text.Thoughts.T0002);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0002);
         // Choice:
-        let firstDialogueElement = await Droidhaven.ƒS.Menu.getInput(firstDialogueAnswers, "class");
+        let firstDialogueElement = await Droidhaven.ƒS.Menu.getInput(firstDialogueAnswers, "choice");
         switch (firstDialogueElement) {
             case firstDialogueAnswers.pSayMage:
                 Droidhaven.playerClass = "Mage";
@@ -63,7 +64,7 @@ var Droidhaven;
                 break;
             case firstDialogueAnswers.pSayHeal:
                 Droidhaven.playerClass = "Heal";
-                await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, "Ah, a very noble goal. I'm sure the students there are all very nice. That would be in room H3A1.");
+                await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, "Ah, a very noble goal. I'm sure the students there are all very nice. That would be in room H30DST.");
                 break;
             case firstDialogueAnswers.pSayBlade:
                 Droidhaven.playerClass = "Blade";
@@ -85,6 +86,8 @@ var Droidhaven;
 var Droidhaven;
 (function (Droidhaven) {
     async function firstClass() {
+        await Droidhaven.ƒS.Location.show(Droidhaven.locations.classroom_front);
+        await Droidhaven.ƒS.update(1);
         switch (Droidhaven.playerClass) {
             case "Mage":
                 mageClass();
@@ -112,8 +115,6 @@ var Droidhaven;
                 T0000: "Hi Honey!"
             }
         };
-        await Droidhaven.ƒS.Location.show(Droidhaven.locations.classroom_front);
-        await Droidhaven.ƒS.update(1);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Thoughts, text.Thoughts.T0000);
     }
 })(Droidhaven || (Droidhaven = {}));
@@ -189,6 +190,10 @@ var Droidhaven;
                 break;
         }
     }
+    async function signalDelay(seconds) {
+        return Droidhaven.ƒS.Progress.defineSignal([() => Droidhaven.ƒS.Progress.delay(seconds)]);
+    }
+    Droidhaven.signalDelay = signalDelay;
     console.log("FudgeStory template starting");
     window.addEventListener("load", start);
     function start(_event) {

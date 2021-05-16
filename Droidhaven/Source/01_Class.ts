@@ -1,6 +1,8 @@
 namespace Droidhaven {
     export async function firstClass(): ƒS.SceneReturn {
-        switch(playerClass){
+        await ƒS.Location.show(locations.classroom_front);
+        await ƒS.update(1);
+        switch(saveData.ProtagClass.name){
             case "Mage":
                 mageClass();
                 break;
@@ -29,13 +31,11 @@ namespace Droidhaven {
               T0000: "Oh, uhh, hello there!"
             },
       
-            Dorothy: {
+            Nanako: {
               T0000: "Hi Honey!"
             }
           }
-
-        await ƒS.Location.show(locations.classroom_front);
-        await ƒS.update(1);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0000);
+        saveData.ProtagClass.level++;
     }
 }

@@ -43,6 +43,7 @@ namespace Droidhaven {
     await ƒS.Location.show(locations.teacherroom_outside);
     await ƒS.Character.show(characters.Dorothy, characters.Dorothy.pose.smile, ƒS.positions.bottomcenter);
     await ƒS.update(1);
+    ƒS.Text.print("Dreck-Internet");
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0000);
     await ƒS.Speech.tell(characters.Protagonist, text.Protagonist.T0000);
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0001);
@@ -51,27 +52,27 @@ namespace Droidhaven {
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0002);
 
     // Choice:
-    let firstDialogueElement = await ƒS.Menu.getInput(firstDialogueAnswers, "class");
+    let firstDialogueElement = await ƒS.Menu.getInput(firstDialogueAnswers, "choice");
 
     switch (firstDialogueElement){
       case firstDialogueAnswers.pSayMage:
-        playerClass = "Mage";
+        saveData.ProtagClass.name = "Mage";
         await ƒS.Speech.tell(characters.Dorothy, "An aspiring magician. I see! For that you'll want to go to room M1A1.");
         break;
       case firstDialogueAnswers.pSayEngi:
-        playerClass = "Engi";
+        saveData.ProtagClass.name = "Engi";
         await ƒS.Speech.tell(characters.Dorothy, "Engineer, you say? Those are probably my favorite students. They can be found in room 2187. That's in a different building.");
         break;
       case firstDialogueAnswers.pSayGuns:
-        playerClass = "Guns";
+        saveData.ProtagClass.name = "Guns";
         await ƒS.Speech.tell(characters.Dorothy, "Oh, a gunslinger? And they still sent you to me? Have fun getting there. The shooting range is on the other side of campus, that's quite the walk. On the map that would be building CT-99.");
         break;
       case firstDialogueAnswers.pSayHeal:
-        playerClass = "Heal";
+        saveData.ProtagClass.name = "Heal";
         await ƒS.Speech.tell(characters.Dorothy, "Ah, a very noble goal. I'm sure the students there are all very nice. That would be in room H30DST.");
         break;
       case firstDialogueAnswers.pSayBlade:
-        playerClass = "Blade";
+        saveData.ProtagClass.name = "Blade";
         await ƒS.Speech.tell(characters.Dorothy, "Very Cool! Gonna go for the noble white knight or an edgelord lone wanderer type of swordsman? haha, just kidding. Anyway, you'd have to go to room X0W0.");
         break;
     }

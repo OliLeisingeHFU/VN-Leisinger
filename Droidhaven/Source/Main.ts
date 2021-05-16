@@ -62,7 +62,12 @@ namespace Droidhaven {
     }
   };
 
-  export let playerClass: string;
+  export let saveData = {
+    ProtagClass: {
+      name: "none",
+      level: 0
+    }
+  };
 
   document.addEventListener("keydown", hndKeyPress);
 
@@ -79,6 +84,10 @@ namespace Droidhaven {
     }
   }
 
+  export async function signalDelay(seconds: number): Promise<ƒS.Signal>{
+    return ƒS.Progress.defineSignal([() => ƒS.Progress.delay(seconds)]);
+  }
+
   console.log("FudgeStory template starting");
 
   window.addEventListener("load", start);
@@ -88,7 +97,7 @@ namespace Droidhaven {
       { scene: Text, name: "Scene" },
       { scene: firstClass, name: "FirstClass"}
     ];
-
+    ƒS.Progress.setData(saveData);
     // start the sequence
     ƒS.Progress.go(scenes);
   }

@@ -57,4 +57,5 @@ declare namespace Droidhaven {
         };
     };
     let playerClass: string;
+    function signalDelay(seconds: number): Promise<ƒS.Signal>;
 }
