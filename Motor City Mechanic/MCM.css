@@ -1,0 +1,104 @@
+scene {
+  width: 1280px;
+  height: 720px;
+  display: inline-block;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0pc;
+  padding: 0px;
+  background-color: lavender;
+  overflow: hidden;
+  font-family: 'Gill Sans', 'GillSans MT', sans-serif;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+speech {
+  position: absolute;
+  background-color: #222222cc;
+  bottom: 0;
+  left: 0;
+  height: 15%;
+  width: 100%;
+  color: #cccccc;
+}
+speech name {
+  display:block;
+  padding: 2px;
+  color: #222222;
+  background-color: #ccccccdd;
+}
+speech content {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+speech.Thoughts {
+  font-style: italic;
+}
+
+speech.Thoughts name{
+  visibility: hidden;
+}
+
+speech.Protagonist name {
+  color: rgb(202, 199, 201);
+}
+
+/* INVENTORY */
+
+dialog.inventory {
+  background-color: #555555DD;
+  color: white;
+}
+
+dialog.inventory li{
+  position: relative;
+  width: 350px;
+  height: 100px;
+  padding: 5px;
+  border: 2px solid;
+}
+
+dialog.inventory img {
+  float: left;
+  height: 100px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+dialog.inventory name {
+  font-size: x-large;
+}
+
+dialog.inventory amount::before {
+  content: " x";
+}
+
+dialog.inventory amount {
+  font-size: x-large;
+}
+
+dialog.inventory description {
+  display: block;
+  padding-top: 5px;
+}
+
+dialog.inventory button {
+  right: 5px;
+  position: absolute;
+  top: 5px;
+  color: white;
+  background-color: #AA0000;
+  border: 1px;
+  border-radius: 6px;
+  width: 20px;
+  height: 20px;
+}

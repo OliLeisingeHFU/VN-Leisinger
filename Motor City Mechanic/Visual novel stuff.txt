@@ -27,8 +27,8 @@ Ziele definieren:
 - Dafür sorgen, dass die Garage nicht schließen muss
 
 Endings:
-- Worst Ending: [Name] verliert die Garage. Stays Alone.
-- Bad Ending: [Name] verliert die Garage. Bekommt Freund/Freundin.
+- Worst Ending: JJ verliert die Garage. Stays Alone.
+- Bad Ending: JJ verliert die Garage. Bekommt Freund/Freundin.
 - Neutral Ending: kann garage behalten, still alone tho.
 - Good Ending: kann garage behalten, bekommt GF/BF.
 - Best Ending: Garage wird einiges bekannter.
