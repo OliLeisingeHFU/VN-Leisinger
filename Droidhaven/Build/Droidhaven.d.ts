@@ -2,7 +2,7 @@ declare namespace Droidhaven {
     function Text(): ƒS.SceneReturn;
 }
 declare namespace Droidhaven {
-    function firstClass(): ƒS.SceneReturn;
+    function mageClass(): ƒS.SceneReturn;
 }
 declare namespace Droidhaven {
     export import ƒ = FudgeCore;
@@ -56,6 +56,11 @@ declare namespace Droidhaven {
             };
         };
     };
-    let playerClass: string;
+    let saveData: {
+        ProtagClass: {
+            name: string;
+            level: number;
+        };
+    };
     function signalDelay(seconds: number): Promise<ƒS.Signal>;
 }

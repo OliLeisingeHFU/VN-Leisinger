@@ -54,12 +54,16 @@ speech.Protagonist name {
 
 /* INVENTORY */
 
-dialog.inventory {
+dialog[type="inventory"] {
   background-color: #555555DD;
   color: white;
 }
 
-dialog.inventory li{
+dialog[type="inventory"] > ul {
+  list-style-type: none;
+}
+
+dialog[type="inventory"] > ul > li{
   position: relative;
   width: 350px;
   height: 100px;
@@ -67,31 +71,31 @@ dialog.inventory li{
   border: 2px solid;
 }
 
-dialog.inventory img {
+dialog[type="inventory"] img {
   float: left;
   height: 100px;
   position: absolute;
   right: 5px;
   top: 5px;
 }
-dialog.inventory name {
+dialog[type="inventory"] name {
   font-size: x-large;
 }
 
-dialog.inventory amount::before {
+dialog[type="inventory"] amount::before {
   content: " x";
 }
 
-dialog.inventory amount {
+dialog[type="inventory"] amount {
   font-size: x-large;
 }
 
-dialog.inventory description {
+dialog[type="inventory"] description {
   display: block;
   padding-top: 5px;
 }
 
-dialog.inventory button {
+dialog[type="inventory"] button {
   right: 5px;
   position: absolute;
   top: 5px;

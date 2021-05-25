@@ -45,7 +45,7 @@ namespace Droidhaven {
       name: "Fumio"
     },
     Dorothy: {
-      name:"Dorothy",
+      name: "Dorothy",
       origin: ƒS.ORIGIN.BOTTOMRIGHT,
       pose: {
         normal: "",
@@ -71,10 +71,10 @@ namespace Droidhaven {
 
   document.addEventListener("keydown", hndKeyPress);
 
-  async function hndKeyPress(_event: KeyboardEvent): Promise<void>{
-    switch (_event.code){
+  async function hndKeyPress(_event: KeyboardEvent): Promise<void> {
+    switch (_event.code) {
       case ƒ.KEYBOARD_CODE.F4:
-      	console.log("Save");
+        console.log("Save");
         await ƒS.Progress.save();
         break;
       case ƒ.KEYBOARD_CODE.F8:
@@ -84,7 +84,7 @@ namespace Droidhaven {
     }
   }
 
-  export async function signalDelay(seconds: number): Promise<ƒS.Signal>{
+  export async function signalDelay(seconds: number): Promise<ƒS.Signal> {
     return ƒS.Progress.defineSignal([() => ƒS.Progress.delay(seconds)]);
   }
 
@@ -95,8 +95,10 @@ namespace Droidhaven {
     //define sequence of scenes
     let scenes: ƒS.Scenes = [
       { scene: Text, name: "Scene" },
-      { scene: firstClass, name: "FirstClass"}
+      { scene: mageClass, name: "MageClass", id: "mageClass"}
     ];
+    //different paths: give scene id. can also add which scene is next with "next:". then return sceneid at end of previous scene
+
     ƒS.Progress.setData(saveData);
     // start the sequence
     ƒS.Progress.go(scenes);

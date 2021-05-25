@@ -86,5 +86,22 @@ namespace Droidhaven {
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0005);
     await ƒS.Character.hideAll();
     await ƒS.update(1);
+
+    switch (saveData.ProtagClass.name){
+      case "Mage":
+        return "mageClass";
+      case "Engi":
+
+      break;
+      case "Guns":
+
+      break;
+      case "Heal":
+
+      break;
+      case "Blade":
+
+      break;
+    }
   }
 }

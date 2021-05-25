@@ -1,0 +1,37 @@
+In-Game time: 1 Week: Min 1 Scene per day, more added later.
+
+Monday:
+Introduction of James and Justice. First day after apprenticeship.
+Amelias car needs a checkup.
+
+Minigame: check whether car is fine: cables (200N¥), motors (800N¥), Battery (230N¥), tires (150N¥), windows (200N¥). write in checklist.
+Repairs needed: cables, battery and windows.
+
+tell Amelia whats wrong with her car. if something is missing she is distrustful of future services from you.
+if more is fixed than necessary she is mad at you and thinks you overcharged her intentionally.
+if 2 or more mistakes were made, she won't return on a later day.
+
+
+
+Tuesday:
+
+
+Wednesday:
+
+
+Thursday:
+
+
+Friday:
+
+
+Saturday:
+
+
+Sunday:
+
+
+
+Endings (Minimum)
+Konnte alle rechnungen bezahlen: neutrales ende, keine finanzielle Veränderung, character progression
+konnte nicht alle rechungen bezahlen: schlechtes ende, wird aus der wohnung geworfen, muss in der Garage leben, negative character progression

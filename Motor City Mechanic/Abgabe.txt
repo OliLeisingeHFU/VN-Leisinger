@@ -1,0 +1,17 @@
+Für Abgabe:
+Konzept
+    Character Konzepte
+
+Auswahlmöglichkeiten
+Branching Narrative
+GUI
+Punkte verteilungssystem:
+    - Money
+    - Influence with characters
+Inventory
+Music
+Transitions
+styling
+Namens feld
+Novel pages
+verschiedene Enden

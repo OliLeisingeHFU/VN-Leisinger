@@ -40,7 +40,7 @@ var Droidhaven;
         await Droidhaven.ƒS.Location.show(Droidhaven.locations.teacherroom_outside);
         await Droidhaven.ƒS.Character.show(Droidhaven.characters.Dorothy, Droidhaven.characters.Dorothy.pose.smile, Droidhaven.ƒS.positions.bottomcenter);
         await Droidhaven.ƒS.update(1);
-        await Droidhaven.signalDelay(10);
+        Droidhaven.ƒS.Text.print("Dreck-Internet");
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Protagonist, text.Protagonist.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0001);
@@ -51,23 +51,23 @@ var Droidhaven;
         let firstDialogueElement = await Droidhaven.ƒS.Menu.getInput(firstDialogueAnswers, "choice");
         switch (firstDialogueElement) {
             case firstDialogueAnswers.pSayMage:
-                Droidhaven.playerClass = "Mage";
+                Droidhaven.saveData.ProtagClass.name = "Mage";
                 await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, "An aspiring magician. I see! For that you'll want to go to room M1A1.");
                 break;
             case firstDialogueAnswers.pSayEngi:
-                Droidhaven.playerClass = "Engi";
+                Droidhaven.saveData.ProtagClass.name = "Engi";
                 await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, "Engineer, you say? Those are probably my favorite students. They can be found in room 2187. That's in a different building.");
                 break;
             case firstDialogueAnswers.pSayGuns:
-                Droidhaven.playerClass = "Guns";
+                Droidhaven.saveData.ProtagClass.name = "Guns";
                 await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, "Oh, a gunslinger? And they still sent you to me? Have fun getting there. The shooting range is on the other side of campus, that's quite the walk. On the map that would be building CT-99.");
                 break;
             case firstDialogueAnswers.pSayHeal:
-                Droidhaven.playerClass = "Heal";
+                Droidhaven.saveData.ProtagClass.name = "Heal";
                 await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, "Ah, a very noble goal. I'm sure the students there are all very nice. That would be in room H30DST.");
                 break;
             case firstDialogueAnswers.pSayBlade:
-                Droidhaven.playerClass = "Blade";
+                Droidhaven.saveData.ProtagClass.name = "Blade";
                 await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, "Very Cool! Gonna go for the noble white knight or an edgelord lone wanderer type of swordsman? haha, just kidding. Anyway, you'd have to go to room X0W0.");
                 break;
         }
@@ -80,18 +80,9 @@ var Droidhaven;
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0005);
         await Droidhaven.ƒS.Character.hideAll();
         await Droidhaven.ƒS.update(1);
-    }
-    Droidhaven.Text = Text;
-})(Droidhaven || (Droidhaven = {}));
-var Droidhaven;
-(function (Droidhaven) {
-    async function firstClass() {
-        await Droidhaven.ƒS.Location.show(Droidhaven.locations.classroom_front);
-        await Droidhaven.ƒS.update(1);
-        switch (Droidhaven.playerClass) {
+        switch (Droidhaven.saveData.ProtagClass.name) {
             case "Mage":
-                mageClass();
-                break;
+                return "mageClass";
             case "Engi":
                 break;
             case "Guns":
@@ -102,21 +93,32 @@ var Droidhaven;
                 break;
         }
     }
-    Droidhaven.firstClass = firstClass;
+    Droidhaven.Text = Text;
+})(Droidhaven || (Droidhaven = {}));
+var Droidhaven;
+(function (Droidhaven) {
     async function mageClass() {
+        await Droidhaven.ƒS.Location.show(Droidhaven.locations.classroom_front);
+        await Droidhaven.ƒS.update(1);
         let text = {
             Thoughts: {
-                T0000: "Okay, my very first Lesson 'Introduction to Magic'."
+                T0000: "Okay, my very first Lesson 'Introduction to Magic'.",
+                T0001: "Oh, no! He's weird"
             },
             Protagonist: {
-                T0000: "Oh, uhh, hello there!"
+                T0000: "Oh, uhh, hi... I am Fumio..."
             },
-            Dorothy: {
-                T0000: "Hi Honey!"
+            Nanako: {
+                T0000: "Ohayo, new student-kun! I am Nanako, master of shadow magic."
             }
         };
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Thoughts, text.Thoughts.T0000);
+        await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Nanako, text.Nanako.T0000);
+        await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Thoughts, text.Thoughts.T0001);
+        await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Protagonist, text.Protagonist.T0000);
+        Droidhaven.saveData.ProtagClass.level++;
     }
+    Droidhaven.mageClass = mageClass;
 })(Droidhaven || (Droidhaven = {}));
 var Droidhaven;
 (function (Droidhaven) {
@@ -177,6 +179,12 @@ var Droidhaven;
             }
         }
     };
+    Droidhaven.saveData = {
+        ProtagClass: {
+            name: "none",
+            level: 0
+        }
+    };
     document.addEventListener("keydown", hndKeyPress);
     async function hndKeyPress(_event) {
         switch (_event.code) {
@@ -200,8 +208,10 @@ var Droidhaven;
         //define sequence of scenes
         let scenes = [
             { scene: Droidhaven.Text, name: "Scene" },
-            { scene: Droidhaven.firstClass, name: "FirstClass" }
+            { scene: Droidhaven.mageClass, name: "MageClass", id: "mageClass" }
         ];
+        //different paths: give scene id. can also add which scene is next with "next:".
+        Droidhaven.ƒS.Progress.setData(Droidhaven.saveData);
         // start the sequence
         Droidhaven.ƒS.Progress.go(scenes);
     }
