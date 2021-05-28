@@ -2,11 +2,22 @@ namespace Droidhaven {
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
 
+  //define saveData
+  export let saveData = {
+    ProtagName: {
+      name: ""
+    },
+    ProtagClass: {
+      name: "none",
+      level: 0
+    }
+  };
+
   //define transitions
   export let transitions = {
-    clock: {
+    car: {
       duration: 3,
-      alpha: "",
+      alpha: "Images/Transitions/car-transition.png",
       edge: 0.33
     }
   };
@@ -62,12 +73,7 @@ namespace Droidhaven {
     }
   };
 
-  export let saveData = {
-    ProtagClass: {
-      name: "none",
-      level: 0
-    }
-  };
+
 
   document.addEventListener("keydown", hndKeyPress);
 

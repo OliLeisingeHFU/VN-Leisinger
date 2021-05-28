@@ -42,7 +42,7 @@ namespace Droidhaven {
     await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0001);
     await ƒS.Location.show(locations.teacherroom_outside);
     await ƒS.Character.show(characters.Dorothy, characters.Dorothy.pose.smile, ƒS.positions.bottomcenter);
-    await ƒS.update(1);
+    await ƒS.update(transitions.car.duration, transitions.car.alpha, transitions.car.edge);
     ƒS.Text.print("Dreck-Internet");
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0000);
     await ƒS.Speech.tell(characters.Protagonist, text.Protagonist.T0000);

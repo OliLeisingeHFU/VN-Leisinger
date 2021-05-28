@@ -39,7 +39,7 @@ var Droidhaven;
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Thoughts, text.Thoughts.T0001);
         await Droidhaven.ƒS.Location.show(Droidhaven.locations.teacherroom_outside);
         await Droidhaven.ƒS.Character.show(Droidhaven.characters.Dorothy, Droidhaven.characters.Dorothy.pose.smile, Droidhaven.ƒS.positions.bottomcenter);
-        await Droidhaven.ƒS.update(1);
+        await Droidhaven.ƒS.update(Droidhaven.transitions.car.duration, Droidhaven.transitions.car.alpha, Droidhaven.transitions.car.edge);
         Droidhaven.ƒS.Text.print("Dreck-Internet");
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Protagonist, text.Protagonist.T0000);
@@ -124,11 +124,21 @@ var Droidhaven;
 (function (Droidhaven) {
     Droidhaven.ƒ = FudgeCore;
     Droidhaven.ƒS = FudgeStory;
+    //define saveData
+    Droidhaven.saveData = {
+        ProtagName: {
+            name: ""
+        },
+        ProtagClass: {
+            name: "none",
+            level: 0
+        }
+    };
     //define transitions
     Droidhaven.transitions = {
-        clock: {
+        car: {
             duration: 3,
-            alpha: "",
+            alpha: "Images/Transitions/car-transition.png",
             edge: 0.33
         }
     };
@@ -160,7 +170,7 @@ var Droidhaven;
             name: "Thoughts"
         },
         Protagonist: {
-            name: "Fumio"
+            name: Droidhaven.saveData.ProtagName.name
         },
         Dorothy: {
             name: "Dorothy",
@@ -177,12 +187,6 @@ var Droidhaven;
                 normal: "",
                 smile: "Images/Characters/Dorothy.png"
             }
-        }
-    };
-    Droidhaven.saveData = {
-        ProtagClass: {
-            name: "none",
-            level: 0
         }
     };
     document.addEventListener("keydown", hndKeyPress);
@@ -210,7 +214,7 @@ var Droidhaven;
             { scene: Droidhaven.Text, name: "Scene" },
             { scene: Droidhaven.mageClass, name: "MageClass", id: "mageClass" }
         ];
-        //different paths: give scene id. can also add which scene is next with "next:".
+        //different paths: give scene id. can also add which scene is next with "next:". then return sceneid at end of previous scene
         Droidhaven.ƒS.Progress.setData(Droidhaven.saveData);
         // start the sequence
         Droidhaven.ƒS.Progress.go(scenes);

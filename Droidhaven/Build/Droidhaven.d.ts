@@ -7,8 +7,17 @@ declare namespace Droidhaven {
 declare namespace Droidhaven {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
+    let saveData: {
+        ProtagName: {
+            name: string;
+        };
+        ProtagClass: {
+            name: string;
+            level: number;
+        };
+    };
     let transitions: {
-        clock: {
+        car: {
             duration: number;
             alpha: string;
             edge: number;
@@ -54,12 +63,6 @@ declare namespace Droidhaven {
                 normal: string;
                 smile: string;
             };
-        };
-    };
-    let saveData: {
-        ProtagClass: {
-            name: string;
-            level: number;
         };
     };
     function signalDelay(seconds: number): Promise<ƒS.Signal>;
