@@ -7,14 +7,22 @@ declare namespace Droidhaven {
     let sound: {
         backgroundTheme: string;
         restaurant: string;
+        ramsay: string;
     };
     let locations: {
         restaurant: {
             name: string;
             background: string;
         };
+        black: {
+            name: string;
+            background: string;
+        };
     };
     let characters: {
+        Narrator: {
+            name: string;
+        };
         Karen: {
             name: string;
             origin: ƒ.ORIGIN2D;

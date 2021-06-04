@@ -2,7 +2,7 @@
 var Droidhaven;
 (function (Droidhaven) {
     async function restaurant() {
-        Droidhaven.ƒS.Sound.fade(Droidhaven.sound.restaurant, 0.2, 0.5, true);
+        Droidhaven.ƒS.Sound.fade(Droidhaven.sound.restaurant, 0.2, 3, true);
         await Droidhaven.ƒS.Location.show(Droidhaven.locations.restaurant);
         await Droidhaven.ƒS.Character.show(Droidhaven.characters.Karen, Droidhaven.characters.Karen.pose.normal, Droidhaven.ƒS.positions.bottomleft);
         await Droidhaven.ƒS.Character.show(Droidhaven.characters.Waiter, Droidhaven.characters.Waiter.pose.normal, Droidhaven.ƒS.positions.bottomright);
@@ -11,19 +11,35 @@ var Droidhaven;
             Karen: {
                 T0000: "Can I talk to you manager?",
                 T0001: "I ordered these shrimps fifteen minutes ago and now they come and they are COLD?",
-                T0002: "Warm then up then, or GIVE ME YOUR MANAGER"
+                T0002: "Warm then up then, or GIVE ME YOUR MANAGER",
+                T0003: "Eww, they taste disgusting. What have you done?!"
             },
             Waiter: {
                 T0000: "What is wrong?",
                 T0001: "Ma'ám, on the menu it says they are 'cold shrimps', what did you expect?",
-                T0002: "Of course ma'am, your wish is our pleasure"
+                T0002: "Of course ma'am, your wish is our pleasure",
+                T0003: "Here you go ma'am, your warmed up cocktail shrimps."
+            },
+            Narrator: {
+                T0000: "Einige Zeit später."
             }
         };
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Karen, text.Karen.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Waiter, text.Waiter.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Karen, text.Karen.T0001);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Waiter, text.Waiter.T0001);
+        await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Karen, text.Karen.T0002);
+        await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Waiter, text.Waiter.T0002);
         Droidhaven.ƒS.Sound.fade(Droidhaven.sound.restaurant, 0, 1);
+        await Droidhaven.ƒS.Location.show(Droidhaven.locations.black);
+        Droidhaven.ƒS.Character.hideAll();
+        await Droidhaven.ƒS.update(1);
+        Droidhaven.ƒS.Sound.fade(Droidhaven.sound.restaurant, 0.2, 2, true);
+        Droidhaven.ƒS.Sound.play(Droidhaven.sound.ramsay, 0.1, false);
+        await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Narrator, text.Narrator.T0000);
+        await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Waiter, text.Waiter.T0003);
+        await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Karen, text.Karen.T0003);
+        Droidhaven.ƒS.Sound.fade(Droidhaven.sound.restaurant, 0, 3);
     }
     Droidhaven.restaurant = restaurant;
 })(Droidhaven || (Droidhaven = {}));
@@ -36,17 +52,25 @@ var Droidhaven;
         //Musik
         backgroundTheme: "",
         //Sound
-        restaurant: "Sound/Ambiance/crowded.mp3"
+        restaurant: "Sound/Ambiance/crowded.mp3",
+        ramsay: "Sound/Ambiance/ramsay-chan.mp3"
     };
     //define Locations
     Droidhaven.locations = {
         restaurant: {
             name: "restaurant",
             background: "Images/Backgrounds/res.jpg"
+        },
+        black: {
+            name: "black",
+            background: "Images/Backgrounds/black.png"
         }
     };
     //define characters
     Droidhaven.characters = {
+        Narrator: {
+            name: ""
+        },
         Karen: {
             name: "Karen",
             origin: Droidhaven.ƒS.ORIGIN.BOTTOMLEFT,
