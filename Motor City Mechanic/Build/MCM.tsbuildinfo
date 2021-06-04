@@ -3,7 +3,7 @@
     "commonSourceDirectory": "..",
     "sourceFiles": [
       "../Source/Main.ts",
-      "../Source/Scenes/00_Drinking.ts"
+      "../Source/Scenes/D1_Morning.ts"
     ],
     "js": {
       "sections": [
@@ -15,7 +15,7 @@
         },
         {
           "pos": 15,
-          "end": 1908,
+          "end": 5146,
           "kind": "text"
         }
       ],
@@ -43,7 +43,7 @@
       "sections": [
         {
           "pos": 0,
-          "end": 528,
+          "end": 1302,
           "kind": "text"
         }
       ]

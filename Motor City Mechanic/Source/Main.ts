@@ -3,15 +3,46 @@ namespace MCM {
   export import ƒS = FudgeStory;
 
   export let locations = {
-    nightstreet: {
-      name: "nightstreet",
-      background: "Images/Backgrounds/Street-at-Night.jpg"
+    JJ_apartement_out: {
+      name: "JJ_apartement_out",
+      background: "Images/Backgrounds/JJ_apartement_outside.jpg"
+    },
+    JJ_apartement_in: {
+      name: "JJ_apartement_in",
+      background: "Images/Backgrounds/JJ_apartement_inside.jpg"
+    },
+    MC_street_day: {
+      name: "MC_street_day",
+      background: "Images/Backgrounds/MC_streets_day.jpg"
+    },
+    workshop: {
+      name: "JU_workshop",
+      background: "Images/Backgrounds/JU_workshop.jpg"
+    },
+    black: {
+      name: "black",
+      background: "Images/Backgrounds/black.png"
     }
   }
 
   export let characters = {
     Thoughts: {
       name: "Thoughts"
+    },
+    JJ: {
+      name: "JJ"
+    },
+    Justice: {
+      name: "Justice",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Justice/.png",
+        normal: "Images/Characters/Justice/neutral.png",
+        smile: "Images/Characters/Justice/smile.png",
+        angry: "Images/Characters/Justice/angry.png",
+        sad: "Images/Characters/Justice/sad.png",
+        thinking: "Images/Characters/Justice/thinking.png"
+      }
     }
   }
 
@@ -41,7 +72,7 @@ namespace MCM {
   window.addEventListener("load", start);
   function start(_event: Event): void {
     let scenes: ƒS.Scenes = [
-      { scene: Drinking, name: "Scene" }
+      { scene: D1_Morning, name: "Scene" }
     ];
 
     // start the sequence

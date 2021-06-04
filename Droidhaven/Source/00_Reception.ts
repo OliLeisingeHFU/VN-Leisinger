@@ -36,6 +36,13 @@ namespace Droidhaven {
       pSayBlade: "I want to become a master of the blade."
     }
 
+    let slideAni: ƒS.AnimationDefinition = {
+      start: { translation: ƒS.positions.bottomleft},
+      end: { translation: ƒS.positions.bottomright},
+      duration: 5,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+
     await ƒS.Location.show(locations.school_outside);
     await ƒS.update(1);
     await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0000);
@@ -43,7 +50,6 @@ namespace Droidhaven {
     await ƒS.Location.show(locations.teacherroom_outside);
     await ƒS.Character.show(characters.Dorothy, characters.Dorothy.pose.smile, ƒS.positions.bottomcenter);
     await ƒS.update(transitions.car.duration, transitions.car.alpha, transitions.car.edge);
-    ƒS.Text.print("Dreck-Internet");
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0000);
     await ƒS.Speech.tell(characters.Protagonist, text.Protagonist.T0000);
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0001);
@@ -84,7 +90,11 @@ namespace Droidhaven {
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0004);
     await ƒS.Speech.tell(characters.Protagonist, text.Protagonist.T0003);
     await ƒS.Speech.tell(characters.Dorothy, text.Dorothy.T0005);
-    await ƒS.Character.hideAll();
+    ƒS.Character.hideAll();
+    // animation test
+    await ƒS.Character.animate(characters.Dorothy, characters.Dorothy.pose.smile, slideAni);
+
+    
     await ƒS.update(1);
 
     switch (saveData.ProtagClass.name){

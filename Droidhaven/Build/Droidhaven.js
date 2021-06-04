@@ -33,6 +33,12 @@ var Droidhaven;
             pSayHeal: "I'm here to become a Healer.",
             pSayBlade: "I want to become a master of the blade."
         };
+        let slideAni = {
+            start: { translation: Droidhaven.ƒS.positions.bottomleft },
+            end: { translation: Droidhaven.ƒS.positions.bottomright },
+            duration: 5,
+            playmode: Droidhaven.ƒS.ANIMATION_PLAYMODE.PLAYONCE
+        };
         await Droidhaven.ƒS.Location.show(Droidhaven.locations.school_outside);
         await Droidhaven.ƒS.update(1);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Thoughts, text.Thoughts.T0000);
@@ -40,7 +46,6 @@ var Droidhaven;
         await Droidhaven.ƒS.Location.show(Droidhaven.locations.teacherroom_outside);
         await Droidhaven.ƒS.Character.show(Droidhaven.characters.Dorothy, Droidhaven.characters.Dorothy.pose.smile, Droidhaven.ƒS.positions.bottomcenter);
         await Droidhaven.ƒS.update(Droidhaven.transitions.car.duration, Droidhaven.transitions.car.alpha, Droidhaven.transitions.car.edge);
-        Droidhaven.ƒS.Text.print("Dreck-Internet");
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Protagonist, text.Protagonist.T0000);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0001);
@@ -78,7 +83,9 @@ var Droidhaven;
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0004);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Protagonist, text.Protagonist.T0003);
         await Droidhaven.ƒS.Speech.tell(Droidhaven.characters.Dorothy, text.Dorothy.T0005);
-        await Droidhaven.ƒS.Character.hideAll();
+        Droidhaven.ƒS.Character.hideAll();
+        // animation test
+        await Droidhaven.ƒS.Character.animate(Droidhaven.characters.Dorothy, Droidhaven.characters.Dorothy.pose.smile, slideAni);
         await Droidhaven.ƒS.update(1);
         switch (Droidhaven.saveData.ProtagClass.name) {
             case "Mage":
@@ -170,7 +177,7 @@ var Droidhaven;
             name: "Thoughts"
         },
         Protagonist: {
-            name: Droidhaven.saveData.ProtagName.name
+            name: "Fumio"
         },
         Dorothy: {
             name: "Dorothy",

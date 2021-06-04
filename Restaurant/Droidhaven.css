@@ -1,0 +1,57 @@
+scene {
+  width: 1280px;
+  height: 720px;
+  display: inline-block;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0pc;
+  padding: 0px;
+  background-color: lavender;
+  overflow: hidden;
+  font-family: 'Gill Sans', 'GillSans MT', sans-serif;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+speech {
+  position: absolute;
+  background-color: #222222cc;
+  bottom: 0;
+  left: 0;
+  height: 15%;
+  width: 100%;
+  color: #cccccc;
+}
+speech name {
+  display:block;
+  padding: 2px;
+  color: #222222;
+  background-color: #ccccccdd;
+}
+speech content {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+speech.Thoughts {
+  font-style: italic;
+}
+
+speech.Thoughts name{
+  visibility: hidden;
+}
+
+speech.Dorothy name {
+  color: rgb(194, 30, 106);
+}
+
+speech.Protagonist name {
+  color: rgb(202, 199, 201);
+}
