@@ -178,6 +178,8 @@ var FudgeStory;
             // _pose.cmpTransform.addEventListener(ƒ.EVENT.MUTATE, () => Base.viewport.draw());
             // ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, () => Base.viewport.draw());
             let cmpAnimator = new ƒ.ComponentAnimator(_animation, _playmode);
+            for (let cmpOldAnimator of _pose.getComponents(ƒ.ComponentAnimator))
+                _pose.removeComponent(cmpOldAnimator);
             _pose.addComponent(cmpAnimator);
             cmpAnimator.addEventListener("componentActivate" /* COMPONENT_ACTIVATE */, Animation.trackComponents);
             cmpAnimator.addEventListener("componentDeactivate" /* COMPONENT_DEACTIVATE */, Animation.trackComponents);
@@ -694,9 +696,10 @@ var FudgeStory;
             splash.style.height = "100vh";
             splash.style.width = "100vw";
             splash.style.textAlign = "center";
-            splash.style.backgroundColor = "white";
+            // splash.style.color = "white";
+            // splash.style.backgroundColor = "#1C1C1C";
             splash.style.cursor = "pointer";
-            // splash.innerHTML = "<img src='../../Images/Splash.png'/>";
+            splash.innerHTML = "<img src='../Images/Splash.png'/>";
             splash.innerHTML = `<img src="data:image/gif;base64,${Progress.splashBlob()}"/>`;
             splash.innerHTML += "<p>" + _text + "</p>";
             splash.showModal();
@@ -739,6 +742,7 @@ var FudgeStory;
             let sound = Sound.sounds.get(_url);
             if (!sound || _loop != sound.loop)
                 sound = new Sound(_url, _loop);
+            sound.cmpAudio.volume = _volume;
             sound.cmpAudio.play(true);
             return sound;
         }
@@ -821,13 +825,13 @@ var FudgeStory;
         /**
          * Displays the [[Character]]s name and the given text at once
          */
-        static set(_character, _text) {
+        static set(_character, _text, _class) {
             Speech.show();
             let name = _character ? Reflect.get(_character, "name") : "";
             let nameTag = Speech.div.querySelector("name");
             let textTag = Speech.div.querySelector("content");
             nameTag.innerHTML = "";
-            Speech.div.className = name;
+            Speech.div.className = _class || name;
             if (name) {
                 nameTag.innerHTML = name;
             }
@@ -836,10 +840,10 @@ var FudgeStory;
         /**
          * Displays the [[Character]]s name and slowly writes the text letter by letter
          */
-        static async tell(_character, _text, _waitForSignalNext = true) {
+        static async tell(_character, _text, _waitForSignalNext = true, _class) {
             Speech.show();
             let done = false;
-            Speech.set(_character, "");
+            Speech.set(_character, "", _class);
             let buffer = document.createElement("div");
             let textTag = Speech.div.querySelector("content");
             buffer.innerHTML = _text;
@@ -850,7 +854,7 @@ var FudgeStory;
                     return;
                 console.log("Ticker interrupted");
                 Speech.time.clearAllTimers();
-                Speech.set(_character, _text);
+                Speech.set(_character, _text, _class);
                 _resolve(null);
             });
             await Promise.race([prmTick, prmInput]);
