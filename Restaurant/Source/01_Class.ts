@@ -33,12 +33,16 @@ namespace Droidhaven {
         ƒS.Sound.fade(sound.restaurant, 0, 1);
         await ƒS.Location.show(locations.black);
         ƒS.Character.hideAll();
-        await ƒS.update(1);
-
-
-        ƒS.Sound.fade(sound.restaurant, 0.2, 2, true)
-        ƒS.Sound.play(sound.ramsay, 0.1, false);
+        await ƒS.update(0);
         await ƒS.Speech.tell(characters.Narrator, text.Narrator.T0000);
+        await ƒS.update(0);
+        await ƒS.Location.show(locations.restaurant);
+        await ƒS.Character.show(characters.Karen, characters.Karen.pose.normal, ƒS.positions.bottomleft);
+        await ƒS.Character.show(characters.Waiter, characters.Waiter.pose.normal, ƒS.positions.bottomright);
+        await ƒS.update(1);
+        ƒS.Sound.fade(sound.restaurant, 0.2, 2, true)
+        ƒS.Sound.fade(sound.ramsay, 0.05, 1, false);
+        
         await ƒS.Speech.tell(characters.Waiter, text.Waiter.T0003);
         await ƒS.Speech.tell(characters.Karen, text.Karen.T0003);
         ƒS.Sound.fade(sound.restaurant, 0, 3);
