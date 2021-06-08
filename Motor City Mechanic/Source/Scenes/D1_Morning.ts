@@ -49,5 +49,7 @@ namespace MCM {
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0001);
         await ƒS.Speech.tell(characters.Justice, text.Justice.T0002);
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0002);
+
+        saveData.state.scratch += 100;
     }
   }

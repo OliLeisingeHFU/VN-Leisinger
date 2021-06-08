@@ -1,6 +1,13 @@
 declare namespace MCM {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
+    let saveData: {
+        score: number;
+        ended: boolean;
+        state: {
+            scratch: number;
+        };
+    };
     let locations: {
         JJ_apartement_out: {
             name: string;

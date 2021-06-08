@@ -2,6 +2,14 @@ namespace MCM {
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
 
+  export let saveData = {
+    score: 0,
+    ended: false,
+    state: {
+      scratch: 0
+    }
+  }
+
   export let locations = {
     JJ_apartement_out: {
       name: "JJ_apartement_out",
@@ -75,6 +83,8 @@ namespace MCM {
       { scene: D1_Morning, name: "Scene" }
     ];
 
+    let uiElement: HTMLElement = document.querySelector("[type=interface]");
+    saveData.state = ƒS.Progress.setDataInterface(saveData.state, uiElement);
     // start the sequence
     ƒS.Progress.go(scenes);
   }

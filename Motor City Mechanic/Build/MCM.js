@@ -3,6 +3,13 @@ var MCM;
 (function (MCM) {
     MCM.ƒ = FudgeCore;
     MCM.ƒS = FudgeStory;
+    MCM.saveData = {
+        score: 0,
+        ended: false,
+        state: {
+            scratch: 0
+        }
+    };
     MCM.locations = {
         JJ_apartement_out: {
             name: "JJ_apartement_out",
@@ -70,6 +77,8 @@ var MCM;
         let scenes = [
             { scene: MCM.D1_Morning, name: "Scene" }
         ];
+        let uiElement = document.querySelector("[type=interface]");
+        MCM.saveData.state = MCM.ƒS.Progress.setDataInterface(MCM.saveData.state, uiElement);
         // start the sequence
         MCM.ƒS.Progress.go(scenes);
     }
@@ -124,6 +133,7 @@ var MCM;
         await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0001);
         await MCM.ƒS.Speech.tell(MCM.characters.Justice, text.Justice.T0002);
         await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0002);
+        MCM.saveData.state.scratch += 100;
     }
     MCM.D1_Morning = D1_Morning;
 })(MCM || (MCM = {}));
