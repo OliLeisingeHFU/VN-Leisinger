@@ -78,7 +78,7 @@ var MCM;
             { scene: MCM.D1_Morning, name: "Scene" }
         ];
         let uiElement = document.querySelector("[type=interface]");
-        MCM.saveData.state = MCM.ƒS.Progress.setDataInterface(MCM.saveData.state, uiElement);
+        MCM.saveData.state = MCM.ƒS.Progress.setData(MCM.saveData.state, uiElement);
         // start the sequence
         MCM.ƒS.Progress.go(scenes);
     }

@@ -10,6 +10,62 @@ namespace MCM {
     }
   }
 
+  // Audio Control
+  let volume: number = 1.0;
+
+  export function incrementVolume(): void {
+    if(volume < 1.0){
+      volume += 0.1;
+    ƒS.Sound.setVolume(music.backGroundTheme, volume);
+    }
+  }
+
+  export function decrementVolume(): void {
+    if(volume > 0){
+      volume -= 0.1;
+    ƒS.Sound.setVolume(music.backGroundTheme, volume);
+    }
+  }
+
+  export let music = {
+    backGroundTheme: ""
+  }
+
+  // Menu
+  let ingameMenu = {
+    save: "Save",
+    load: "Load",
+    close: "Close",
+    volumeUp: "+",
+    volumeDown: "-",
+    credits: "Credits",
+    about: "About"
+  }
+
+  let gameMenu: ƒS.Menu;
+
+  async function menuFunctions(_opt: string): Promise<void>{
+    console.log(_opt);
+    switch(_opt){
+      case ingameMenu.save:
+        await ƒS.Progress.save();
+        break;
+      case ingameMenu.load:
+        await ƒS.Progress.load();
+        break;
+      case ingameMenu.volumeUp:
+        incrementVolume();
+        break;
+      case ingameMenu.volumeDown:
+        decrementVolume();
+        break;
+      case ingameMenu.close:
+        gameMenu.close();
+        break;
+    }
+  }
+
+
   export let locations = {
     JJ_apartement_out: {
       name: "JJ_apartement_out",
@@ -79,13 +135,21 @@ namespace MCM {
 
   window.addEventListener("load", start);
   function start(_event: Event): void {
+    //Menu
+    gameMenu = ƒS.Menu.create(ingameMenu, menuFunctions, "gameMenu");
+
+
     let scenes: ƒS.Scenes = [
       { scene: D1_Morning, name: "Scene" }
     ];
 
     let uiElement: HTMLElement = document.querySelector("[type=interface]");
-    saveData.state = ƒS.Progress.setDataInterface(saveData.state, uiElement);
+    saveData.state = ƒS.Progress.setData(saveData.state, uiElement);
     // start the sequence
     ƒS.Progress.go(scenes);
   }
 }
+
+// for inventory: https://stackoverflow.com/questions/25152463/how-to-use-typescript-on-a-button-click
+// for inventory: https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
+// pictures: https://www.artbreeder.com/
