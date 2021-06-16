@@ -107,6 +107,20 @@ namespace MCM {
         sad: "Images/Characters/Justice/sad.png",
         thinking: "Images/Characters/Justice/thinking.png"
       }
+    },
+    Unknown: {
+      name: "???"
+    },
+    Amelia: {
+      name: "Amelia",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Amelia/.png",
+        normal: "Images/Characters/Amelia/neutral.png",
+        smile: "Images/Characters/Amelia/smile.png",
+        angry: "Images/Characters/Amelia/angry.png",
+        sad: "Images/Characters/Amelia/sad.png"
+      }
     }
   }
 

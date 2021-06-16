@@ -4,8 +4,8 @@ Monday:
 Introduction of James and Justice. First day after apprenticeship.
 Amelias car needs a checkup.
 
-Minigame: check whether car is fine: cables (200N¥), motors (800N¥), Battery (230N¥), tires (150N¥), windows (200N¥). write in checklist.
-Repairs needed: cables, battery and windows.
+Minigame: check whether car is fine: cables (200N¥), motors (800N¥), Battery (300N¥), tires (300N¥), windows (200N¥). write in checklist.
+Repairs needed: cables, battery and tires.
 
 tell Amelia whats wrong with her car. if something is missing she is distrustful of future services from you.
 if more is fixed than necessary she is mad at you and thinks you overcharged her intentionally.
