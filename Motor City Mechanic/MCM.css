@@ -1,4 +1,6 @@
 scene {
+  width: 2500px;
+  height: 1667px;
   display: inline-block;
   position: relative;
 }

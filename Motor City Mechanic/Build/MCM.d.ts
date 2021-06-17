@@ -8,6 +8,11 @@ declare namespace MCM {
             scratch: number;
         };
     };
+    function incrementVolume(): void;
+    function decrementVolume(): void;
+    let music: {
+        backGroundTheme: string;
+    };
     let locations: {
         JJ_apartement_out: {
             name: string;
@@ -47,6 +52,20 @@ declare namespace MCM {
                 angry: string;
                 sad: string;
                 thinking: string;
+            };
+        };
+        Unknown: {
+            name: string;
+        };
+        Amelia: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                pathtemplate: string;
+                normal: string;
+                smile: string;
+                angry: string;
+                sad: string;
             };
         };
     };
