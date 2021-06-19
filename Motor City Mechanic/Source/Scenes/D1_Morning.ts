@@ -98,9 +98,9 @@ namespace MCM {
                 break;
         }
 
-        ƒS.Character.hideAll();
-        ƒS.Character.show(characters.Amelia, characters.Amelia.pose.angry, ƒS.positions.bottomcenter);
-        ƒS.update();
+        await ƒS.Character.hide(characters.Justice);
+        await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.angry, ƒS.positions.bottomcenter);
+        ƒS.update(0);
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0000);
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0001);
 

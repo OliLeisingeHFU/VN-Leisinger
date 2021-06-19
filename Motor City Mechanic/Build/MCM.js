@@ -247,9 +247,9 @@ var MCM;
                 await MCM.ƒS.Speech.tell(MCM.characters.Justice, "Anyway, get to your customer, she's looking kinda mad.");
                 break;
         }
-        MCM.ƒS.Character.hideAll();
-        MCM.ƒS.Character.show(MCM.characters.Amelia, MCM.characters.Amelia.pose.angry, MCM.ƒS.positions.bottomcenter);
-        MCM.ƒS.update();
+        await MCM.ƒS.Character.hide(MCM.characters.Justice);
+        await MCM.ƒS.Character.show(MCM.characters.Amelia, MCM.characters.Amelia.pose.angry, MCM.ƒS.positions.bottomcenter);
+        MCM.ƒS.update(0);
         await MCM.ƒS.Speech.tell(MCM.characters.Amelia, text.Amelia.T0000);
         await MCM.ƒS.Speech.tell(MCM.characters.Amelia, text.Amelia.T0001);
         // Minigame
