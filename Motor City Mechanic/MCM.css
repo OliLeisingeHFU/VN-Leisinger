@@ -1,3 +1,14 @@
+/* IMPORTANT COLORS
+red: ff0000
+greenscreen: 00ff00
+orange: ff8400
+yellow: fff100
+interface: 821dc6
+
+
+*/
+
+
 scene {
   width: 2500px;
   height: 1667px;
@@ -36,8 +47,8 @@ speech name {
   position: absolute;
   padding: 2px;
   color: white;
-  top: 17%;
-  left: 25%;
+  top: 13%;
+  left: 24%;
   font-size: xx-large;
   text-shadow: 0 0 5px black;
 }

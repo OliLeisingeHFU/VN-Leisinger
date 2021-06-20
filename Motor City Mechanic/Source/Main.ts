@@ -38,8 +38,7 @@ namespace MCM {
     close: "Close",
     volumeUp: "+",
     volumeDown: "-",
-    credits: "Credits",
-    about: "About"
+    credits: "Credits"
   }
 
   let gameMenu: ƒS.Menu;
@@ -86,6 +85,10 @@ namespace MCM {
     black: {
       name: "black",
       background: "Images/Backgrounds/black.png"
+    },
+    carscanner: {
+      name: "CarScan",
+      background: "Images/Backgrounds/CarScanMT.png"
     }
   }
 
@@ -120,6 +123,14 @@ namespace MCM {
         smile: "Images/Characters/Amelia/smile.png",
         angry: "Images/Characters/Amelia/angry.png",
         sad: "Images/Characters/Amelia/sad.png"
+      }
+    },
+    MinigameOverlays: {
+      name: "Minigames",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Minigames/CarsScan-DN-Name.png",
+        AmeD1: "Images/Minigames/CarScan-D1-Amelia.png"
       }
     }
   }

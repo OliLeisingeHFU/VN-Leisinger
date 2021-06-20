@@ -34,6 +34,10 @@ declare namespace MCM {
             name: string;
             background: string;
         };
+        carscanner: {
+            name: string;
+            background: string;
+        };
     };
     let characters: {
         Thoughts: {
@@ -66,6 +70,14 @@ declare namespace MCM {
                 smile: string;
                 angry: string;
                 sad: string;
+            };
+        };
+        MinigameOverlays: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                pathtemplate: string;
+                AmeD1: string;
             };
         };
     };

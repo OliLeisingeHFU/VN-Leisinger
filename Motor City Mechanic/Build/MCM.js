@@ -36,8 +36,7 @@ var MCM;
         close: "Close",
         volumeUp: "+",
         volumeDown: "-",
-        credits: "Credits",
-        about: "About"
+        credits: "Credits"
     };
     let gameMenu;
     async function menuFunctions(_opt) {
@@ -80,6 +79,10 @@ var MCM;
         black: {
             name: "black",
             background: "Images/Backgrounds/black.png"
+        },
+        carscanner: {
+            name: "CarScan",
+            background: "Images/Backgrounds/CarScanMT.png"
         }
     };
     MCM.characters = {
@@ -113,6 +116,14 @@ var MCM;
                 smile: "Images/Characters/Amelia/smile.png",
                 angry: "Images/Characters/Amelia/angry.png",
                 sad: "Images/Characters/Amelia/sad.png"
+            }
+        },
+        MinigameOverlays: {
+            name: "Minigames",
+            origin: MCM.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                pathtemplate: "Images/Minigames/CarsScan-DN-Name.png",
+                AmeD1: "Images/Minigames/CarScan-D1-Amelia.png"
             }
         }
     };
@@ -253,6 +264,11 @@ var MCM;
         await MCM.ƒS.Speech.tell(MCM.characters.Amelia, text.Amelia.T0000);
         await MCM.ƒS.Speech.tell(MCM.characters.Amelia, text.Amelia.T0001);
         // Minigame
+        MCM.ƒS.Character.hideAll();
+        await MCM.ƒS.Location.show(MCM.locations.carscanner);
+        MCM.ƒS.Speech.hide();
+        await MCM.ƒS.Character.show(MCM.characters.MinigameOverlays, MCM.characters.MinigameOverlays.pose.AmeD1, MCM.ƒS.positions.bottomcenter);
+        MCM.ƒS.update(0);
         MCM.saveData.state.scratch += 100;
     }
     MCM.D1_Morning = D1_Morning;

@@ -105,7 +105,12 @@ namespace MCM {
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0001);
 
         // Minigame
-
+        ƒS.Character.hideAll();
+        await ƒS.Location.show(locations.carscanner);
+        ƒS.Speech.hide();
+        await ƒS.Character.show(characters.MinigameOverlays, characters.MinigameOverlays.pose.AmeD1, ƒS.positions.bottomcenter);
+        ƒS.update(0);
+        
         saveData.state.scratch += 100;
     }
   }
