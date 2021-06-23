@@ -1,26 +1,27 @@
+// いじめっ子Bully
 namespace MCM {
     export async function D1_Morning(): ƒS.SceneReturn {
         await ƒS.Location.show(locations.JJ_apartement_in);
-        ƒS.update(1);
+        await ƒS.update(1);
 
         let text = {
             Thoughts: {
-                T0000: "Guh, I'm so nervous I could puke.",
-                T0001: "Ok, JJ, it's your first day, no need for worry, you haven't done anything wrong.",
+                T0000: "Damn, I can't believe this is already the last week of September.",
+                T0001: "Ok, JJ, no need for worry. This is still your first month working. You haven't made any mistakes.",
                 T0002: "YET.",
-                T0003: "I'm sure Justice won't fire me on the first mistake.",
+                T0003: "I'm sure Justice won't fire me immediately on the first mistake.",
                 T0004: "Just breath in...",
                 T0005: ". . .",
                 T0006: "And out."
             },
             JJ: {
-                T0000: "Good Evening, Justice.",
+                T0000: "Good Morning, Justice.",
                 T0001: "I know, I know, I'm on it, ok?",
                 T0002: "Not at work, please, it's embarrassing.",
                 T0003: "Ok, we're gonna have to fix the following:",
                 T0004: "First of all, some of your cables are starting to become brittle. At some point, that's gonna cause a short circuit. I'm gonna have to replace them.",
                 T0005: "That's gonna be 200¥€.",
-                T0006: "I think your machine could use new motors for the wheels up front. Costing you about 800¥€.",
+                T0006: "I think some Motor parts are grinding against each other. re-oiling them should fix that. That procedure would cost you 800¥€",
                 T0007: "This battery isn't charging properly. Losing power in the middle of the race could be a death sentence, not just for the win.",
                 T0008: "Gonna be 300¥€ to replace it.",
                 T0009: "So, your tires are edging closer and closer to being totally worn out. It's a wonder no patrol ever fined you for it.",
@@ -30,12 +31,12 @@ namespace MCM {
                 T0013: "Didn't see anything out of order. You should be fine."
             },
             Justice: {
-                T0000: "Konbanwa, James.",
+                T0000: "おはようございます, James.",
                 T0001: "Don't you think it's time to finally learn Japanese?",
                 T0002: "Also, just because I'm your boss, doesn't mean you have to stop calling me auntie",
                 T0003: "Ok, sweetie, try not to die from embarrassment, and get to work. Car parts ain't cheap, so the faster we sell 'em, the more profit we make.",
                 T0004: "Start with the small one over there. Needs her ride checked out.",
-                T0005: "Oh yeah, I almost forgot, could you do overtime tonight? I know, it's your first day and all, but someone needs to cover X' shift. We've got an important night-active customer today."
+                T0005: "Oh yeah, I almost forgot, could you do overtime tonight? I know, it's still your first month and you barely know the ropes, but someone needs to cover X' shift. We've got an important night-active customer today."
             },
             Unknown: {
                 T0000: "I'M ACTUALLY PERFECTLY NORMAL SIZED FOR MY KIND, THANK YOU!!!"
@@ -51,22 +52,22 @@ namespace MCM {
 
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0000);
         await ƒS.Location.show(locations.JJ_apartement_out);
-        ƒS.update(1);
+        await ƒS.update(1);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0001);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0002);
         await ƒS.Location.show(locations.MC_street_day);
-        ƒS.update(1);
+        await ƒS.update(1);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0003);
         await ƒS.Location.show(locations.workshop);
-        ƒS.update(1);
+        await ƒS.update(1);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0004);
         await ƒS.Location.show(locations.black);
-        ƒS.update(2);
+        await ƒS.update(2);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0005);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0006);
         await ƒS.Location.show(locations.workshop);
         await ƒS.Character.show(characters.Justice, characters.Justice.pose.smile, ƒS.positions.bottomcenter);
-        ƒS.update(2);
+        await ƒS.update(2);
         await ƒS.Speech.tell(characters.Justice, text.Justice.T0000);
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0000);
         await ƒS.Speech.tell(characters.Justice, text.Justice.T0001);
@@ -100,7 +101,7 @@ namespace MCM {
 
         await ƒS.Character.hide(characters.Justice);
         await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.angry, ƒS.positions.bottomcenter);
-        ƒS.update(0);
+        await ƒS.update(0);
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0000);
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0001);
 
@@ -109,8 +110,26 @@ namespace MCM {
         await ƒS.Location.show(locations.carscanner);
         ƒS.Speech.hide();
         await ƒS.Character.show(characters.MinigameOverlays, characters.MinigameOverlays.pose.AmeD1, ƒS.positions.bottomcenter);
-        ƒS.update(0);
+        await ƒS.update(0);
+
+        let checkOptions: string[][] = [
+            ["cables", "Replace broken power cables (200¥€)"],
+            ["motors", "Greasing moving parts in the motor (800¥€)"],
+            ["battery", "Fix non-charging Battery (300¥€)"],
+            ["tires", "Replace punctures tires (300¥€)"],
+            ["windows", "Fill windowcracks (200¥€)"]
+        ]
+        checklistFiller(checkOptions);
         
-        saveData.state.scratch += 100;
+        menu.style.visibility = "hidden";
+        money.style.visibility = "hidden";
+        checklist.style.visibility = "visible";
+
+        waiting4input = true;
+
+        waiting();
+        
+        //y.style.display="block";
+        //saveData.state.scratch += 100;
     }
   }

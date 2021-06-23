@@ -10,6 +10,8 @@ var MCM;
             scratch: 0
         }
     };
+    MCM.waiting4input = false;
+    MCM.miniGameAnswer = new Array;
     // Audio Control
     let volume = 1.0;
     function incrementVolume() {
@@ -40,7 +42,6 @@ var MCM;
     };
     let gameMenu;
     async function menuFunctions(_opt) {
-        console.log(_opt);
         switch (_opt) {
             case ingameMenu.save:
                 await MCM.ƒS.Progress.save();
@@ -137,20 +138,76 @@ var MCM;
     async function hndKeyPress(_event) {
         switch (_event.code) {
             case MCM.ƒ.KEYBOARD_CODE.F4:
-                console.log("Save");
                 await MCM.ƒS.Progress.save();
                 break;
             case MCM.ƒ.KEYBOARD_CODE.F8:
-                console.log("Load");
                 await MCM.ƒS.Progress.load();
+                break;
+            case MCM.ƒ.KEYBOARD_CODE.M:
+                if (MCM.menu.style.visibility != "hidden") {
+                    MCM.menu.style.visibility = "hidden";
+                }
+                else {
+                    MCM.menu.style.visibility = "visible";
+                }
                 break;
         }
     }
+    function checklistFiller(elements) {
+        for (let x = 0; x < elements.length; x++) {
+            let li = document.createElement("li");
+            let input = document.createElement("input");
+            input.type = "checkbox";
+            input.id = elements[x][0];
+            input.name = elements[x][0];
+            let label = document.createElement("label");
+            label.innerHTML = elements[x][1];
+            li.appendChild(input);
+            li.appendChild(label);
+            li.addEventListener("click", checkToggle);
+            MCM.checklist.children[0].appendChild(li);
+        }
+    }
+    MCM.checklistFiller = checklistFiller;
+    function checkToggle() {
+        let checkbox = this.children[0];
+        if (checkbox.checked) {
+            checkbox.checked = false;
+        }
+        else {
+            checkbox.checked = true;
+        }
+    }
+    function confirmRep() {
+        MCM.waiting4input = false;
+        let checklistEntries = MCM.checklist.children[0].children;
+        for (let x = 0; x < checklistEntries.length; x++) {
+            if (checklistEntries[x].tagName == "LI") {
+                let checkbox = checklistEntries[x].children[0];
+                if (checkbox.checked) {
+                    MCM.miniGameAnswer.push(checklistEntries[x].children[0].id);
+                }
+                checklistEntries[x].remove();
+            }
+        }
+        MCM.checklist.style.visibility = "hidden";
+    }
+    function waiting() {
+        if (MCM.waiting4input) {
+            setTimeout(waiting, 100);
+        }
+    }
+    MCM.waiting = waiting;
     document.addEventListener("keydown", hndKeyPress);
     window.addEventListener("load", start);
     function start(_event) {
         //Menu
         gameMenu = MCM.ƒS.Menu.create(ingameMenu, menuFunctions, "gameMenu");
+        // Important HTML Elements
+        MCM.menu = document.getElementsByClassName("gameMenu")[0];
+        MCM.money = document.getElementsByClassName("moneybar")[0];
+        MCM.checklist = document.getElementById("checklist");
+        document.getElementById("confirmRep").addEventListener("click", confirmRep);
         let scenes = [
             { scene: MCM.D1_Morning, name: "Scene" }
         ];
@@ -163,29 +220,31 @@ var MCM;
 // for inventory: https://stackoverflow.com/questions/25152463/how-to-use-typescript-on-a-button-click
 // for inventory: https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
 // pictures: https://www.artbreeder.com/
+// いじめっ子Bully
 var MCM;
+// いじめっ子Bully
 (function (MCM) {
     async function D1_Morning() {
         await MCM.ƒS.Location.show(MCM.locations.JJ_apartement_in);
-        MCM.ƒS.update(1);
+        await MCM.ƒS.update(1);
         let text = {
             Thoughts: {
-                T0000: "Guh, I'm so nervous I could puke.",
-                T0001: "Ok, JJ, it's your first day, no need for worry, you haven't done anything wrong.",
+                T0000: "Damn, I can't believe this is already the last week of September.",
+                T0001: "Ok, JJ, no need for worry. This is still your first month working. You haven't made any mistakes.",
                 T0002: "YET.",
-                T0003: "I'm sure Justice won't fire me on the first mistake.",
+                T0003: "I'm sure Justice won't fire me immediately on the first mistake.",
                 T0004: "Just breath in...",
                 T0005: ". . .",
                 T0006: "And out."
             },
             JJ: {
-                T0000: "Good Evening, Justice.",
+                T0000: "Good Morning, Justice.",
                 T0001: "I know, I know, I'm on it, ok?",
                 T0002: "Not at work, please, it's embarrassing.",
                 T0003: "Ok, we're gonna have to fix the following:",
                 T0004: "First of all, some of your cables are starting to become brittle. At some point, that's gonna cause a short circuit. I'm gonna have to replace them.",
                 T0005: "That's gonna be 200¥€.",
-                T0006: "I think your machine could use new motors for the wheels up front. Costing you about 800¥€.",
+                T0006: "I think some Motor parts are grinding against each other. re-oiling them should fix that. That procedure would cost you 800¥€",
                 T0007: "This battery isn't charging properly. Losing power in the middle of the race could be a death sentence, not just for the win.",
                 T0008: "Gonna be 300¥€ to replace it.",
                 T0009: "So, your tires are edging closer and closer to being totally worn out. It's a wonder no patrol ever fined you for it.",
@@ -195,12 +254,12 @@ var MCM;
                 T0013: "Didn't see anything out of order. You should be fine."
             },
             Justice: {
-                T0000: "Konbanwa, James.",
+                T0000: "おはようございます, James.",
                 T0001: "Don't you think it's time to finally learn Japanese?",
                 T0002: "Also, just because I'm your boss, doesn't mean you have to stop calling me auntie",
                 T0003: "Ok, sweetie, try not to die from embarrassment, and get to work. Car parts ain't cheap, so the faster we sell 'em, the more profit we make.",
                 T0004: "Start with the small one over there. Needs her ride checked out.",
-                T0005: "Oh yeah, I almost forgot, could you do overtime tonight? I know, it's your first day and all, but someone needs to cover X' shift. We've got an important night-active customer today."
+                T0005: "Oh yeah, I almost forgot, could you do overtime tonight? I know, it's still your first month and you barely know the ropes, but someone needs to cover X' shift. We've got an important night-active customer today."
             },
             Unknown: {
                 T0000: "I'M ACTUALLY PERFECTLY NORMAL SIZED FOR MY KIND, THANK YOU!!!"
@@ -215,22 +274,22 @@ var MCM;
         };
         await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, text.Thoughts.T0000);
         await MCM.ƒS.Location.show(MCM.locations.JJ_apartement_out);
-        MCM.ƒS.update(1);
+        await MCM.ƒS.update(1);
         await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, text.Thoughts.T0001);
         await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, text.Thoughts.T0002);
         await MCM.ƒS.Location.show(MCM.locations.MC_street_day);
-        MCM.ƒS.update(1);
+        await MCM.ƒS.update(1);
         await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, text.Thoughts.T0003);
         await MCM.ƒS.Location.show(MCM.locations.workshop);
-        MCM.ƒS.update(1);
+        await MCM.ƒS.update(1);
         await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, text.Thoughts.T0004);
         await MCM.ƒS.Location.show(MCM.locations.black);
-        MCM.ƒS.update(2);
+        await MCM.ƒS.update(2);
         await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, text.Thoughts.T0005);
         await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, text.Thoughts.T0006);
         await MCM.ƒS.Location.show(MCM.locations.workshop);
         await MCM.ƒS.Character.show(MCM.characters.Justice, MCM.characters.Justice.pose.smile, MCM.ƒS.positions.bottomcenter);
-        MCM.ƒS.update(2);
+        await MCM.ƒS.update(2);
         await MCM.ƒS.Speech.tell(MCM.characters.Justice, text.Justice.T0000);
         await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0000);
         await MCM.ƒS.Speech.tell(MCM.characters.Justice, text.Justice.T0001);
@@ -260,7 +319,7 @@ var MCM;
         }
         await MCM.ƒS.Character.hide(MCM.characters.Justice);
         await MCM.ƒS.Character.show(MCM.characters.Amelia, MCM.characters.Amelia.pose.angry, MCM.ƒS.positions.bottomcenter);
-        MCM.ƒS.update(0);
+        await MCM.ƒS.update(0);
         await MCM.ƒS.Speech.tell(MCM.characters.Amelia, text.Amelia.T0000);
         await MCM.ƒS.Speech.tell(MCM.characters.Amelia, text.Amelia.T0001);
         // Minigame
@@ -268,8 +327,22 @@ var MCM;
         await MCM.ƒS.Location.show(MCM.locations.carscanner);
         MCM.ƒS.Speech.hide();
         await MCM.ƒS.Character.show(MCM.characters.MinigameOverlays, MCM.characters.MinigameOverlays.pose.AmeD1, MCM.ƒS.positions.bottomcenter);
-        MCM.ƒS.update(0);
-        MCM.saveData.state.scratch += 100;
+        await MCM.ƒS.update(0);
+        let checkOptions = [
+            ["cables", "Replace broken power cables (200¥€)"],
+            ["motors", "Greasing moving parts in the motor (800¥€)"],
+            ["battery", "Fix non-charging Battery (300¥€)"],
+            ["tires", "Replace punctures tires (300¥€)"],
+            ["windows", "Fill windowcracks (200¥€)"]
+        ];
+        MCM.checklistFiller(checkOptions);
+        MCM.menu.style.visibility = "hidden";
+        MCM.money.style.visibility = "hidden";
+        MCM.checklist.style.visibility = "visible";
+        MCM.waiting4input = true;
+        MCM.waiting();
+        //y.style.display="block";
+        //saveData.state.scratch += 100;
     }
     MCM.D1_Morning = D1_Morning;
 })(MCM || (MCM = {}));

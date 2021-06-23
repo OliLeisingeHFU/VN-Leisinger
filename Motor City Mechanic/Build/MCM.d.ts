@@ -8,11 +8,16 @@ declare namespace MCM {
             scratch: number;
         };
     };
+    var waiting4input: boolean;
+    let miniGameAnswer: string[];
     function incrementVolume(): void;
     function decrementVolume(): void;
     let music: {
         backGroundTheme: string;
     };
+    let menu: HTMLDialogElement;
+    let money: HTMLDialogElement;
+    let checklist: HTMLDialogElement;
     let locations: {
         JJ_apartement_out: {
             name: string;
@@ -88,6 +93,8 @@ declare namespace MCM {
             image: string;
         };
     };
+    function checklistFiller(elements: string[][]): void;
+    function waiting(): void;
 }
 declare namespace MCM {
     function D1_Morning(): ƒS.SceneReturn;

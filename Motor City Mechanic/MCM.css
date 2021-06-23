@@ -21,7 +21,7 @@ html, body {
   height: 100vh;
   margin: 0pc;
   padding: 0px;
-  background-color: lavender;
+  background-color: #333333;
   overflow: hidden;
   font-family: 'Gill Sans', 'GillSans MT', sans-serif;
 }
@@ -147,13 +147,49 @@ div[type="interface"] * {
 /* CHECKLIST MINIGAME */
 #checklist {
   position: absolute;
-  /* align-self: center; */
-  top: 41%;
-  background-color: white;
-  width: 15%;
-  left: 42.5%;
-  height: 18%;
+  bottom: 40%;
+  background-color: #821dc666;
+  width: 40%;
+  left: 30%;
+  border: solid 1px;
+  border-radius: 10px;
+  font-size: x-large;
 }
+
+#checklist ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0;
+}
+
+#checklist ul button{
+  width: 100%;
+  font-size: xx-large;
+  border: none;
+  background-color: #00000066;
+  color: white;
+}
+
+#checklist ul button:hover{
+  box-shadow: 0px 0px 4px aquamarine;
+  text-shadow: 0px 0px 4px aquamarine;
+}
+
+#checklist ul li{
+  background-color: #00000066;
+  border: none;
+  margin: 10px 5px;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#checklist ul li:hover{
+  box-shadow: 0px 0px 4px aquamarine;
+  text-shadow: 0px 0px 4px aquamarine;
+}
+
+/* MENU */
 
 .gameMenu {
   position: absolute;
@@ -172,6 +208,7 @@ div[type="interface"] * {
   font-size: larger;
 }
 
+/* CHOICES */
 .choice {
   background-color: #821dc666;
   border: solid 1px;
@@ -187,4 +224,9 @@ div[type="interface"] * {
   color: white;
   border-radius: 5px;
   padding: 5px;
+}
+
+.choice button:hover{
+  box-shadow: 0px 0px 4px aquamarine;
+  text-shadow: 0px 0px 4px aquamarine;
 }

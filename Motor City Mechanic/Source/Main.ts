@@ -10,6 +10,9 @@ namespace MCM {
     }
   }
 
+  export var waiting4input: boolean = false;
+  export let miniGameAnswer: string[] = new Array;
+
   // Audio Control
   let volume: number = 1.0;
 
@@ -43,8 +46,11 @@ namespace MCM {
 
   let gameMenu: ƒS.Menu;
 
+  export let menu: HTMLDialogElement;
+  export let money: HTMLDialogElement;
+  export let checklist: HTMLDialogElement;
+
   async function menuFunctions(_opt: string): Promise<void>{
-    console.log(_opt);
     switch(_opt){
       case ingameMenu.save:
         await ƒS.Progress.save();
@@ -146,13 +152,65 @@ namespace MCM {
   async function hndKeyPress(_event: KeyboardEvent): Promise<void>{
     switch (_event.code){
       case ƒ.KEYBOARD_CODE.F4:
-      	console.log("Save");
         await ƒS.Progress.save();
         break;
       case ƒ.KEYBOARD_CODE.F8:
-        console.log("Load");
         await ƒS.Progress.load();
         break;
+      case ƒ.KEYBOARD_CODE.M:
+        if(menu.style.visibility != "hidden"){
+          menu.style.visibility = "hidden";
+        }else {
+          menu.style.visibility = "visible";
+        }
+        break;
+    }
+  }
+
+  export function checklistFiller(elements: string[][]): void{
+    for(let x: number = 0; x < elements.length; x++)
+    {
+      let li: HTMLLIElement = document.createElement("li");
+      let input:  HTMLInputElement = document.createElement("input");
+      input.type = "checkbox";
+      input.id = elements[x][0];
+      input.name = elements[x][0];
+      let label:  HTMLLabelElement = document.createElement("label");
+      label.innerHTML = elements[x][1];
+      li.appendChild(input);
+      li.appendChild(label);
+      li.addEventListener("click", checkToggle);
+      checklist.children[0].appendChild(li);
+    }
+  }
+
+  function checkToggle(this: HTMLElement): void{
+    let checkbox: HTMLInputElement = <HTMLInputElement> this.children[0];
+    if(checkbox.checked){
+      checkbox.checked = false;
+    }else{
+      checkbox.checked = true;
+    }
+  }
+
+  function confirmRep(): void {
+    waiting4input = false;
+    let checklistEntries: HTMLCollection = checklist.children[0].children;
+    for(let x: number = 0; x < checklistEntries.length; x++){
+      if(checklistEntries[x].tagName == "LI"){
+        let checkbox: HTMLInputElement = <HTMLInputElement> checklistEntries[x].children[0];
+        if(checkbox.checked){
+          miniGameAnswer.push(checklistEntries[x].children[0].id);
+        }
+        checklistEntries[x].remove();
+      }
+    }
+    checklist.style.visibility = "hidden";
+  }
+
+  export function waiting(): void{
+    if(waiting4input){
+      setTimeout(waiting, 100);
     }
   }
 
@@ -163,6 +221,12 @@ namespace MCM {
     //Menu
     gameMenu = ƒS.Menu.create(ingameMenu, menuFunctions, "gameMenu");
 
+    // Important HTML Elements
+    menu = <HTMLDialogElement>document.getElementsByClassName("gameMenu")[0];
+    money = <HTMLDialogElement>document.getElementsByClassName("moneybar")[0];
+    checklist = <HTMLDialogElement>document.getElementById("checklist");
+
+    document.getElementById("confirmRep").addEventListener("click", confirmRep);
 
     let scenes: ƒS.Scenes = [
       { scene: D1_Morning, name: "Scene" }
