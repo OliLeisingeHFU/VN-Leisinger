@@ -5,15 +5,22 @@ declare namespace MCM {
         score: number;
         ended: boolean;
         state: {
-            scratch: number;
+            yero: number;
         };
+        waiting: boolean;
+        d1evening: string;
+        d1Ame: string;
     };
-    var waiting4input: boolean;
     let miniGameAnswer: string[];
+    let volume: number;
+    let playing: string;
     function incrementVolume(): void;
     function decrementVolume(): void;
     let music: {
-        backGroundTheme: string;
+        moringBGM: string;
+        noonBGM: string;
+        eveningBGM: string;
+        partyBGM: string;
     };
     let menu: HTMLDialogElement;
     let money: HTMLDialogElement;
@@ -32,6 +39,10 @@ declare namespace MCM {
             background: string;
         };
         workshop: {
+            name: string;
+            background: string;
+        };
+        kitchen: {
             name: string;
             background: string;
         };
@@ -75,6 +86,23 @@ declare namespace MCM {
                 smile: string;
                 angry: string;
                 sad: string;
+                questioning: string;
+            };
+        };
+        Yuri: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                pathtemplate: string;
+                normal: string;
+                happy: string;
+                angry: string;
+                sad: string;
+                questioning: string;
+                thinking: string;
+                explaining: string;
+                wink: string;
+                smug: string;
             };
         };
         MinigameOverlays: {
@@ -92,10 +120,18 @@ declare namespace MCM {
             description: string;
             image: string;
         };
+        Asacoco: {
+            name: string;
+            description: string;
+            image: string;
+        };
     };
     function checklistFiller(elements: string[][]): void;
-    function waiting(): void;
+    function minigameInput(): Promise<void>;
 }
 declare namespace MCM {
     function D1_Morning(): ƒS.SceneReturn;
+}
+declare namespace MCM {
+    function D1_Noon(): ƒS.SceneReturn;
 }

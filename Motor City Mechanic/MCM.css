@@ -168,6 +168,7 @@ div[type="interface"] * {
   border: none;
   background-color: #00000066;
   color: white;
+  cursor: pointer
 }
 
 #checklist ul button:hover{
@@ -182,6 +183,7 @@ div[type="interface"] * {
   color: white;
   border-radius: 5px;
   padding: 5px;
+  cursor: pointer
 }
 
 #checklist ul li:hover{
@@ -224,6 +226,7 @@ div[type="interface"] * {
   color: white;
   border-radius: 5px;
   padding: 5px;
+  cursor: pointer
 }
 
 .choice button:hover{
