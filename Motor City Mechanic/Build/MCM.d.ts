@@ -7,9 +7,20 @@ declare namespace MCM {
         state: {
             yero: number;
         };
+        friendship: {
+            Yuri: {
+                state: string;
+                happiness: number;
+            };
+            Ame: {
+                state: string;
+                happiness: number;
+            };
+        };
         waiting: boolean;
         d1evening: string;
         d1Ame: string;
+        d1YuriUpgrade: string;
     };
     let miniGameAnswer: string[];
     let volume: number;
@@ -22,6 +33,8 @@ declare namespace MCM {
         eveningBGM: string;
         partyBGM: string;
     };
+    function higherFriendship(person: any, value: number): void;
+    function lowerFriendship(person: any, value: number): void;
     let menu: HTMLDialogElement;
     let money: HTMLDialogElement;
     let checklist: HTMLDialogElement;
@@ -72,6 +85,7 @@ declare namespace MCM {
                 angry: string;
                 sad: string;
                 thinking: string;
+                closed: string;
             };
         };
         Unknown: {
@@ -98,11 +112,11 @@ declare namespace MCM {
                 happy: string;
                 angry: string;
                 sad: string;
-                questioning: string;
                 thinking: string;
                 explaining: string;
                 wink: string;
                 smug: string;
+                surprised: string;
             };
         };
         MinigameOverlays: {
@@ -128,6 +142,15 @@ declare namespace MCM {
     };
     function checklistFiller(elements: string[][]): void;
     function minigameInput(): Promise<void>;
+}
+declare namespace MCM {
+    function D1_Evening_Free(): ƒS.SceneReturn;
+}
+declare namespace MCM {
+    function D1_Evening_Party(): ƒS.SceneReturn;
+}
+declare namespace MCM {
+    function D1_Evening_Work(): ƒS.SceneReturn;
 }
 declare namespace MCM {
     function D1_Morning(): ƒS.SceneReturn;

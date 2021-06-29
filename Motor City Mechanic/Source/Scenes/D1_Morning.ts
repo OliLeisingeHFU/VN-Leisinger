@@ -10,7 +10,7 @@ namespace MCM {
 
         let text = {
             Thoughts: {
-                T0000: "Damn, I can't believe this is already the last week of September. I still need 5000 Ye-Ro to pay all my bills. And what if Justice fires me?",
+                T0000: "Damn, I can't believe this is already the last week of September. I still need 5000 yero to pay all my bills. And what if Justice fires me?",
                 T0001: "Ok, JJ, no need for worry. This is still your first month working. You haven't made any mistakes.",
                 T0002: "YET.",
                 T0003: "I'm sure she won't fire me immediately on the first mistake.",
@@ -38,7 +38,7 @@ namespace MCM {
                 T0017: "Thanks, auntie, I'll be back in 30!"
             },
             Justice: {
-                T0000: "おはよう, James.",
+                T0000: "Ohayo, James. Genkidesuka?",
                 T0001: "Don't you think it's time to finally learn Japanese?",
                 T0002: "Also, just because I'm your boss, doesn't mean you have to stop calling me auntie.",
                 T0003: "Ok, sweetie, try not to die from embarrassment, and get to work. Car parts ain't cheap, so the faster we sell 'em, the more profit we make.",
@@ -103,13 +103,13 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.JJ, overTimeDia.no);
                 await ƒS.Speech.tell(characters.Justice, "Don't worry about it, I thought I'd just ask you before calling Carla.");
                 await ƒS.Speech.tell(characters.Justice, "Now get to your customer, before she gets any angrier.");
-                saveData.d1evening = "free";
+                saveData.d1evening = "D1_Evening_Free";
                 break;
             case overTimeDia.yes:
                 await ƒS.Speech.tell(characters.JJ, overTimeDia.yes);
                 await ƒS.Speech.tell(characters.Justice, "Great. Thanks, sweetie.");
                 await ƒS.Speech.tell(characters.Justice, "Anyway, get to your customer, she's looking kinda mad.");
-                saveData.d1evening = "work";
+                saveData.d1evening = "D1_Evening_Work";
                 break;
         }
 
@@ -275,6 +275,9 @@ namespace MCM {
         ƒS.update(0.1);
         await ƒS.Speech.tell(characters.Justice, text.Justice.T0006);
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0017);
+        await ƒS.Location.show(locations.black);
+        ƒS.Sound.fade(music.moringBGM, 0, 2, true);
+        await ƒS.update(2);
         //y.style.display="block";
         //saveData.state.yero += 100;
     }

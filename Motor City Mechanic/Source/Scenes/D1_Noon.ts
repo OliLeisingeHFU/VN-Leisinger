@@ -15,7 +15,7 @@ namespace MCM {
         playing = music.noonBGM;
 
         await ƒS.Location.show(locations.kitchen);
-        await ƒS.update(1);
+        await ƒS.update(2);
         await ƒS.Speech.tell(characters.Yuri, text.Yuri.T0000);
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0000);
         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.happy, ƒS.positions.bottomcenter);
@@ -163,10 +163,109 @@ namespace MCM {
                         await ƒS.Character.hide(characters.Yuri);
                         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positions.bottomcenter);
                         await ƒS.update(0.1);
-                        await ƒS.Speech.tell(characters.Yuri, "Oh, and come in your wyvern! As I said, cool ride equals free I/Os.");
+                        await ƒS.Speech.tell(characters.Yuri, "Oh, also, come in your wyvern! As I said, cool ride equals free I/Os.");
+                        await ƒS.Speech.tell(characters.Yuri, "Come on, don't give me that look. You've been in a dry streak for to long!");
+                        await ƒS.Speech.tell(characters.JJ, "No need to rub it in.");
+                        await ƒS.Speech.tell(characters.Yuri, "You know I love to rub in.");
+                        await ƒS.Speech.tell(characters.JJ, "Hahaha, yeah, you sure do.");
+                        saveData.d1evening = "D1_Evening_Party";
                         break;
                 }
             }
         }
+
+        await ƒS.Speech.tell(characters.Yuri, "I think my car could use some more glitz. Got anything kakkoii here?");
+        await ƒS.Speech.tell(characters.Thoughts, "I think the two best options are either the neon lights or the new spoiler.");
+        await ƒS.Speech.tell(characters.Thoughts, "A spoiler is definitely the less imp option, but also cheaper. It would cost him about 250 yero");
+        await ƒS.Speech.tell(characters.Thoughts, "The new neon lights are preem, but at 1450 yero they are very expensive.");
+        await ƒS.Speech.tell(characters.Thoughts, "Getting both will ensure he scores an output, but might attract thrillers.");
+
+        let car = {
+            spoiler: "Get the spoiler",
+            neon: "Get the neon lights",
+            both: "get both",
+        }
+
+        let carElem = await ƒS.Menu.getInput(car, "choice");
+
+        switch(carElem){
+            case car.spoiler:
+                await ƒS.Speech.tell(characters.JJ, "One of the spoilers we got will def look clean on your ride.");
+                await ƒS.Speech.tell(characters.JJ, "It would cost you 250 ¥€, and it's so quick, I can easily squeeze you in between some other work.");
+                await ƒS.Speech.tell(characters.Yuri, "Oh yeah, I've seen some of them. Get me the one with the shark fins.");
+                await ƒS.Speech.tell(characters.JJ, "'Course. Gonna start the painting machine asap after lunch.");
+                saveData.state.yero += 125;
+                saveData.d1YuriUpgrade = "spoiler";
+                break;
+            case car.neon:
+                await ƒS.Speech.tell(characters.JJ, "Def! We got new neon lights! some hi-qual stuff.");
+                await ƒS.Speech.tell(characters.JJ, "Sure, they cost about 1450 yero, but they are highly customizable and look bretty damn amazing. I'm getting some myself, if I can afford it after the bills.");
+                await ƒS.Speech.tell(characters.Yuri, "That does sound imp, choom! I'm gonna have lots of fun setting them up.");
+                await ƒS.Speech.tell(characters.JJ, "Preem. I'll ask Roland to get them fitted. I'm to swamped to do that.");
+                await ƒS.Speech.tell(characters.Yuri, "No prob. Just be in time for tonight.");
+                saveData.state.yero += 725;
+                saveData.d1YuriUpgrade = "neon";
+                break;
+            case car.both:
+                await ƒS.Speech.tell(characters.JJ, "Def! We got new neon lights! some hi-qual stuff. Together with a nice spoiler they'll work like magic.");
+                await ƒS.Speech.tell(characters.JJ, "But, they cost about 1700 yero in total..");
+                await ƒS.Speech.tell(characters.Yuri, "Ah, sure, I got the extra bank. I better score tonight, though.");
+                await ƒS.Speech.tell(characters.JJ, "I guarantee you will. I'll ask Roland to get them built in. I'm to swamped to do that.");
+                await ƒS.Speech.tell(characters.Yuri, "No prob. Just be in time for tonight.");
+                saveData.state.yero += 1050;
+                saveData.d1YuriUpgrade = "both";
+                break;
+        }
+        await ƒS.Speech.tell(characters.JJ, "Sorry, tomodachi. Break's over, gotta go.");
+        await ƒS.Speech.tell(characters.Yuri, "Mondainai. I need to buzz anyway, even small corpos don't run them-");
+        await ƒS.Character.hide(characters.Yuri);
+        await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.surprised, ƒS.positionPercent(25, 100));
+        await ƒS.update(0.1);
+        await ƒS.Character.show(characters.Justice, characters.Justice.pose.angry, ƒS.positionPercent(75, 100));
+        await ƒS.update(0.1);
+        await ƒS.Speech.tell(characters.Justice, "What's the aho doing here? You know he annoys the essence out of me.");
+        await ƒS.Character.hide(characters.Yuri);
+        await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.smug, ƒS.positionPercent(25, 100));
+        await ƒS.update(0.1);
+        await ƒS.Speech.tell(characters.Yuri, "Well, actually, I came here as a customer.");
+        switch(saveData.d1YuriUpgrade){
+            case car.spoiler:
+                await ƒS.Speech.tell(characters.Yuri, "I wanted to get a kakkoii spoiler.");
+                break;
+            case car.neon:
+                await ƒS.Speech.tell(characters.Yuri, "JJ recommended the new neonlights, and I'd like them in my car.");
+                break;
+            case car.both:
+                await ƒS.Speech.tell(characters.Yuri, "Some neonlights and a spoiler would make my car meccha kakkoii. JJ has a good eye for these things.");
+                break;
+        }
+        await ƒS.Character.hide(characters.Yuri);
+        await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.sad, ƒS.positionPercent(25, 100));
+        await ƒS.update(0.1);
+        await ƒS.Speech.tell(characters.Yuri, "But I don't know if I can handle you being so mean to me. I might have to go to a different shop. Maybe they'll appreciate their dear, dear customers.");
+        await ƒS.Character.hide(characters.Justice);
+        await ƒS.Character.show(characters.Justice, characters.Justice.pose.closed, ƒS.positionPercent(75, 100));
+        await ƒS.update(0.1);
+        await ƒS.Speech.tell(characters.Justice, "<i>inhales</i>");
+        await ƒS.Character.hide(characters.Justice);
+        await ƒS.Character.show(characters.Justice, characters.Justice.pose.normal, ƒS.positionPercent(75, 100));
+        await ƒS.update(0.1);
+        await ƒS.Character.hide(characters.Yuri);
+        await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positionPercent(25, 100));
+        await ƒS.update(0.1);
+        await ƒS.Speech.tell(characters.Justice, "That's xactly what I meant. Anyway... You and Roland are gonna run the front alone for a while.");
+        await ƒS.Speech.tell(characters.JJ, "Will do. See ya in a while.");
+        await ƒS.Character.hide(characters.Justice);
+        await ƒS.Character.hide(characters.Yuri);
+        await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positionPercent(75, 100));
+        await ƒS.update(0.1);
+        await ƒS.Speech.tell(characters.Yuri, "I'll bounce too. Good luck, choomba.");
+        await ƒS.Speech.tell(characters.JJ, "Later, choom.");
+        await ƒS.Location.show(locations.black);
+        ƒS.Character.hideAll();
+        ƒS.Sound.fade(music.noonBGM, 0, 2, true);
+        await ƒS.update(2);
+        
+        return saveData.d1evening;
     }
 } //await ƒS.Speech.tell(characters., ".");

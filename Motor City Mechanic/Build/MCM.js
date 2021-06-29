@@ -9,24 +9,37 @@ var MCM;
         state: {
             yero: 0
         },
+        friendship: {
+            Yuri: {
+                state: "best friend",
+                happiness: 100
+            },
+            Ame: {
+                state: "stranger",
+                happiness: 10
+            }
+        },
         waiting: false,
         d1evening: "",
-        d1Ame: ""
+        d1Ame: "",
+        d1YuriUpgrade: ""
     };
     MCM.miniGameAnswer = new Array;
     // Audio Control
     MCM.volume = 1.0;
     MCM.playing = "";
     function incrementVolume() {
-        if (MCM.volume < 1.0) {
-            MCM.volume += 0.1;
+        if (MCM.volume <= 0.9) {
+            MCM.volume = MCM.volume + 0.1;
+            console.log(MCM.volume);
             MCM.ƒS.Sound.setVolume(MCM.playing, MCM.volume);
         }
     }
     MCM.incrementVolume = incrementVolume;
     function decrementVolume() {
-        if (MCM.volume > 0) {
-            MCM.volume -= 0.1;
+        if (MCM.volume >= 0.1) {
+            MCM.volume = MCM.volume - 0.1;
+            console.log(MCM.volume);
             MCM.ƒS.Sound.setVolume(MCM.playing, MCM.volume);
         }
     }
@@ -38,6 +51,24 @@ var MCM;
         partyBGM: "Sound/Music/Alumo - Outlander.wav",
     };
     // Lazy functions
+    function higherFriendship(person, value) {
+        if ((person.happiness + value) <= 100) {
+            person.happiness += value;
+        }
+        else {
+            person.happiness = 100;
+        }
+    }
+    MCM.higherFriendship = higherFriendship;
+    function lowerFriendship(person, value) {
+        if ((person.happiness + value) >= -100) {
+            person.happiness += value;
+        }
+        else {
+            person.happiness = -100;
+        }
+    }
+    MCM.lowerFriendship = lowerFriendship;
     // Menu
     let ingameMenu = {
         save: "Save",
@@ -111,7 +142,8 @@ var MCM;
                 smile: "Images/Characters/Justice/smile.png",
                 angry: "Images/Characters/Justice/angry.png",
                 sad: "Images/Characters/Justice/sad.png",
-                thinking: "Images/Characters/Justice/thinking.png"
+                thinking: "Images/Characters/Justice/thinking.png",
+                closed: "Images/Characters/Justice/closed.png"
             }
         },
         Unknown: {
@@ -138,11 +170,11 @@ var MCM;
                 happy: "Images/Characters/Yuri/happy.png",
                 angry: "Images/Characters/Yuri/angry.png",
                 sad: "Images/Characters/Yuri/sad.png",
-                questioning: "Images/Characters/Yuri/questioning.png",
                 thinking: "Images/Characters/Yuri/thinking.png",
                 explaining: "Images/Characters/Yuri/explaining.png",
                 wink: "Images/Characters/Yuri/wink.png",
-                smug: "Images/Characters/Yuri/smug.png"
+                smug: "Images/Characters/Yuri/smug.png",
+                surprised: "Images/Characters/Yuri/smug.png"
             }
         },
         MinigameOverlays: {
@@ -183,10 +215,10 @@ var MCM;
                 }
                 break;
             case MCM.ƒ.KEYBOARD_CODE.NUMPAD_SUBTRACT:
-                decrementVolume;
+                decrementVolume();
                 break;
             case MCM.ƒ.KEYBOARD_CODE.NUMPAD_ADD:
-                decrementVolume;
+                incrementVolume();
                 break;
         }
     }
@@ -252,7 +284,10 @@ var MCM;
         document.getElementById("confirmRep").addEventListener("click", confirmRep);
         let scenes = [
             { scene: MCM.D1_Morning, name: "Scene1" },
-            { scene: MCM.D1_Noon, name: "Scene2" }
+            { scene: MCM.D1_Noon, name: "Scene2" },
+            { scene: MCM.D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free" },
+            { scene: MCM.D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work" },
+            { scene: MCM.D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         MCM.saveData.state = MCM.ƒS.Progress.setData(MCM.saveData.state, uiElement);
@@ -263,6 +298,29 @@ var MCM;
 // for inventory: https://stackoverflow.com/questions/25152463/how-to-use-typescript-on-a-button-click
 // for inventory: https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
 // pictures: https://www.artbreeder.com/
+var MCM;
+(function (MCM) {
+    async function D1_Evening_Free() {
+        await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, "Scene: Day one/evening/free time. Content: Locked. Unlocked at: TBA. Thanks for playing the demo");
+    }
+    MCM.D1_Evening_Free = D1_Evening_Free;
+})(MCM || (MCM = {}));
+//levan polkka
+var MCM;
+//levan polkka
+(function (MCM) {
+    async function D1_Evening_Party() {
+        await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, "Scene: Day one/evening/party. Content: Locked. Unlocked at: TBA. Thanks for playing the demo");
+    }
+    MCM.D1_Evening_Party = D1_Evening_Party;
+})(MCM || (MCM = {}));
+var MCM;
+(function (MCM) {
+    async function D1_Evening_Work() {
+        await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, "Scene: Day one/evening/work. Content: Locked. Unlocked at: TBA. Thanks for playing the demo");
+    }
+    MCM.D1_Evening_Work = D1_Evening_Work;
+})(MCM || (MCM = {}));
 // いじめっ子Bully
 var MCM;
 // いじめっ子Bully
@@ -273,11 +331,9 @@ var MCM;
         MCM.playing = MCM.music.moringBGM;
         await MCM.ƒS.Location.show(MCM.locations.JJ_apartement_in);
         await MCM.ƒS.update(1);
-        MCM.ƒS.Inventory.add(MCM.items.Asacoco);
-        MCM.ƒS.Inventory.open();
         let text = {
             Thoughts: {
-                T0000: "Damn, I can't believe this is already the last week of September. I still need 5000 Ye-Ro to pay all my bills. And what if Justice fires me?",
+                T0000: "Damn, I can't believe this is already the last week of September. I still need 5000 yero to pay all my bills. And what if Justice fires me?",
                 T0001: "Ok, JJ, no need for worry. This is still your first month working. You haven't made any mistakes.",
                 T0002: "YET.",
                 T0003: "I'm sure she won't fire me immediately on the first mistake.",
@@ -305,7 +361,7 @@ var MCM;
                 T0017: "Thanks, auntie, I'll be back in 30!"
             },
             Justice: {
-                T0000: "おはよう, James.",
+                T0000: "Ohayo, James. Genkidesuka?",
                 T0001: "Don't you think it's time to finally learn Japanese?",
                 T0002: "Also, just because I'm your boss, doesn't mean you have to stop calling me auntie.",
                 T0003: "Ok, sweetie, try not to die from embarrassment, and get to work. Car parts ain't cheap, so the faster we sell 'em, the more profit we make.",
@@ -366,13 +422,13 @@ var MCM;
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, overTimeDia.no);
                 await MCM.ƒS.Speech.tell(MCM.characters.Justice, "Don't worry about it, I thought I'd just ask you before calling Carla.");
                 await MCM.ƒS.Speech.tell(MCM.characters.Justice, "Now get to your customer, before she gets any angrier.");
-                MCM.saveData.d1evening = "free";
+                MCM.saveData.d1evening = "D1_Evening_Free";
                 break;
             case overTimeDia.yes:
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, overTimeDia.yes);
                 await MCM.ƒS.Speech.tell(MCM.characters.Justice, "Great. Thanks, sweetie.");
                 await MCM.ƒS.Speech.tell(MCM.characters.Justice, "Anyway, get to your customer, she's looking kinda mad.");
-                MCM.saveData.d1evening = "work";
+                MCM.saveData.d1evening = "D1_Evening_Work";
                 break;
         }
         await MCM.ƒS.Character.hide(MCM.characters.Justice);
@@ -443,6 +499,8 @@ var MCM;
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0014);
                 MCM.saveData.d1Ame = "fewest";
                 MCM.saveData.state.yero += 150;
+                MCM.lowerFriendship(MCM.saveData.friendship.Ame, 50);
+                MCM.saveData.friendship.Ame.state = "hater";
                 break;
             case miniGameAnswersD1Ame.fewer:
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0004);
@@ -457,6 +515,7 @@ var MCM;
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0014);
                 MCM.saveData.d1Ame = "fewer";
                 MCM.saveData.state.yero += 300;
+                MCM.lowerFriendship(MCM.saveData.friendship.Ame, 15);
                 break;
             case miniGameAnswersD1Ame.correct:
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0004);
@@ -472,6 +531,8 @@ var MCM;
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0013);
                 MCM.saveData.d1Ame = "correct";
                 MCM.saveData.state.yero += 400;
+                MCM.higherFriendship(MCM.saveData.friendship.Ame, 20);
+                MCM.saveData.friendship.Ame.state = "customer";
                 break;
             case miniGameAnswersD1Ame.more:
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0004);
@@ -488,6 +549,7 @@ var MCM;
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0014);
                 MCM.saveData.d1Ame = "more";
                 MCM.saveData.state.yero += 800;
+                MCM.lowerFriendship(MCM.saveData.friendship.Ame, 15);
                 break;
             case miniGameAnswersD1Ame.most:
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0004);
@@ -505,6 +567,8 @@ var MCM;
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0014);
                 MCM.saveData.d1Ame = "most";
                 MCM.saveData.state.yero += 900;
+                MCM.lowerFriendship(MCM.saveData.friendship.Ame, 50);
+                MCM.saveData.friendship.Ame.state = "hater";
                 break;
         }
         await MCM.ƒS.Speech.tell(MCM.characters.Amelia, text.Amelia.T0006);
@@ -515,6 +579,9 @@ var MCM;
         MCM.ƒS.update(0.1);
         await MCM.ƒS.Speech.tell(MCM.characters.Justice, text.Justice.T0006);
         await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0017);
+        await MCM.ƒS.Location.show(MCM.locations.black);
+        MCM.ƒS.Sound.fade(MCM.music.moringBGM, 0, 2, true);
+        await MCM.ƒS.update(2);
         //y.style.display="block";
         //saveData.state.yero += 100;
     }
@@ -536,7 +603,7 @@ var MCM;
         MCM.ƒS.Sound.fade(MCM.music.noonBGM, MCM.volume, 1, true);
         MCM.playing = MCM.music.noonBGM;
         await MCM.ƒS.Location.show(MCM.locations.kitchen);
-        await MCM.ƒS.update(1);
+        await MCM.ƒS.update(2);
         await MCM.ƒS.Speech.tell(MCM.characters.Yuri, text.Yuri.T0000);
         await MCM.ƒS.Speech.tell(MCM.characters.JJ, text.JJ.T0000);
         await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.happy, MCM.ƒS.positions.bottomcenter);
@@ -562,7 +629,7 @@ var MCM;
                     await MCM.ƒS.Character.hide(MCM.characters.Yuri);
                     await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.sad, MCM.ƒS.positions.bottomcenter);
                     await MCM.ƒS.update(0.1);
-                    await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Oh, kuso! I actually came here to ask you, if you wanted to head to my place this evening. I'm throwing a party.");
+                    await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Oh, dreck! I actually came here to ask you, if you wanted to head to my place this evening. I'm throwing a party.");
                     await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "");
                 }
                 else {
@@ -634,9 +701,151 @@ var MCM;
             await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "But back to the party I'm throwing, it starts at eight. You don't need to bring anything.");
             if (MCM.saveData.d1evening == "work") {
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, "I would love to, but I already promised auntie, I would take over the sleepy boi hours.");
-                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Kuso, just my luck. I really .");
+                await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+                await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.sad, MCM.ƒS.positions.bottomcenter);
+                await MCM.ƒS.update(0.1);
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Kuso, just my luck. I really thought I could get you hooked up this time.");
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Look I appreciate it, but you don't need to worry about my love life this much.");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "If it was just your love life, I really wouldn't care all that much, it's about all of your social life.");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Sometimes you get so absorbed in your goals, you completely forget all other important things in life. Also, you are shit at socialising!");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Or do you have any <b>real</b> friends other than me? You know, people outside of your family that would help you in any situation, with all resources avaiable to them?");
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "I know, I know, you're right. Next time I'll make sure I can make it. Promise.");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Yeah, you better. Else I'll force you to go speed dating or some shit like that.");
+                await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+                await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.normal, MCM.ƒS.positions.bottomcenter);
+                await MCM.ƒS.update(0.1);
+            }
+            else {
+                let partyDia = {
+                    no: "Sorry, but I really don't think I can go today.",
+                    yes: "Yeah, I've got time."
+                };
+                let partyDiaElem = await MCM.ƒS.Menu.getInput(partyDia, "choice");
+                switch (partyDiaElem) {
+                    case partyDia.no:
+                        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+                        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.angry, MCM.ƒS.positions.bottomcenter);
+                        await MCM.ƒS.update(0.1);
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Kuso, cooooooome on, choom. I really thought I could get you hooked up this time.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Look I appreciate it, but you don't need to worry about my love life this much.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "If it was just your love life, I really wouldn't care all that much, it's about all of your social life.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "If you never go out or do anything, you'll never meet new people. Also, you are shit at socialising! So it's twice as hard for you to make friends.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Or do you have any <b>real</b> friends other than me? You know, people outside of your family that would help you in any situation, with all resources avaiable to them?");
+                        await MCM.ƒS.Speech.tell(MCM.characters.JJ, "I know, I know, you're right. Next time I'll make sure I can make it. Promise.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Yeah, you better. Else I'll force you to go speed dating or some shit like that.");
+                        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+                        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.normal, MCM.ƒS.positions.bottomcenter);
+                        await MCM.ƒS.update(0.1);
+                        break;
+                    case partyDia.yes:
+                        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+                        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.happy, MCM.ƒS.positions.bottomcenter);
+                        await MCM.ƒS.update(0.1);
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Dope! Based! Superlit!");
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Don't forget to wear your MCM jacket. Some of the riders really dig mechanics. Also, you look great in it.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Will do.");
+                        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+                        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.normal, MCM.ƒS.positions.bottomcenter);
+                        await MCM.ƒS.update(0.1);
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Oh, also, come in your wyvern! As I said, cool ride equals free I/Os.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Come on, don't give me that look. You've been in a dry streak for to long!");
+                        await MCM.ƒS.Speech.tell(MCM.characters.JJ, "No need to rub it in.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "You know I love to rub in.");
+                        await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Hahaha, yeah, you sure do.");
+                        MCM.saveData.d1evening = "D1_Evening_Party";
+                        break;
+                }
             }
         }
+        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "I think my car could use some more glitz. Got anything kakkoii here?");
+        await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, "I think the two best options are either the neon lights or the new spoiler.");
+        await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, "A spoiler is definitely the less imp option, but also cheaper. It would cost him about 250 yero");
+        await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, "The new neon lights are preem, but at 1450 yero they are very expensive.");
+        await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, "Getting both will ensure he scores an output, but might attract thrillers.");
+        let car = {
+            spoiler: "Get the spoiler",
+            neon: "Get the neon lights",
+            both: "get both",
+        };
+        let carElem = await MCM.ƒS.Menu.getInput(car, "choice");
+        switch (carElem) {
+            case car.spoiler:
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "One of the spoilers we got will def look clean on your ride.");
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "It would cost you 250 ¥€, and it's so quick, I can easily squeeze you in between some other work.");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Oh yeah, I've seen some of them. Get me the one with the shark fins.");
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "'Course. Gonna start the painting machine asap after lunch.");
+                MCM.saveData.state.yero += 125;
+                MCM.saveData.d1YuriUpgrade = "spoiler";
+                break;
+            case car.neon:
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Def! We got new neon lights! some hi-qual stuff.");
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Sure, they cost about 1450 yero, but they are highly customizable and look bretty damn amazing. I'm getting some myself, if I can afford it after the bills.");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "That does sound imp, choom! I'm gonna have lots of fun setting them up.");
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Preem. I'll ask Roland to get them fitted. I'm to swamped to do that.");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "No prob. Just be in time for tonight.");
+                MCM.saveData.state.yero += 725;
+                MCM.saveData.d1YuriUpgrade = "neon";
+                break;
+            case car.both:
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Def! We got new neon lights! some hi-qual stuff. Together with a nice spoiler they'll work like magic.");
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "But, they cost about 1700 yero in total..");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Ah, sure, I got the extra bank. I better score tonight, though.");
+                await MCM.ƒS.Speech.tell(MCM.characters.JJ, "I guarantee you will. I'll ask Roland to get them built in. I'm to swamped to do that.");
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "No prob. Just be in time for tonight.");
+                MCM.saveData.state.yero += 1050;
+                MCM.saveData.d1YuriUpgrade = "both";
+                break;
+        }
+        await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Sorry, tomodachi. Break's over, gotta go.");
+        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Mondainai. I need to buzz anyway, even small corpos don't run them-");
+        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.surprised, MCM.ƒS.positionPercent(25, 100));
+        await MCM.ƒS.update(0.1);
+        await MCM.ƒS.Character.show(MCM.characters.Justice, MCM.characters.Justice.pose.angry, MCM.ƒS.positionPercent(75, 100));
+        await MCM.ƒS.update(0.1);
+        await MCM.ƒS.Speech.tell(MCM.characters.Justice, "What's the aho doing here? You know he annoys the essence out of me.");
+        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.smug, MCM.ƒS.positionPercent(25, 100));
+        await MCM.ƒS.update(0.1);
+        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Well, actually, I came here as a customer.");
+        switch (MCM.saveData.d1YuriUpgrade) {
+            case car.spoiler:
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "I wanted to get a kakkoii spoiler.");
+                break;
+            case car.neon:
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "JJ recommended the new neonlights, and I'd like them in my car.");
+                break;
+            case car.both:
+                await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "Some neonlights and a spoiler would make my car meccha kakkoii. JJ has a good eye for these things.");
+                break;
+        }
+        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.sad, MCM.ƒS.positionPercent(25, 100));
+        await MCM.ƒS.update(0.1);
+        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "But I don't know if I can handle you being so mean to me. I might have to go to a different shop. Maybe they'll appreciate their dear, dear customers.");
+        await MCM.ƒS.Character.hide(MCM.characters.Justice);
+        await MCM.ƒS.Character.show(MCM.characters.Justice, MCM.characters.Justice.pose.closed, MCM.ƒS.positionPercent(75, 100));
+        await MCM.ƒS.update(0.1);
+        await MCM.ƒS.Speech.tell(MCM.characters.Justice, "<i>inhales</i>");
+        await MCM.ƒS.Character.hide(MCM.characters.Justice);
+        await MCM.ƒS.Character.show(MCM.characters.Justice, MCM.characters.Justice.pose.normal, MCM.ƒS.positionPercent(75, 100));
+        await MCM.ƒS.update(0.1);
+        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.normal, MCM.ƒS.positionPercent(25, 100));
+        await MCM.ƒS.update(0.1);
+        await MCM.ƒS.Speech.tell(MCM.characters.Justice, "That's xactly what I meant. Anyway... You and Roland are gonna run the front alone for a while.");
+        await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Will do. See ya in a while.");
+        await MCM.ƒS.Character.hide(MCM.characters.Justice);
+        await MCM.ƒS.Character.hide(MCM.characters.Yuri);
+        await MCM.ƒS.Character.show(MCM.characters.Yuri, MCM.characters.Yuri.pose.normal, MCM.ƒS.positionPercent(75, 100));
+        await MCM.ƒS.update(0.1);
+        await MCM.ƒS.Speech.tell(MCM.characters.Yuri, "I'll bounce too. Good luck, choomba.");
+        await MCM.ƒS.Speech.tell(MCM.characters.JJ, "Later, choom.");
+        await MCM.ƒS.Location.show(MCM.locations.black);
+        MCM.ƒS.Character.hideAll();
+        MCM.ƒS.Sound.fade(MCM.music.noonBGM, 0, 2, true);
+        await MCM.ƒS.update(2);
+        return MCM.saveData.d1evening;
     }
     MCM.D1_Noon = D1_Noon;
 })(MCM || (MCM = {})); //await ƒS.Speech.tell(characters., ".");

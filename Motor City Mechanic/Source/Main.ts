@@ -20,7 +20,8 @@ namespace MCM {
     },
     waiting: false,
     d1evening: "",
-    d1Ame: ""
+    d1Ame: "",
+    d1YuriUpgrade: ""
   }
   export let miniGameAnswer: string[] = new Array;
 
@@ -29,15 +30,17 @@ namespace MCM {
   export let playing: string = "";
 
   export function incrementVolume(): void {
-    if (volume < 1.0) {
-      volume += 0.1;
+    if (volume <= 0.9) {
+      volume = volume + 0.1;
+      console.log(volume);
       ƒS.Sound.setVolume(playing, volume);
     }
   }
 
   export function decrementVolume(): void {
-    if (volume > 0) {
-      volume -= 0.1;
+    if (volume >= 0.1) {
+      volume = volume - 0.1;
+      console.log(volume);
       ƒS.Sound.setVolume(playing, volume);
     }
   }
@@ -148,7 +151,8 @@ namespace MCM {
         smile: "Images/Characters/Justice/smile.png",
         angry: "Images/Characters/Justice/angry.png",
         sad: "Images/Characters/Justice/sad.png",
-        thinking: "Images/Characters/Justice/thinking.png"
+        thinking: "Images/Characters/Justice/thinking.png",
+        closed: "Images/Characters/Justice/closed.png"
       }
     },
     Unknown: {
@@ -175,11 +179,11 @@ namespace MCM {
         happy: "Images/Characters/Yuri/happy.png",
         angry: "Images/Characters/Yuri/angry.png",
         sad: "Images/Characters/Yuri/sad.png",
-        questioning: "Images/Characters/Yuri/questioning.png",
         thinking: "Images/Characters/Yuri/thinking.png",
         explaining: "Images/Characters/Yuri/explaining.png",
         wink: "Images/Characters/Yuri/wink.png",
-        smug: "Images/Characters/Yuri/smug.png"
+        smug: "Images/Characters/Yuri/smug.png",
+        surprised: "Images/Characters/Yuri/smug.png"
       }
     },
     MinigameOverlays: {
@@ -221,10 +225,10 @@ namespace MCM {
         }
         break;
       case ƒ.KEYBOARD_CODE.NUMPAD_SUBTRACT:
-        decrementVolume
+        decrementVolume();
         break;
       case ƒ.KEYBOARD_CODE.NUMPAD_ADD:
-        decrementVolume
+        incrementVolume();
         break;
     }
   }
@@ -298,7 +302,10 @@ namespace MCM {
 
     let scenes: ƒS.Scenes = [
       { scene: D1_Morning, name: "Scene1" },
-      { scene: D1_Noon, name: "Scene2" }
+      { scene: D1_Noon, name: "Scene2" },
+      { scene: D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free"},
+      { scene: D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work"},
+      { scene: D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party"}
     ];
 
     let uiElement: HTMLElement = document.querySelector("[type=interface]");
