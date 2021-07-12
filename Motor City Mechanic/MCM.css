@@ -80,21 +80,26 @@ speech.Protagonist name {
 dialog[type="inventory"] {
   background-color: #555555DD;
   color: white;
+  width: 60%;
+  border: none;
 }
 
 dialog[type="inventory"] > ul {
   list-style-type: none;
+  padding: 5px;
 }
 
 dialog[type="inventory"] > ul > li{
   position: relative;
-  width: 350px;
-  height: 100px;
+  height: 115px;
   padding: 5px;
-  border: 2px solid;
+  background-image: url(Images/Textbox/ItemBox.png);
+  
+  background-size: cover;
+
 }
 
-dialog[type="inventory"] img {
+dialog[type="inventory"] > ul > li > img {
   float: left;
   height: 100px;
   position: absolute;
@@ -232,4 +237,8 @@ div[type="interface"] * {
 .choice button:hover{
   box-shadow: 0px 0px 4px aquamarine;
   text-shadow: 0px 0px 4px aquamarine;
+}
+
+.hidden {
+  visibility: hidden;
 }

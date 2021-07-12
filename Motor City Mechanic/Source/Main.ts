@@ -4,7 +4,9 @@ namespace MCM {
 
   export let saveData = {
     score: 0,
+    started: false,
     ended: false,
+    waiting: false,
     state: {
       yero: 0
     },
@@ -18,10 +20,13 @@ namespace MCM {
         happiness: 10
       }
     },
-    waiting: false,
+    drunkness: 0,
+    sobbering: false,
+    yuriRabbit: "Pekora",
     d1evening: "",
     d1Ame: "",
-    d1YuriUpgrade: ""
+    d1YuriUpgrade: "",
+    d1Dio: ""
   }
   export let miniGameAnswer: string[] = new Array;
 
@@ -30,18 +35,18 @@ namespace MCM {
   export let playing: string = "";
 
   export function incrementVolume(): void {
-    if (volume <= 0.9) {
-      volume = volume + 0.1;
+    if (volume <= 0.95) {
+      volume = volume + 0.05;
       console.log(volume);
-      ƒS.Sound.setVolume(playing, volume);
+      ƒS.Sound.setMasterVolume(volume);
     }
   }
 
   export function decrementVolume(): void {
-    if (volume >= 0.1) {
-      volume = volume - 0.1;
+    if (volume >= 0.04) {
+      volume = volume - 0.05;
       console.log(volume);
-      ƒS.Sound.setVolume(playing, volume);
+      ƒS.Sound.setMasterVolume(volume);
     }
   }
 
@@ -50,21 +55,22 @@ namespace MCM {
     noonBGM: "Sound/Music/Alumo - Vice.wav",
     eveningBGM: "Sound/Music/Alumo - Diotic.wav",
     partyBGM: "Sound/Music/Alumo - Outlander.wav",
+    synthAdiago: "Sound/Music/.wav"
   }
 
   // Lazy functions
-  export function higherFriendship(person: any, value: number){
-    if((person.happiness + value) <= 100){
+  export function higherFriendship(person: any, value: number) {
+    if ((person.happiness + value) <= 100) {
       person.happiness += value;
-    }else{
+    } else {
       person.happiness = 100;
     }
   }
 
-  export function lowerFriendship(person: any, value: number){
-    if((person.happiness + value) >= -100){
+  export function lowerFriendship(person: any, value: number) {
+    if ((person.happiness + value) >= -100) {
       person.happiness += value;
-    }else{
+    } else {
       person.happiness = -100;
     }
   }
@@ -81,6 +87,7 @@ namespace MCM {
   let gameMenu: ƒS.Menu;
 
   export let menu: HTMLDialogElement;
+  export let openinv: boolean;
   export let money: HTMLDialogElement;
   export let checklist: HTMLDialogElement;
 
@@ -125,6 +132,10 @@ namespace MCM {
       name: "JU_kitchen",
       background: "Images/Backgrounds/JU_kitchen.jpg"
     },
+    party: {
+      name: "YU_party",
+      background: "Images/Backgrounds/YU_party.jpg"
+    },
     black: {
       name: "black",
       background: "Images/Backgrounds/black.png"
@@ -135,9 +146,28 @@ namespace MCM {
     }
   }
 
+  export let transitions = {
+    eye: {
+      duration: 2.5,
+      alpha: "Images/Transitions/Eye.png",
+      edge: 0.01
+    },
+    car: {
+      duration: 1,
+      alpha: "Images/Transitions/car.png",
+      edge: 0.05
+    }
+  };
+
   export let characters = {
     Thoughts: {
       name: "Thoughts"
+    },
+    Unknown: {
+      name: "???"
+    },
+    Speakers: {
+      name: "Speakers"
     },
     JJ: {
       name: "JJ"
@@ -154,9 +184,6 @@ namespace MCM {
         thinking: "Images/Characters/Justice/thinking.png",
         closed: "Images/Characters/Justice/closed.png"
       }
-    },
-    Unknown: {
-      name: "???"
     },
     Amelia: {
       name: "Amelia",
@@ -186,29 +213,92 @@ namespace MCM {
         surprised: "Images/Characters/Yuri/smug.png"
       }
     },
+    Dio: {
+      name: "Dionysos",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Dio/.png",
+        normal: "Images/Characters/Dio/neutral.png",
+        smile: "Images/Characters/Dio/smile.png",
+        angry: "Images/Characters/Dio/angry.png",
+        sad: "Images/Characters/Dio/sad.png",
+        questioning: "Images/Characters/Amelia/questioning.png"
+      }
+    },
+    Nao: {
+      name: "Nao",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Nao/.png",
+        normal: "Images/Characters/Nao/normal.png",
+        happy: "Images/Characters/Nao/happy.png",
+        surprised: "Images/Characters/Nao/surprised.png",
+        sad: "Images/Characters/Nao/sad.png"
+      }
+    },
     MinigameOverlays: {
       name: "Minigames",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         pathtemplate: "Images/Minigames/CarsScan-DN-Name.png",
-        AmeD1: "Images/Minigames/CarScan-D1-Amelia.png"
+        AmeD1: "Images/Minigames/CarScan-D1-Amelia.png",
+        DioD1: "Images/Minigames/CarsScan-D1-Dio.png",
       }
     }
   }
 
+  //Items
   export let items = {
     Rum: {
       name: "Rum",
       description: "A bottle of cheap white 'rum'",
-      image: "Images/Items/Rum.png"
+      image: "Images/Items/Rum.png",
+      handler: gettingDrunk
     },
     Asacoco: {
       name: "Merchandise",
       description: "An item of unknown function honoring the greatest dragon out there. Matane, Kaich&#333;! Arigathanks for all the kuso.",
-      image: "Images/Items/Asacoco.png"
+      image: "Images/Items/Asacoco.png",
+      handler: useAsacoco,
+      static: true
+    },
+    Stop:{
+      name: "Stop drinking",
+      description: "",
+      image: "",
+      handler: stopDrinking
     }
   }
 
+  function gettingDrunk(): void {
+    console.log("getting drunk");
+    saveData.drunkness += 100;
+    if(!saveData.sobbering){
+      saveData.sobbering = true;
+      setTimeout(unDrunk, 1000);
+    }
+  }
+  function unDrunk(): void {
+    if(saveData.drunkness - 5 >= 5){
+      saveData.drunkness -= 5;
+      setTimeout(unDrunk, 1000);
+    }else{
+      saveData.drunkness = 0;
+      saveData.sobbering = false;
+    }
+  }
+  async function useAsacoco(): Promise<void> {
+    await ƒS.Speech.tell(characters.Unknown, "Good morning, motherfuckers");
+    await ƒS.Speech.tell(characters.JJ, "Huh? Who said that?");
+    await ƒS.Speech.tell(characters.JJ, "Weird...");
+    await ƒS.Speech.tell(characters.JJ, "Why would someone gift me something like this?");
+  }
+  function stopDrinking(): void {
+    openinv = false;
+    ƒS.Inventory.close();
+  }
+
+  // Keyboard Control
   async function hndKeyPress(_event: KeyboardEvent): Promise<void> {
     switch (_event.code) {
       case ƒ.KEYBOARD_CODE.F4:
@@ -233,7 +323,7 @@ namespace MCM {
     }
   }
 
-  export function checklistFiller(elements: string[][]): void {
+/*   export function checklistFiller(elements: string[][]): void {
     for (let x: number = 0; x < elements.length; x++) {
       let li: HTMLLIElement = document.createElement("li");
       let input: HTMLInputElement = document.createElement("input");
@@ -283,7 +373,7 @@ namespace MCM {
       console.log("why");
       minigameInput();
     }
-  }
+  } */
 
 
   document.addEventListener("keydown", hndKeyPress);
@@ -298,18 +388,20 @@ namespace MCM {
     money = <HTMLDialogElement>document.getElementsByClassName("moneybar")[0];
     checklist = <HTMLDialogElement>document.getElementById("checklist");
 
-    document.getElementById("confirmRep").addEventListener("click", confirmRep);
+    //document.getElementById("confirmRep").addEventListener("click", confirmRep);
 
     let scenes: ƒS.Scenes = [
       { scene: D1_Morning, name: "Scene1" },
-      { scene: D1_Noon, name: "Scene2" },
-      { scene: D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free"},
-      { scene: D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work"},
-      { scene: D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party"}
+      //{ scene: D1_Noon, name: "Scene2" },
+      //{ scene: D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free" },
+      //{ scene: D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work" },
+      //{ scene: D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party" },
+      //{ scene: Ending_Depression, name: "Ending_Depression", id: "Ending_Depression", next: "End_Credits" },
+      //{ scene: End_Credits, name: "End_Credits", id: "End_Credits" }
     ];
-
     let uiElement: HTMLElement = document.querySelector("[type=interface]");
     saveData.state = ƒS.Progress.setData(saveData.state, uiElement);
+
     // start the sequence
     ƒS.Progress.go(scenes);
   }

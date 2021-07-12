@@ -3,11 +3,14 @@
     "commonSourceDirectory": "..",
     "sourceFiles": [
       "../Source/Main.ts",
-      "../Source/Scenes/D1_Evening_Free.ts",
-      "../Source/Scenes/D1_Evening_Party.ts",
-      "../Source/Scenes/D1_Evening_Work.ts",
-      "../Source/Scenes/D1_Morning.ts",
-      "../Source/Scenes/D1_Noon.ts"
+      "../Source/Scenes/End_Credits.ts",
+      "../Source/Scenes/Day_1/D1_Evening_Free.ts",
+      "../Source/Scenes/Day_1/D1_Evening_Party.ts",
+      "../Source/Scenes/Day_1/D1_Evening_Work.ts",
+      "../Source/Scenes/Day_1/D1_Morning.ts",
+      "../Source/Scenes/Day_1/D1_Noon.ts",
+      "../Source/Scenes/Day_2/D2_Morning.ts",
+      "../Source/Scenes/Endings/Ending_Depression.ts"
     ],
     "js": {
       "sections": [
@@ -19,7 +22,7 @@
         },
         {
           "pos": 15,
-          "end": 51353,
+          "end": 87679,
           "kind": "text"
         }
       ],
@@ -47,7 +50,7 @@
       "sections": [
         {
           "pos": 0,
-          "end": 4140,
+          "end": 5972,
           "kind": "text"
         }
       ]
