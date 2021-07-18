@@ -60,7 +60,6 @@ namespace MCM {
                 T0007: "Alright then, see ya, James!"
             }
         }
-        await ƒS.Speech.tell(characters.Unknown, "Welcome to the Test-Version of this game. So far only day 1 is playable. Thank you for you patience.");
 
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0000);
         await ƒS.Location.show(locations.JJ_apartement_out);
@@ -181,7 +180,7 @@ namespace MCM {
 
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0002);
 
-        switch(minigameElem){
+        switch (minigameElem) {
             case miniGameAnswersD1Ame.fewest:
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0004);
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0005);
@@ -203,7 +202,7 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0007);
                 await ƒS.Speech.tell(characters.JJ, (text.JJ.T0012 + " 600¥€"));
                 ƒS.Character.hide(characters.Amelia);
-            	await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.questioning, ƒS.positions.bottomcenter);
+                await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.questioning, ƒS.positions.bottomcenter);
                 await ƒS.update(0.1);
                 await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0003);
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0014);

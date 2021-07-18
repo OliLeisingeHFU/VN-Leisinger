@@ -378,7 +378,7 @@ var MCM;
         MCM.openinv = false;
         MCM.ƒS.Inventory.close();
     }
-    // Keyboard Control
+    // Keyboard Control 
     async function hndKeyPress(_event) {
         switch (_event.code) {
             case MCM.ƒ.KEYBOARD_CODE.F4:
@@ -423,16 +423,16 @@ var MCM;
         MCM.money = document.getElementsByClassName("moneybar")[0];
         MCM.checklist = document.getElementById("checklist");
         let scenes = [
-            /*       { scene: D1_Morning, name: "Scene1" },
-                  { scene: D1_Noon, name: "Scene2" },
-                  { scene: D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free" },
-                  { scene: D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work" },
-                  { scene: D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party" },
-                  { scene: D1_Evening_Free, name: "D1_AfterParty_Ame", id: "D1_AfterParty_Ame" },
-                  { scene: D1_Evening_Work, name: "D1_AfterParty_Azami", id: "D1_AfterParty_Azami" },
-                  { scene: D1_Evening_Party, name: "D1_AfterParty_Books", id: "D1_AfterParty_Books" },
-                  { scene: D1_Evening_Party, name: "D1_AfterParty_Urban", id: "D1_AfterParty_Urban" },
-                  { scene: Ending_Depression, name: "Ending_Depression", id: "Ending_Depression", next: "End_Credits" }, */
+            { scene: MCM.D1_Morning, name: "Scene1" },
+            { scene: MCM.D1_Noon, name: "Scene2" },
+            { scene: MCM.D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free" },
+            { scene: MCM.D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work" },
+            { scene: MCM.D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party" },
+            { scene: MCM.D1_Evening_Free, name: "D1_AfterParty_Ame", id: "D1_AfterParty_Ame" },
+            { scene: MCM.D1_Evening_Work, name: "D1_AfterParty_Azami", id: "D1_AfterParty_Azami" },
+            { scene: MCM.D1_Evening_Party, name: "D1_AfterParty_Books", id: "D1_AfterParty_Books" },
+            { scene: MCM.D1_Evening_Party, name: "D1_AfterParty_Urban", id: "D1_AfterParty_Urban" },
+            { scene: MCM.Ending_Depression, name: "Ending_Depression", id: "Ending_Depression", next: "End_Credits" },
             { scene: MCM.End_Credits, name: "End_Credits", id: "End_Credits" }
         ];
         let uiElement = document.querySelector("[type=interface]");
@@ -1708,7 +1708,6 @@ var MCM;
                 T0007: "Alright then, see ya, James!"
             }
         };
-        await MCM.ƒS.Speech.tell(MCM.characters.Unknown, "Welcome to the Test-Version of this game. So far only day 1 is playable. Thank you for you patience.");
         await MCM.ƒS.Speech.tell(MCM.characters.Thoughts, text.Thoughts.T0000);
         await MCM.ƒS.Location.show(MCM.locations.JJ_apartement_out);
         await MCM.ƒS.update(1);
