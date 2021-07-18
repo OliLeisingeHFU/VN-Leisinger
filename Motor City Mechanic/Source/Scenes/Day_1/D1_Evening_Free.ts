@@ -11,11 +11,10 @@ namespace MCM {
         await ƒS.Speech.tell(characters.JJ, "Finally home!");
         await ƒS.Speech.tell(characters.Thoughts, "Hmm... 18:23... I think I'm just gonna relax a bit. My responisilities won't be running away in the next 5 minutes.");
         await ƒS.Speech.tell(characters.Thoughts, ". . .");
-        await ƒS.Location.show(locations.black);
-        await ƒS.update(transitions.eye.duration, transitions.eye.alpha, transitions.eye.edge);
+        fadeToBlack();
         await ƒS.Speech.tell(characters.Thoughts, ". . .");
         await ƒS.Location.show(locations.JJ_apartement_in);
-        await ƒS.update(transitions.eye.duration, transitions.eye.alpha, transitions.eye.edge);
+        await ƒS.update(2);
 
         await ƒS.Speech.tell(characters.JJ, "I feel like crap... how long did I sleep?");
         await ƒS.Speech.tell(characters.Thoughts, "It's 01:37. Amelias race is already over. Yuris party is probably still going strong.");
@@ -36,8 +35,7 @@ namespace MCM {
         switch(doingElem){
             case doing.anime:
                 await ƒS.Speech.tell(characters.JJ, "Guess I could get catched up on some seasonals.");
-                await ƒS.Location.show(locations.black);
-                await ƒS.update(transitions.eye.duration, transitions.eye.alpha, transitions.eye.edge);
+                fadeToBlack();
                 await ƒS.Speech.tell(characters.Thoughts, "2 hours of anime later.");
                 await ƒS.Location.show(locations.JJ_apartement_in);
                 await ƒS.update(0.3);
@@ -45,8 +43,7 @@ namespace MCM {
                 break;
             case doing.games:
                 await ƒS.Speech.tell(characters.JJ, "I've got more than enough RPGs I haven't finished yet.");
-                await ƒS.Location.show(locations.black);
-                await ƒS.update(transitions.eye.duration, transitions.eye.alpha, transitions.eye.edge);
+                fadeToBlack();
                 await ƒS.Speech.tell(characters.Thoughts, "2 hours of gaming later.");
                 await ƒS.Location.show(locations.JJ_apartement_in);
                 await ƒS.update(0.3);
@@ -98,9 +95,7 @@ namespace MCM {
                         await ƒS.Speech.tell(characters.JJ, "There was nothing else seriously wrong with her car... It... must've been an accident...");
                         await ƒS.Speech.tell(characters.JJ, "I need a drink...");
                         await ƒS.Speech.tell(characters.JJ, "Make that 3.");
-                        await ƒS.Location.show(locations.black);
-                        ƒS.Character.hideAll();
-                        ƒS.Sound.fade(playing, 0, 2, true);
+                        fadeToBlack();
                         await ƒS.update(2);
                         return "Ending_Depression";
                     case "fewer":
@@ -114,13 +109,8 @@ namespace MCM {
                         return "End_Credits";
                         //break;
                 }
-                break;
         }
-
-        await ƒS.Location.show(locations.black);
-        ƒS.Character.hideAll();
-        ƒS.Sound.fade(playing, 0, 2, true);
-        await ƒS.update(2);
+        fadeToBlackMusicOff();
         await ƒS.Speech.tell(characters.Thoughts, "to be continued...");
     }
 }

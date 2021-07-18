@@ -6,9 +6,12 @@ declare namespace MCM {
         started: boolean;
         ended: boolean;
         waiting: boolean;
+        inv: boolean;
+        sobbering: boolean;
         state: {
             yero: number;
         };
+        happiness: number;
         friendship: {
             Yuri: {
                 state: string;
@@ -18,14 +21,26 @@ declare namespace MCM {
                 state: string;
                 happiness: number;
             };
+            Azami: {
+                state: string;
+                happiness: number;
+            };
+            Urban: {
+                state: string;
+                happiness: number;
+            };
+            Books: {
+                state: string;
+                happiness: number;
+            };
         };
         drunkness: number;
-        sobbering: boolean;
         yuriRabbit: string;
         d1evening: string;
         d1Ame: string;
         d1YuriUpgrade: string;
         d1Dio: string;
+        d1AfterPartyDate: string;
     };
     export let miniGameAnswer: string[];
     export let volume: number;
@@ -41,6 +56,12 @@ declare namespace MCM {
     };
     export function higherFriendship(person: any, value: number): void;
     export function lowerFriendship(person: any, value: number): void;
+    export let yesno: {
+        yes: string;
+        no: string;
+    };
+    export function fadeToBlack(): Promise<void>;
+    export function fadeToBlackMusicOff(): Promise<void>;
     export let menu: HTMLDialogElement;
     export let openinv: boolean;
     export let money: HTMLDialogElement;
@@ -79,18 +100,6 @@ declare namespace MCM {
             background: string;
         };
     };
-    export let transitions: {
-        eye: {
-            duration: number;
-            alpha: string;
-            edge: number;
-        };
-        car: {
-            duration: number;
-            alpha: string;
-            edge: number;
-        };
-    };
     export let characters: {
         Thoughts: {
             name: string;
@@ -123,9 +132,8 @@ declare namespace MCM {
             pose: {
                 pathtemplate: string;
                 normal: string;
-                smile: string;
+                happy: string;
                 angry: string;
-                sad: string;
                 questioning: string;
             };
         };
@@ -166,6 +174,41 @@ declare namespace MCM {
                 happy: string;
                 surprised: string;
                 sad: string;
+            };
+        };
+        Azami: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                pathtemplate: string;
+                normal: string;
+                happy: string;
+                surprised: string;
+                angry: string;
+                cute: string;
+            };
+        };
+        Books: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                pathtemplate: string;
+                normal: string;
+                happy: string;
+                surprised: string;
+                sad: string;
+                cute: string;
+            };
+        };
+        Urban: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                pathtemplate: string;
+                normal: string;
+                happy: string;
+                surprised: string;
+                angry: string;
             };
         };
         MinigameOverlays: {
@@ -223,5 +266,20 @@ declare namespace MCM {
     function D1_Noon(): ƒS.SceneReturn;
 }
 declare namespace MCM {
+    function D1_AfterParty_Ame(): ƒS.SceneReturn;
+}
+declare namespace MCM {
+    function D1_AfterParty_Azami(): ƒS.SceneReturn;
+}
+declare namespace MCM {
+    function D1_AfterParty_Books(): ƒS.SceneReturn;
+}
+declare namespace MCM {
+    function D1_AfterParty_Urban(): ƒS.SceneReturn;
+}
+declare namespace MCM {
     function Ending_Depression(): ƒS.SceneReturn;
+}
+declare namespace MCM {
+    function Ending_Normal(): ƒS.SceneReturn;
 }

@@ -52,7 +52,7 @@ namespace MCM {
             await ƒS.update(2);
             await ƒS.Speech.tell(characters.JJ, "All fixed now, let's get back to Amelia.");
             await ƒS.Location.show(locations.workshop);
-            await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.smile, ƒS.positions.bottomcenter);
+            await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.happy, ƒS.positions.bottomcenter);
             await ƒS.update(2);
             await ƒS.Speech.tell(characters.Amelia, "Thanks, how much do I owe you?");
             await ƒS.Speech.tell(characters.JJ, "I'm just charging you for the parts, not the work time. My mistake after all.");

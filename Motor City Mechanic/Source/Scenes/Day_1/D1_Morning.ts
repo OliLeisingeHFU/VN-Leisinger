@@ -73,13 +73,12 @@ namespace MCM {
         await ƒS.Location.show(locations.workshop);
         await ƒS.update(1);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0004);
-        await ƒS.Location.show(locations.black);
-        await ƒS.update(transitions.eye.duration, transitions.eye.alpha, transitions.eye.edge);
+        fadeToBlack();
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0005);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0006);
         await ƒS.Location.show(locations.workshop);
         await ƒS.Character.show(characters.Justice, characters.Justice.pose.smile, ƒS.positions.bottomcenter);
-        await ƒS.update(transitions.eye.duration, transitions.eye.alpha, transitions.eye.edge);
+        await ƒS.update(2);
         await ƒS.Speech.tell(characters.Justice, text.Justice.T0000);
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0000);
         await ƒS.Speech.tell(characters.Justice, text.Justice.T0001);
@@ -275,9 +274,7 @@ namespace MCM {
         await ƒS.update(0.1);
         await ƒS.Speech.tell(characters.Justice, text.Justice.T0006);
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0017);
-        await ƒS.Location.show(locations.black);
-        ƒS.Sound.fade(music.moringBGM, 0, 2, true);
-        await ƒS.update(2);
+        fadeToBlackMusicOff();
         //y.style.display="block";
         //saveData.state.yero += 100;
     }

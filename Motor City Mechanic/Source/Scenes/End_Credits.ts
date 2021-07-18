@@ -3,8 +3,8 @@ namespace MCM {
         menu.className += " hidden";
         money.className += " hidden";
         ƒS.Speech.hide();
+
         ƒS.Text.addClass("credits");
         ƒS.Text.print("Thank you very much for playing!");
-
         }
     }

@@ -165,7 +165,7 @@ namespace MCM {
                         await ƒS.Character.hide(characters.Yuri);
                         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positions.bottomcenter);
                         await ƒS.update(0.1);
-                        await ƒS.Speech.tell(characters.Yuri, "Oh, also, come in your wyvern! As I said, cool ride equals free I/Os.");
+                        await ƒS.Speech.tell(characters.Yuri, "Oh, also, come in your Wyvern! As I said, cool ride equals free I/Os.");
                         await ƒS.Speech.tell(characters.Yuri, "Come on, don't give me that look. You've been in a dry streak for to long!");
                         await ƒS.Speech.tell(characters.JJ, "No need to rub it in.");
                         await ƒS.Speech.tell(characters.Yuri, "You know I love to rub in.");
@@ -263,9 +263,7 @@ namespace MCM {
         await ƒS.update(0.1);
         await ƒS.Speech.tell(characters.Yuri, "I'll bounce too. Good luck, tomodachi.");
         await ƒS.Speech.tell(characters.JJ, "Later, tomo.");
-        await ƒS.Location.show(locations.black);
-        ƒS.Character.hideAll();
-        ƒS.Sound.fade(music.noonBGM, 0, 2, true);
+        fadeToBlackMusicOff();
         await ƒS.update(2);
         
         return saveData.d1evening;
