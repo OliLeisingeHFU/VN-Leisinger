@@ -2,7 +2,7 @@ namespace MCM {
     export async function D1_Noon(): ƒS.SceneReturn {
         let text = {
             JJ: {
-                T0000: "In the back! How's it going, choomba?"
+                T0000: "In the back! How's it going, tomodachi?"
             },
             Yuri: {
                 T0000: "Yo! JJ? Where you at?",
@@ -38,7 +38,7 @@ namespace MCM {
                 await ƒS.Character.hide(characters.Yuri);
                 await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positions.bottomcenter);
                 await ƒS.update(0.1);
-                if(saveData.d1evening == "work"){
+                if(saveData.d1evening == "D1_Evening_Work"){
                     await ƒS.Speech.tell(characters.JJ, "Oh, yeah, actually, Justice asked me to cover the nightshift. I'll probably have at least <b>some</b> time to do that. Thanks.");
                     await ƒS.Character.hide(characters.Yuri);
                     await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.sad, ƒS.positions.bottomcenter);
@@ -68,7 +68,7 @@ namespace MCM {
                 await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.happy, ƒS.positions.bottomcenter);
                 await ƒS.update(0.1);
                 await ƒS.Speech.tell(characters.Yuri, "Ah, come on, I know you. Gíve yourself more cred. If you think you did not miss anything, then I know for sure you didn't");
-                await ƒS.Speech.tell(characters.JJ, "Thanks, choom. You're the best.");
+                await ƒS.Speech.tell(characters.JJ, "Thanks, tomo. You're the best.");
                 await ƒS.Character.hide(characters.Yuri);
                 await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.wink, ƒS.positions.bottomcenter);
                 await ƒS.update(0.1);
@@ -98,11 +98,13 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.Yuri, "Sure.");
                 break;
         }
+        console.log(saveData.d1evening);
+        console.log(saveData.d1Ame);
 
-        if(saveData.d1evening != "work" && (saveData.d1Ame != "fewer" && saveData.d1Ame != "fewest")){
+        if(!(saveData.d1evening == "D1_Evening_Work" && (saveData.d1Ame == "fewer" || saveData.d1Ame == "fewest"))){
             await ƒS.Speech.tell(characters.Yuri, "Well, what I actually came here for was to inform you, that tonight I'm having a party at my place.");
             await ƒS.Speech.tell(characters.Yuri, "Casual clothing, enough ethanol to desinfect a whole bodyshop, as well as lots of potential inputs and outputs that dig nice rides.");
-            await ƒS.Speech.tell(characters.Yuri, "On the topic of bodyshops, I heard from mine got a deal with your boss, 20% off all cyberware! sugoi ne~");
+            await ƒS.Speech.tell(characters.Yuri, "On the topic of bodyshops, I heard you get 20% off of all cyberware from Jackie's place! sugoi ne~");
             await ƒS.Speech.tell(characters.Yuri, "If you ever plan on chippin' in, I'll gladly chip in.");
             await ƒS.Character.hide(characters.Yuri);
             await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.happy, ƒS.positions.bottomcenter);
@@ -114,7 +116,7 @@ namespace MCM {
             await ƒS.Speech.tell(characters.Yuri, "Consider it payback for the 20% off I get here. I'm sure a nice cyberarm or two will help you with difficult tasks at work.");
             await ƒS.Speech.tell(characters.Yuri, "But back to the party I'm throwing, it starts at eight. You don't need to bring anything.");
 
-            if(saveData.d1evening == "work"){
+            if(saveData.d1evening == "D1_Evening_Work"){
                 await ƒS.Speech.tell(characters.JJ, "I would love to, but I already promised auntie, I would take over the sleepy boi hours.");
                 await ƒS.Character.hide(characters.Yuri);
                 await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.sad, ƒS.positions.bottomcenter);
@@ -142,7 +144,7 @@ namespace MCM {
                         await ƒS.Character.hide(characters.Yuri);
                         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.angry, ƒS.positions.bottomcenter);
                         await ƒS.update(0.1);
-                        await ƒS.Speech.tell(characters.Yuri, "Kuso, cooooooome on, choom. I really thought I could get you hooked up this time.");
+                        await ƒS.Speech.tell(characters.Yuri, "Kuso, cooooooome on, tomo. I really thought I could get you hooked up this time.");
                         await ƒS.Speech.tell(characters.JJ, "Look I appreciate it, but you don't need to worry about my love life this much.");
                         await ƒS.Speech.tell(characters.Yuri, "If it was just your love life, I really wouldn't care all that much, it's about all of your social life.");
                         await ƒS.Speech.tell(characters.Yuri, "If you never go out or do anything, you'll never meet new people. Also, you are shit at socialising! So it's twice as hard for you to make friends.");
@@ -163,7 +165,7 @@ namespace MCM {
                         await ƒS.Character.hide(characters.Yuri);
                         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positions.bottomcenter);
                         await ƒS.update(0.1);
-                        await ƒS.Speech.tell(characters.Yuri, "Oh, also, come in your wyvern! As I said, cool ride equals free I/Os.");
+                        await ƒS.Speech.tell(characters.Yuri, "Oh, also, come in your Wyvern! As I said, cool ride equals free I/Os.");
                         await ƒS.Speech.tell(characters.Yuri, "Come on, don't give me that look. You've been in a dry streak for to long!");
                         await ƒS.Speech.tell(characters.JJ, "No need to rub it in.");
                         await ƒS.Speech.tell(characters.Yuri, "You know I love to rub in.");
@@ -200,9 +202,9 @@ namespace MCM {
             case car.neon:
                 await ƒS.Speech.tell(characters.JJ, "Def! We got new neon lights! some hi-qual stuff.");
                 await ƒS.Speech.tell(characters.JJ, "Sure, they cost about 1450 yero, but they are highly customizable and look bretty damn amazing. I'm getting some myself, if I can afford it after the bills.");
-                await ƒS.Speech.tell(characters.Yuri, "That does sound imp, choom! I'm gonna have lots of fun setting them up.");
+                await ƒS.Speech.tell(characters.Yuri, "That does sound imp, tomo! I'm gonna have lots of fun setting them up.");
                 await ƒS.Speech.tell(characters.JJ, "Preem. I'll ask Roland to get them fitted. I'm to swamped to do that.");
-                await ƒS.Speech.tell(characters.Yuri, "No prob. Just be in time for tonight.");
+                await ƒS.Speech.tell(characters.Yuri, "Mondainai.");
                 saveData.state.yero += 725;
                 saveData.d1YuriUpgrade = "neon";
                 break;
@@ -211,7 +213,7 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.JJ, "But, they cost about 1700 yero in total..");
                 await ƒS.Speech.tell(characters.Yuri, "Ah, sure, I got the extra bank. I better score tonight, though.");
                 await ƒS.Speech.tell(characters.JJ, "I guarantee you will. I'll ask Roland to get them built in. I'm to swamped to do that.");
-                await ƒS.Speech.tell(characters.Yuri, "No prob. Just be in time for tonight.");
+                await ƒS.Speech.tell(characters.Yuri, "Mondainai.");
                 saveData.state.yero += 1050;
                 saveData.d1YuriUpgrade = "both";
                 break;
@@ -227,7 +229,7 @@ namespace MCM {
         await ƒS.Character.hide(characters.Yuri);
         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.smug, ƒS.positionPercent(25, 100));
         await ƒS.update(0.1);
-        await ƒS.Speech.tell(characters.Yuri, "Well, actually, I came here as a customer.");
+        await ƒS.Speech.tell(characters.Yuri, "Well, actually, I'm here as a customer.");
         switch(saveData.d1YuriUpgrade){
             case car.spoiler:
                 await ƒS.Speech.tell(characters.Yuri, "I wanted to get a kakkoii spoiler.");
@@ -257,13 +259,11 @@ namespace MCM {
         await ƒS.Speech.tell(characters.JJ, "Will do. See ya in a while.");
         await ƒS.Character.hide(characters.Justice);
         await ƒS.Character.hide(characters.Yuri);
-        await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positionPercent(75, 100));
+        await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positions.bottomcenter);
         await ƒS.update(0.1);
-        await ƒS.Speech.tell(characters.Yuri, "I'll bounce too. Good luck, choomba.");
-        await ƒS.Speech.tell(characters.JJ, "Later, choom.");
-        await ƒS.Location.show(locations.black);
-        ƒS.Character.hideAll();
-        ƒS.Sound.fade(music.noonBGM, 0, 2, true);
+        await ƒS.Speech.tell(characters.Yuri, "I'll bounce too. Good luck, tomodachi.");
+        await ƒS.Speech.tell(characters.JJ, "Later, tomo.");
+        fadeToBlackMusicOff();
         await ƒS.update(2);
         
         return saveData.d1evening;

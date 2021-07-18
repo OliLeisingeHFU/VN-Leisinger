@@ -4,10 +4,15 @@ namespace MCM {
 
   export let saveData = {
     score: 0,
+    started: false,
     ended: false,
+    waiting: false, 
+    inv: false,
+    sobbering: false,
     state: {
       yero: 0
     },
+    happiness: 25,
     friendship: {
       Yuri: {
         state: "best friend",
@@ -16,32 +21,67 @@ namespace MCM {
       Ame: {
         state: "stranger",
         happiness: 10
-      }
+      },
+      Azami: {
+        state: "stranger",
+        happiness: 10
+      },
+      Urban: {
+        state: "stranger",
+        happiness: 10
+      },
+      Books: {
+        state: "stranger",
+        happiness: 10
+      },
     },
-    waiting: false,
+    drunkness: 0,
+    yuriRabbit: "Pekora",
     d1evening: "",
     d1Ame: "",
-    d1YuriUpgrade: ""
+    d1YuriUpgrade: "",
+    d1Dio: "",
+    d1AfterPartyDate: ""
   }
   export let miniGameAnswer: string[] = new Array;
 
+  let credits: string[] = [
+    "<b>Titlescreen:</b></br>\
+    <i>Car:</i> Daniel Zhabotinsky on Sketchfab</br>\
+    <i>Font:</i> Perfect Dark BRK by Ænigma Fonts",
+    "<b>Backgrounds:</b></br>\
+    Futuristic Reality 2 Pack by Rachel Chen",
+    "<b>Hairstyles:</b></br>\
+    <i>JJ & Dio:</i> https://booth.pm/en/items/2870629 / Male protagonist hair by Atelier Echo ~ アトリエ・エコー</br>\
+    <i>Justice:</i> https://booth.pm/en/items/3028807 / Vroid Blonde Ponytail by nyxxxnoctis</br>\
+    <i>Yuri:</i> 【Serena Kupopo - https://kupopo.net/】</br>\
+    <i>Amelia:</i> https://booth.pm/en/items/3020826 / Vroid Hair Preset ane texture by nyxxxnoctis</br>\
+    <i>Books:</i> https://booth.pm/ja/items/2933774 / Long Curly hair With headbang Preset by scarletanimefox</br>\
+    <i>Nao:</i> https://booth.pm/ja/items/3044682 / Vroid~ Free hair preset 3 by alis</br>\
+    <i>Azami:</i> https://booth.pm/ja/items/3044516 / Vroid~ Free hair preset by alis</br>\
+    ",
+    "<b>Music:</b></br>\
+    <i>Alumo:</i> https://soundcloud.com/alumomusic/sets/synthwave",
+    "<b>Textbox:</b></br>\
+    https://otomeflag.itch.io/futuristic-hologram-01 by OTOME	&#10084; FLAG"
+  ];
   // Audio Control
   export let volume: number = 1.0;
   export let playing: string = "";
 
   export function incrementVolume(): void {
-    if (volume <= 0.9) {
-      volume = volume + 0.1;
+    if (volume <= 0.95) {
+      volume = volume + 0.05;
       console.log(volume);
-      ƒS.Sound.setVolume(playing, volume);
+      ƒS.Sound.setMasterVolume(volume);
     }
   }
 
   export function decrementVolume(): void {
-    if (volume >= 0.1) {
-      volume = volume - 0.1;
+    if (volume >= 0.04) {
+      volume = volume - 0.05;
       console.log(volume);
-      ƒS.Sound.setVolume(playing, volume);
+      ƒS.Sound.setMasterVolume(volume);
     }
   }
 
@@ -50,23 +90,41 @@ namespace MCM {
     noonBGM: "Sound/Music/Alumo - Vice.wav",
     eveningBGM: "Sound/Music/Alumo - Diotic.wav",
     partyBGM: "Sound/Music/Alumo - Outlander.wav",
+    synthAdiago: "Sound/Music/.wav"
   }
 
   // Lazy functions
-  export function higherFriendship(person: any, value: number){
-    if((person.happiness + value) <= 100){
+  export function higherFriendship(person: any, value: number) {
+    if ((person.happiness + value) <= 100) {
       person.happiness += value;
-    }else{
+    } else {
       person.happiness = 100;
     }
   }
 
-  export function lowerFriendship(person: any, value: number){
-    if((person.happiness + value) >= -100){
-      person.happiness += value;
-    }else{
+  export function lowerFriendship(person: any, value: number) {
+    if ((person.happiness - value) >= -100) {
+      person.happiness -= value;
+    } else {
       person.happiness = -100;
     }
+  }
+
+  export let yesno = {
+    yes: "Yes",
+    no: "No"
+  }
+
+  export async function fadeToBlack(): Promise<void>{
+    await ƒS.Location.show(locations.black);
+    ƒS.Character.hideAll();
+    await ƒS.update(2);
+  }
+  export async function fadeToBlackMusicOff(): Promise<void>{
+    ƒS.Sound.fade(playing, 0, 2, true);
+    await ƒS.Location.show(locations.black);
+    ƒS.Character.hideAll();
+    await ƒS.update(2);
   }
 
   // Menu
@@ -81,6 +139,7 @@ namespace MCM {
   let gameMenu: ƒS.Menu;
 
   export let menu: HTMLDialogElement;
+  export let openinv: boolean;
   export let money: HTMLDialogElement;
   export let checklist: HTMLDialogElement;
 
@@ -97,6 +156,25 @@ namespace MCM {
         break;
       case ingameMenu.volumeDown:
         decrementVolume();
+        break;
+      case ingameMenu.credits:
+          let current: number = 0;
+          let flip = { back: "Back", next: "Next", done: "Close" };
+          let choice: string;
+          ƒS.Text.addClass("credits");
+          do {
+            ƒS.Text.print(credits[current]);
+            choice = await ƒS.Menu.getInput(flip, "flip");
+            switch (choice) {
+              case flip.back:
+                current = Math.max(0, current - 1);
+                break;
+              case flip.next:
+                current = Math.min(credits.length - 1, current + 1);
+                break;
+            }
+          } while (choice != flip.done);
+          ƒS.Text.close();
         break;
       default:
         console.log(gameMenu);
@@ -125,6 +203,10 @@ namespace MCM {
       name: "JU_kitchen",
       background: "Images/Backgrounds/JU_kitchen.jpg"
     },
+    party: {
+      name: "YU_party",
+      background: "Images/Backgrounds/YU_party.jpg"
+    },
     black: {
       name: "black",
       background: "Images/Backgrounds/black.png"
@@ -138,6 +220,12 @@ namespace MCM {
   export let characters = {
     Thoughts: {
       name: "Thoughts"
+    },
+    Unknown: {
+      name: "???"
+    },
+    Speakers: {
+      name: "Speakers"
     },
     JJ: {
       name: "JJ"
@@ -155,18 +243,14 @@ namespace MCM {
         closed: "Images/Characters/Justice/closed.png"
       }
     },
-    Unknown: {
-      name: "???"
-    },
     Amelia: {
       name: "Amelia",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         pathtemplate: "Images/Characters/Amelia/.png",
         normal: "Images/Characters/Amelia/neutral.png",
-        smile: "Images/Characters/Amelia/smile.png",
+        happy: "Images/Characters/Amelia/happy.png",
         angry: "Images/Characters/Amelia/angry.png",
-        sad: "Images/Characters/Amelia/sad.png",
         questioning: "Images/Characters/Amelia/questioning.png"
       }
     },
@@ -186,29 +270,127 @@ namespace MCM {
         surprised: "Images/Characters/Yuri/smug.png"
       }
     },
+    Dio: {
+      name: "Dionysos",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Dio/.png",
+        normal: "Images/Characters/Dio/neutral.png",
+        smile: "Images/Characters/Dio/smile.png",
+        angry: "Images/Characters/Dio/angry.png",
+        sad: "Images/Characters/Dio/sad.png",
+        questioning: "Images/Characters/Amelia/questioning.png"
+      }
+    },
+    Nao: {
+      name: "Nao",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Nao/.png",
+        normal: "Images/Characters/Nao/normal.png",
+        happy: "Images/Characters/Nao/happy.png",
+        surprised: "Images/Characters/Nao/surprised.png",
+        sad: "Images/Characters/Nao/sad.png"
+      }
+    },
+    Azami: {
+      name: "Azami",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Azami/.png",
+        normal: "Images/Characters/Azami/neutral.png",
+        happy: "Images/Characters/Azami/happy.png",
+        surprised: "Images/Characters/Azami/surprised.png",
+        angry: "Images/Characters/Azami/angry.png",
+        cute: "Images/Characters/Azami/cute.png",
+      }
+    },
+    Books: {
+      name: "Books",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Books/.png",
+        normal: "Images/Characters/Books/neutral.png",
+        happy: "Images/Characters/Books/happy.png",
+        surprised: "Images/Characters/Books/surprised.png",
+        sad: "Images/Characters/Books/sad.png",
+        cute: "Images/Characters/Books/cute.png",
+      }
+    },
+    Urban: {
+      name: "Urban",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        pathtemplate: "Images/Characters/Urban/.png",
+        normal: "Images/Characters/Urban/neutral.png",
+        happy: "Images/Characters/Urban/happy.png",
+        surprised: "Images/Characters/Urban/surprised.png",
+        angry: "Images/Characters/Urban/angry.png"
+      }
+    },
     MinigameOverlays: {
       name: "Minigames",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         pathtemplate: "Images/Minigames/CarsScan-DN-Name.png",
-        AmeD1: "Images/Minigames/CarScan-D1-Amelia.png"
+        AmeD1: "Images/Minigames/CarScan-D1-Amelia.png",
+        DioD1: "Images/Minigames/CarsScan-D1-Dio.png",
       }
     }
   }
 
+  //Items
   export let items = {
     Rum: {
       name: "Rum",
       description: "A bottle of cheap white 'rum'",
-      image: "Images/Items/Rum.png"
+      image: "Images/Items/Rum.png",
+      handler: gettingDrunk
     },
     Asacoco: {
       name: "Merchandise",
       description: "An item of unknown function honoring the greatest dragon out there. Matane, Kaich&#333;! Arigathanks for all the kuso.",
-      image: "Images/Items/Asacoco.png"
+      image: "Images/Items/Asacoco.png",
+      handler: useAsacoco,
+      static: true
+    },
+    Stop: {
+      name: "Stop drinking",
+      description: "",
+      image: "",
+      handler: stopDrinking
     }
   }
 
+  function gettingDrunk(): void {
+    console.log("getting drunk");
+    saveData.drunkness += 100;
+    if (!saveData.sobbering) {
+      saveData.sobbering = true;
+      setTimeout(unDrunk, 1000);
+    }
+  }
+  function unDrunk(): void {
+    if (saveData.drunkness - 5 >= 5) {
+      saveData.drunkness -= 5;
+      setTimeout(unDrunk, 1000);
+    } else {
+      saveData.drunkness = 0;
+      saveData.sobbering = false;
+    }
+  }
+  async function useAsacoco(): Promise<void> {
+    await ƒS.Speech.tell(characters.Unknown, "Good morning, motherfuckers!");
+    await ƒS.Speech.tell(characters.Thoughts, "Huh? Who said that?");
+    await ƒS.Speech.tell(characters.Thoughts, "Weird...");
+    await ƒS.Speech.tell(characters.Thoughts, "Must've been the wind.");
+  }
+  function stopDrinking(): void {
+    openinv = false;
+    ƒS.Inventory.close();
+  }
+
+  // Keyboard Control
   async function hndKeyPress(_event: KeyboardEvent): Promise<void> {
     switch (_event.code) {
       case ƒ.KEYBOARD_CODE.F4:
@@ -224,6 +406,15 @@ namespace MCM {
           menu.style.visibility = "visible";
         }
         break;
+      case ƒ.KEYBOARD_CODE.I:
+        if (saveData.inv) {
+          ƒS.Inventory.close();
+          saveData.inv = false;
+        } else {
+          ƒS.Inventory.open();
+          saveData.inv = true;
+        }
+        break;
       case ƒ.KEYBOARD_CODE.NUMPAD_SUBTRACT:
         decrementVolume();
         break;
@@ -232,59 +423,6 @@ namespace MCM {
         break;
     }
   }
-
-  export function checklistFiller(elements: string[][]): void {
-    for (let x: number = 0; x < elements.length; x++) {
-      let li: HTMLLIElement = document.createElement("li");
-      let input: HTMLInputElement = document.createElement("input");
-      input.type = "checkbox";
-      input.id = elements[x][0];
-      input.name = elements[x][0];
-      let label: HTMLLabelElement = document.createElement("label");
-      label.innerHTML = elements[x][1];
-      li.appendChild(input);
-      li.appendChild(label);
-      li.addEventListener("click", checkToggle);
-      checklist.children[0].appendChild(li);
-    }
-
-    menu.style.visibility = "hidden";
-    money.style.visibility = "hidden";
-    checklist.style.visibility = "visible";
-  }
-
-  function checkToggle(this: HTMLElement): void {
-    let checkbox: HTMLInputElement = <HTMLInputElement>this.children[0];
-    if (checkbox.checked) {
-      checkbox.checked = false;
-    } else {
-      checkbox.checked = true;
-    }
-  }
-
-  function confirmRep(): void {
-    saveData.waiting = false;
-    let checklistEntries: HTMLCollection = checklist.children[0].children;
-    for (let x: number = 0; x < checklistEntries.length; x++) {
-      if (checklistEntries[x].tagName == "LI") {
-        let checkbox: HTMLInputElement = <HTMLInputElement>checklistEntries[x].children[0];
-        if (checkbox.checked) {
-          miniGameAnswer.push(checklistEntries[x].children[0].id);
-        }
-        checklistEntries[x].remove();
-      }
-    }
-    checklist.style.visibility = "hidden";
-  }
-
-  export async function minigameInput(): Promise<void> {
-    if (saveData.waiting) {
-      await ƒS.Progress.delay(1);
-      console.log("why");
-      minigameInput();
-    }
-  }
-
 
   document.addEventListener("keydown", hndKeyPress);
 
@@ -298,23 +436,23 @@ namespace MCM {
     money = <HTMLDialogElement>document.getElementsByClassName("moneybar")[0];
     checklist = <HTMLDialogElement>document.getElementById("checklist");
 
-    document.getElementById("confirmRep").addEventListener("click", confirmRep);
-
     let scenes: ƒS.Scenes = [
       { scene: D1_Morning, name: "Scene1" },
       { scene: D1_Noon, name: "Scene2" },
-      { scene: D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free"},
-      { scene: D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work"},
-      { scene: D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party"}
+      { scene: D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free" },
+      { scene: D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work" },
+      { scene: D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party" },
+      { scene: D1_Evening_Free, name: "D1_AfterParty_Ame", id: "D1_AfterParty_Ame" },
+      { scene: D1_Evening_Work, name: "D1_AfterParty_Azami", id: "D1_AfterParty_Azami" },
+      { scene: D1_Evening_Party, name: "D1_AfterParty_Books", id: "D1_AfterParty_Books" },
+      { scene: D1_Evening_Party, name: "D1_AfterParty_Urban", id: "D1_AfterParty_Urban" },
+      { scene: Ending_Depression, name: "Ending_Depression", id: "Ending_Depression", next: "End_Credits" },
+      { scene: End_Credits, name: "End_Credits", id: "End_Credits" }
     ];
-
     let uiElement: HTMLElement = document.querySelector("[type=interface]");
     saveData.state = ƒS.Progress.setData(saveData.state, uiElement);
+
     // start the sequence
     ƒS.Progress.go(scenes);
   }
 }
-
-// for inventory: https://stackoverflow.com/questions/25152463/how-to-use-typescript-on-a-button-click
-// for inventory: https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
-// pictures: https://www.artbreeder.com/

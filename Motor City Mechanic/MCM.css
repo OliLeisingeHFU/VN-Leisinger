@@ -80,42 +80,54 @@ speech.Protagonist name {
 dialog[type="inventory"] {
   background-color: #555555DD;
   color: white;
+  width: 60%;
+  border: none;
 }
 
 dialog[type="inventory"] > ul {
   list-style-type: none;
+  padding: 5px;
 }
 
 dialog[type="inventory"] > ul > li{
   position: relative;
-  width: 350px;
-  height: 100px;
+  height: 115px;
   padding: 5px;
-  border: 2px solid;
+  background-image: url(Images/Textbox/ItemBox.png);
+  background-size: cover;
 }
 
-dialog[type="inventory"] img {
-  float: left;
-  height: 100px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
 dialog[type="inventory"] name {
   font-size: x-large;
+  top: 27%;
+  left: 27.5%;
+  position: relative;
 }
-
+dialog[type="inventory"] amount {
+  font-size: x-large;
+  top: 27%;
+  left: 27.5%;
+  position: relative;
+}
 dialog[type="inventory"] amount::before {
   content: " x";
 }
 
-dialog[type="inventory"] amount {
-  font-size: x-large;
+dialog[type="inventory"] > ul > li > img {
+  position: relative;
+  height: 80%;
+  left: 7%;
+  bottom: 33%;
+
 }
 
 dialog[type="inventory"] description {
   display: block;
   padding-top: 5px;
+  position: relative;
+  top: 20%;
+  left: 27.5%;
+  width: 67%;
 }
 
 dialog[type="inventory"] button {
@@ -142,53 +154,6 @@ div[type="interface"] * {
   width: 80px;
   margin: 0;
   padding: 0;
-}
-
-/* CHECKLIST MINIGAME */
-#checklist {
-  position: absolute;
-  bottom: 40%;
-  background-color: #821dc666;
-  width: 40%;
-  left: 30%;
-  border: solid 1px;
-  border-radius: 10px;
-  font-size: x-large;
-}
-
-#checklist ul{
-  list-style-type: none;
-  padding: 0;
-  margin: 5px 0;
-}
-
-#checklist ul button{
-  width: 100%;
-  font-size: xx-large;
-  border: none;
-  background-color: #00000066;
-  color: white;
-  cursor: pointer
-}
-
-#checklist ul button:hover{
-  box-shadow: 0px 0px 4px aquamarine;
-  text-shadow: 0px 0px 4px aquamarine;
-}
-
-#checklist ul li{
-  background-color: #00000066;
-  border: none;
-  margin: 10px 5px;
-  color: white;
-  border-radius: 5px;
-  padding: 5px;
-  cursor: pointer
-}
-
-#checklist ul li:hover{
-  box-shadow: 0px 0px 4px aquamarine;
-  text-shadow: 0px 0px 4px aquamarine;
 }
 
 /* MENU */
@@ -232,4 +197,54 @@ div[type="interface"] * {
 .choice button:hover{
   box-shadow: 0px 0px 4px aquamarine;
   text-shadow: 0px 0px 4px aquamarine;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+/* CREDITS */
+dialog.flip{
+  background-color: #821dc666;
+  border: solid 3px #00000066;
+  color: white;
+  position: absolute;
+  left: 72%;
+  width: 5%;
+  top: 43%;
+  margin: 0;
+}
+dialog.flip button{
+  background-color: #00000066;
+  border: none;
+  color: white;
+  margin: 1% 0;
+  width: 100%;
+  padding: 3%;
+  font-size: large;
+}
+
+dialog.flip button#back::before{
+  content: "<< ";
+  color: aquamarine;
+}
+dialog.flip button#next::after{
+  content: " >>";
+  color: aquamarine;
+}
+
+.credits{
+  background-color: #00000066;
+  border: solid 3px #821dc6;
+  color: white;
+  font-size: larger;
+  width: 41%;
+}
+.credits b{
+  color: #821dc6;
+  font-size: xx-large;
+}
+.credits i{
+  color: aquamarine;
+  font-size: x-large;
 }

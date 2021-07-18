@@ -6,11 +6,11 @@ namespace MCM {
         playing = music.moringBGM;
 
         await ƒS.Location.show(locations.JJ_apartement_in);
-        await ƒS.update(1);
+        await ƒS.update(2);
 
         let text = {
             Thoughts: {
-                T0000: "Damn, I can't believe this is already the last week of September. I still need 5000 yero to pay all my bills. And what if Justice fires me?",
+                T0000: "Damn, I can't believe this is already the last week of August. I still need 5000 yero to pay all my bills. And what if Justice fires me?",
                 T0001: "Ok, JJ, no need for worry. This is still your first month working. You haven't made any mistakes.",
                 T0002: "YET.",
                 T0003: "I'm sure she won't fire me immediately on the first mistake.",
@@ -39,11 +39,11 @@ namespace MCM {
             },
             Justice: {
                 T0000: "Ohayo, James. Genkidesuka?",
-                T0001: "Don't you think it's time to finally learn Japanese?",
+                T0001: "Don't you think it's time to finally learn proper Japanese?",
                 T0002: "Also, just because I'm your boss, doesn't mean you have to stop calling me auntie.",
                 T0003: "Ok, sweetie, try not to die from embarrassment, and get to work. Car parts ain't cheap, so the faster we sell 'em, the more profit we make.",
                 T0004: "Start with the small one over there. Needs her ride checked out.",
-                T0005: "Oh yeah, I almost forgot, could you do overtime tonight? I know, it's still your first month and you barely know the ropes, but someone needs to cover X' shift. We've got an important night-active customer today.",
+                T0005: "Oh yeah, I almost forgot, could you do overtime tonight? I know, it's still your first month and you barely know the ropes, but someone needs to cover X's shift. We've got an important night-active customer today.",
                 T0006: "NICE WORK, JAMES! YOU'VE EARNED YOURSELF A LUNCH BREAK!"
             },
             Unknown: {
@@ -52,7 +52,7 @@ namespace MCM {
             Amelia: {
                 T0000: "Okay, buddy, I need you to look over my car, right? It's <b>gotta</b> be in preem condition for the race tonight.",
                 T0001: "But don't you dare selling me shit I don't need.",
-                T0002: "Sorry, about earlier... Anway, what's wrong with my ride?",
+                T0002: "Sorry, about earlier... Anway, whats wrong with my ride?",
                 T0003: "That's it? Doesn't seem right to me. You sure?",
                 T0004: "Are you sure about that?",
                 T0005: "Wow that is quite expensive. Are you sure all that is broken??",
@@ -73,8 +73,7 @@ namespace MCM {
         await ƒS.Location.show(locations.workshop);
         await ƒS.update(1);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0004);
-        await ƒS.Location.show(locations.black);
-        await ƒS.update(2);
+        fadeToBlack();
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0005);
         await ƒS.Speech.tell(characters.Thoughts, text.Thoughts.T0006);
         await ƒS.Location.show(locations.workshop);
@@ -115,7 +114,7 @@ namespace MCM {
 
         await ƒS.Character.hide(characters.Justice);
         await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.angry, ƒS.positions.bottomcenter);
-        ƒS.update(0.1);
+        await ƒS.update(0.1);
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0000);
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0001);
 
@@ -189,7 +188,7 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.JJ, (text.JJ.T0012 + " 300¥€"));
                 ƒS.Character.hide(characters.Amelia);
                 await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.questioning, ƒS.positions.bottomcenter);
-                ƒS.update(0.1);
+                await ƒS.update(0.1);
                 await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0003);
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0014);
                 saveData.d1Ame = "fewest";
@@ -205,7 +204,7 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.JJ, (text.JJ.T0012 + " 600¥€"));
                 ƒS.Character.hide(characters.Amelia);
             	await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.questioning, ƒS.positions.bottomcenter);
-                ƒS.update(0.1);
+                await ƒS.update(0.1);
                 await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0003);
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0014);
                 saveData.d1Ame = "fewer";
@@ -221,7 +220,7 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.JJ, (text.JJ.T0012 + " 800¥€"));
                 ƒS.Character.hide(characters.Amelia);
                 await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.questioning, ƒS.positions.bottomcenter);
-                ƒS.update(0.1);
+                await ƒS.update(0.1);
                 await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0004);
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0013);
                 saveData.d1Ame = "correct";
@@ -239,12 +238,12 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.JJ, (text.JJ.T0012 + " 1600¥€"));
                 ƒS.Character.hide(characters.Amelia);
                 await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.questioning, ƒS.positions.bottomcenter);
-                ƒS.update(0.1);
+                await ƒS.update(0.1);
                 await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0005);
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0014);
                 saveData.d1Ame = "more";
                 saveData.state.yero += 800;
-                lowerFriendship(saveData.friendship.Ame, 15)
+                higherFriendship(saveData.friendship.Ame, 10)
                 break;
             case miniGameAnswersD1Ame.most:
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0004);
@@ -257,7 +256,7 @@ namespace MCM {
                 await ƒS.Speech.tell(characters.JJ, (text.JJ.T0012 + " 1800¥€"));
                 ƒS.Character.hide(characters.Amelia);
                 await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.questioning, ƒS.positions.bottomcenter);
-                ƒS.update(0.1);
+                await ƒS.update(0.1);
                 await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0005);
                 await ƒS.Speech.tell(characters.JJ, text.JJ.T0014);
                 saveData.d1Ame = "most";
@@ -272,12 +271,10 @@ namespace MCM {
         await ƒS.Speech.tell(characters.Amelia, text.Amelia.T0007);
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0016);
         ƒS.Character.hide(characters.Amelia);
-        ƒS.update(0.1);
+        await ƒS.update(0.1);
         await ƒS.Speech.tell(characters.Justice, text.Justice.T0006);
         await ƒS.Speech.tell(characters.JJ, text.JJ.T0017);
-        await ƒS.Location.show(locations.black);
-        ƒS.Sound.fade(music.moringBGM, 0, 2, true);
-        await ƒS.update(2);
+        fadeToBlackMusicOff();
         //y.style.display="block";
         //saveData.state.yero += 100;
     }
