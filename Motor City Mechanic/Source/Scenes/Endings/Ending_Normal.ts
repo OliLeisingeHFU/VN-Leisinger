@@ -2,10 +2,10 @@ namespace MCM {
     export async function Ending_Normal(): ƒS.SceneReturn {
         menu.className += " hidden";
         money.className += " hidden";
-        
-        if(saveData.state.yero >= 1000){
+
+        if (saveData.state.yero >= 1000) {
             await ƒS.Speech.tell(characters.Thoughts, "Not being able to pay all bills, JJ was kicked out of his appartment.");
-            switch(saveData.d1AfterPartyDate){
+            switch (saveData.d1AfterPartyDate) {
                 case "Azami":
                     await ƒS.Speech.tell(characters.Thoughts, "But Azami has taken a liking to him, and so she allowed him to live with her, for as long as he performed certain chores.");
                     break;
@@ -22,9 +22,9 @@ namespace MCM {
                     await ƒS.Speech.tell(characters.Thoughts, "Yuri's flat was to small for 3 people, so JJ had no choice than to sleep in Justice's shop until he can find a new place.");
                     break;
             }
-        }else{
+        } else {
             await ƒS.Speech.tell(characters.Thoughts, "JJ managed to pay all bills and keep his home.");
-            switch(saveData.d1AfterPartyDate){
+            switch (saveData.d1AfterPartyDate) {
                 case "Azami":
                     await ƒS.Speech.tell(characters.Thoughts, "Azami had his fun with JJ and never called him again. Which he didn't mind, as he never expected anything serious.");
                     break;

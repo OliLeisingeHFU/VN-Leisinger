@@ -24,7 +24,7 @@ namespace MCM {
         await ƒS.Character.hide(characters.Amelia)
         await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.normal, ƒS.positions.bottomcenter);
         await ƒS.update(2);
-    
+
         await ƒS.Speech.tell(characters.JJ, "So, uhm, what did you think of doing next?");
         await ƒS.Character.hide(characters.Amelia)
         await ƒS.Character.show(characters.Amelia, characters.Amelia.pose.happy, ƒS.positions.bottomcenter);

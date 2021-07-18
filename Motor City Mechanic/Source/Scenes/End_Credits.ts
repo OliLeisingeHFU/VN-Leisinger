@@ -6,5 +6,5 @@ namespace MCM {
 
         ƒS.Text.addClass("credits");
         ƒS.Text.print("Thank you very much for playing!");
-        }
     }
+}

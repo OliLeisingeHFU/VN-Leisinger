@@ -6,7 +6,7 @@ namespace MCM {
     score: 0,
     started: false,
     ended: false,
-    waiting: false, 
+    waiting: false,
     inv: false,
     sobbering: false,
     state: {
@@ -115,12 +115,12 @@ namespace MCM {
     no: "No"
   }
 
-  export async function fadeToBlack(): Promise<void>{
+  export async function fadeToBlack(): Promise<void> {
     await ƒS.Location.show(locations.black);
     ƒS.Character.hideAll();
     await ƒS.update(2);
   }
-  export async function fadeToBlackMusicOff(): Promise<void>{
+  export async function fadeToBlackMusicOff(): Promise<void> {
     ƒS.Sound.fade(playing, 0, 2, true);
     await ƒS.Location.show(locations.black);
     ƒS.Character.hideAll();
@@ -158,23 +158,23 @@ namespace MCM {
         decrementVolume();
         break;
       case ingameMenu.credits:
-          let current: number = 0;
-          let flip = { back: "Back", next: "Next", done: "Close" };
-          let choice: string;
-          ƒS.Text.addClass("credits");
-          do {
-            ƒS.Text.print(credits[current]);
-            choice = await ƒS.Menu.getInput(flip, "flip");
-            switch (choice) {
-              case flip.back:
-                current = Math.max(0, current - 1);
-                break;
-              case flip.next:
-                current = Math.min(credits.length - 1, current + 1);
-                break;
-            }
-          } while (choice != flip.done);
-          ƒS.Text.close();
+        let current: number = 0;
+        let flip = { back: "Back", next: "Next", done: "Close" };
+        let choice: string;
+        ƒS.Text.addClass("credits");
+        do {
+          ƒS.Text.print(credits[current]);
+          choice = await ƒS.Menu.getInput(flip, "flip");
+          switch (choice) {
+            case flip.back:
+              current = Math.max(0, current - 1);
+              break;
+            case flip.next:
+              current = Math.min(credits.length - 1, current + 1);
+              break;
+          }
+        } while (choice != flip.done);
+        ƒS.Text.close();
         break;
       default:
         console.log(gameMenu);
@@ -390,7 +390,7 @@ namespace MCM {
     ƒS.Inventory.close();
   }
 
-  // Keyboard Control
+  // Keyboard Control 
   async function hndKeyPress(_event: KeyboardEvent): Promise<void> {
     switch (_event.code) {
       case ƒ.KEYBOARD_CODE.F4:

@@ -10,7 +10,7 @@ namespace MCM {
         await ƒS.update(2);
         await ƒS.Speech.tell(characters.Azami, "Before I show you my bedroom, I wanna see your gaming skills. Best of three in this fighting game.");
         await ƒS.Speech.tell(characters.JJ, "Kay, let's go.");
-        
+
         let game = {
             tryhard: "Tryhard",
             casual: "Casual"
@@ -18,7 +18,7 @@ namespace MCM {
 
         let gamingElem = await ƒS.Menu.getInput(game, "choice");
 
-        switch(gamingElem){
+        switch (gamingElem) {
             case game.tryhard:
                 await ƒS.Speech.tell(characters.JJ, "But don't think I'm gonna go easy on you, just because I wanna have sex!");
                 await ƒS.Speech.tell(characters.Azami, "You better give your best!");

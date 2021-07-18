@@ -23,7 +23,7 @@ namespace MCM {
 
         await ƒS.Speech.tell(characters.Yuri, text.Yuri.T0001);
 
-        switch(saveData.d1Ame){
+        switch (saveData.d1Ame) {
             case "fewest":
             case "fewer":
                 await ƒS.Speech.tell(characters.JJ, "There's this customer from this morning, I'm kinda afraid I might've missed something during her carscan.");
@@ -38,16 +38,16 @@ namespace MCM {
                 await ƒS.Character.hide(characters.Yuri);
                 await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positions.bottomcenter);
                 await ƒS.update(0.1);
-                if(saveData.d1evening == "D1_Evening_Work"){
+                if (saveData.d1evening == "D1_Evening_Work") {
                     await ƒS.Speech.tell(characters.JJ, "Oh, yeah, actually, Justice asked me to cover the nightshift. I'll probably have at least <b>some</b> time to do that. Thanks.");
                     await ƒS.Character.hide(characters.Yuri);
                     await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.sad, ƒS.positions.bottomcenter);
                     await ƒS.update(0.1);
                     await ƒS.Speech.tell(characters.Yuri, "Oh, dreck! I actually came here to ask you, if you wanted to head to my place this evening. I'm throwing a party.");
                     await ƒS.Speech.tell(characters.Yuri, "");
-                }else{
+                } else {
                     await ƒS.Speech.tell(characters.JJ, "I am totally swamped until my shift is over. And the race is tonight, so she doesn't have the time either.");
-                    if(saveData.d1Ame == "fewest"){
+                    if (saveData.d1Ame == "fewest") {
                         await ƒS.Character.hide(characters.Yuri);
                         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.happy, ƒS.positions.bottomcenter);
                         await ƒS.update(0.1);
@@ -101,7 +101,7 @@ namespace MCM {
         console.log(saveData.d1evening);
         console.log(saveData.d1Ame);
 
-        if(!(saveData.d1evening == "D1_Evening_Work" && (saveData.d1Ame == "fewer" || saveData.d1Ame == "fewest"))){
+        if (!(saveData.d1evening == "D1_Evening_Work" && (saveData.d1Ame == "fewer" || saveData.d1Ame == "fewest"))) {
             await ƒS.Speech.tell(characters.Yuri, "Well, what I actually came here for was to inform you, that tonight I'm having a party at my place.");
             await ƒS.Speech.tell(characters.Yuri, "Casual clothing, enough ethanol to desinfect a whole bodyshop, as well as lots of potential inputs and outputs that dig nice rides.");
             await ƒS.Speech.tell(characters.Yuri, "On the topic of bodyshops, I heard you get 20% off of all cyberware from Jackie's place! sugoi ne~");
@@ -116,7 +116,7 @@ namespace MCM {
             await ƒS.Speech.tell(characters.Yuri, "Consider it payback for the 20% off I get here. I'm sure a nice cyberarm or two will help you with difficult tasks at work.");
             await ƒS.Speech.tell(characters.Yuri, "But back to the party I'm throwing, it starts at eight. You don't need to bring anything.");
 
-            if(saveData.d1evening == "D1_Evening_Work"){
+            if (saveData.d1evening == "D1_Evening_Work") {
                 await ƒS.Speech.tell(characters.JJ, "I would love to, but I already promised auntie, I would take over the sleepy boi hours.");
                 await ƒS.Character.hide(characters.Yuri);
                 await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.sad, ƒS.positions.bottomcenter);
@@ -131,15 +131,15 @@ namespace MCM {
                 await ƒS.Character.hide(characters.Yuri);
                 await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.normal, ƒS.positions.bottomcenter);
                 await ƒS.update(0.1);
-            }else{
+            } else {
                 let partyDia = {
                     no: "Sorry, but I really don't think I can go today.",
                     yes: "Yeah, I've got time."
                 }
-        
+
                 let partyDiaElem = await ƒS.Menu.getInput(partyDia, "choice");
 
-                switch(partyDiaElem){
+                switch (partyDiaElem) {
                     case partyDia.no:
                         await ƒS.Character.hide(characters.Yuri);
                         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.angry, ƒS.positions.bottomcenter);
@@ -190,7 +190,7 @@ namespace MCM {
 
         let carElem = await ƒS.Menu.getInput(car, "choice");
 
-        switch(carElem){
+        switch (carElem) {
             case car.spoiler:
                 await ƒS.Speech.tell(characters.JJ, "One of the spoilers we got will def look clean on your ride.");
                 await ƒS.Speech.tell(characters.JJ, "It would cost you 250 ¥€, and it's so quick, I can easily squeeze you in between some other work.");
@@ -230,7 +230,7 @@ namespace MCM {
         await ƒS.Character.show(characters.Yuri, characters.Yuri.pose.smug, ƒS.positionPercent(25, 100));
         await ƒS.update(0.1);
         await ƒS.Speech.tell(characters.Yuri, "Well, actually, I'm here as a customer.");
-        switch(saveData.d1YuriUpgrade){
+        switch (saveData.d1YuriUpgrade) {
             case car.spoiler:
                 await ƒS.Speech.tell(characters.Yuri, "I wanted to get a kakkoii spoiler.");
                 break;
@@ -265,7 +265,7 @@ namespace MCM {
         await ƒS.Speech.tell(characters.JJ, "Later, tomo.");
         fadeToBlackMusicOff();
         await ƒS.update(2);
-        
+
         return saveData.d1evening;
     }
 } //await ƒS.Speech.tell(characters., ".");
