@@ -115,7 +115,7 @@ namespace MCM {
             case miniGameAnswersD1Dio.replacemot:
                 await ƒS.Character.show(characters.Dio, characters.Dio.pose.angry, ƒS.positions.bottomcenter);
                 await ƒS.update(1);
-                await ƒS.Speech.tell(characters.Dio, "Wie <b>dumm</b> kann ein Mensch eigentlich sein!? I specifi-fucking-ly a-ha-sked your boss <b>not</b> to replace anything and you just don't care, huh?");
+                await ƒS.Speech.tell(characters.Dio, "Wie <b>dumm</b> kann ein Mensch eigentlich sein!? I specifi-fucking-ly a-ha-sked your boss <b>not</b> to replace anything and you can't even honor that, huh?");
                 await ƒS.Speech.tell(characters.JJ, "I'm so sorry, sir, I can fix it right away. I don't know, what came over me.");
                 await ƒS.Speech.tell(characters.Dio, "You better. Don't expect me not to call your boss or pay for all this shit though!");
                 saveData.state.yero += 500;

@@ -1620,7 +1620,7 @@ var MCM;
             case miniGameAnswersD1Dio.replacemot:
                 await MCM.ƒS.Character.show(MCM.characters.Dio, MCM.characters.Dio.pose.angry, MCM.ƒS.positions.bottomcenter);
                 await MCM.ƒS.update(1);
-                await MCM.ƒS.Speech.tell(MCM.characters.Dio, "Wie <b>dumm</b> kann ein Mensch eigentlich sein!? I specifi-fucking-ly a-ha-sked your boss <b>not</b> to replace anything and you just don't care, huh?");
+                await MCM.ƒS.Speech.tell(MCM.characters.Dio, "Wie <b>dumm</b> kann ein Mensch eigentlich sein!? I specifi-fucking-ly a-ha-sked your boss <b>not</b> to replace anything and you can't even honor that, huh?");
                 await MCM.ƒS.Speech.tell(MCM.characters.JJ, "I'm so sorry, sir, I can fix it right away. I don't know, what came over me.");
                 await MCM.ƒS.Speech.tell(MCM.characters.Dio, "You better. Don't expect me not to call your boss or pay for all this shit though!");
                 MCM.saveData.state.yero += 500;
