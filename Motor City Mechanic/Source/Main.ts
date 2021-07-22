@@ -442,11 +442,12 @@ namespace MCM {
       { scene: D1_Evening_Free, name: "D1_Evening_Free", id: "D1_Evening_Free" },
       { scene: D1_Evening_Work, name: "D1_Evening_Work", id: "D1_Evening_Work" },
       { scene: D1_Evening_Party, name: "D1_Evening_Party", id: "D1_Evening_Party" },
-      { scene: D1_Evening_Free, name: "D1_AfterParty_Ame", id: "D1_AfterParty_Ame" },
-      { scene: D1_Evening_Work, name: "D1_AfterParty_Azami", id: "D1_AfterParty_Azami" },
-      { scene: D1_Evening_Party, name: "D1_AfterParty_Books", id: "D1_AfterParty_Books" },
-      { scene: D1_Evening_Party, name: "D1_AfterParty_Urban", id: "D1_AfterParty_Urban" },
+      { scene: D1_AfterParty_Ame, name: "D1_AfterParty_Ame", id: "D1_AfterParty_Ame" },
+      { scene: D1_AfterParty_Azami, name: "D1_AfterParty_Azami", id: "D1_AfterParty_Azami" },
+      { scene: D1_AfterParty_Books, name: "D1_AfterParty_Books", id: "D1_AfterParty_Books" },
+      { scene: D1_AfterParty_Urban, name: "D1_AfterParty_Urban", id: "D1_AfterParty_Urban" },
       { scene: Ending_Depression, name: "Ending_Depression", id: "Ending_Depression", next: "End_Credits" },
+      { scene: Ending_Normal, name: "Ending_Normal", id: "Ending_Normal", next: "End_Credits" },
       { scene: End_Credits, name: "End_Credits", id: "End_Credits" }
     ];
     let uiElement: HTMLElement = document.querySelector("[type=interface]");

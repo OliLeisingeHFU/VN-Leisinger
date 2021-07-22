@@ -46,6 +46,6 @@ namespace MCM {
         await ƒS.Speech.tell(characters.Yuri, "Then, don't fuck this up. I gotta go, see ya!");
         await ƒS.Speech.tell(characters.JJ, "Matane!");
         fadeToBlackMusicOff();
-        return "End_Credits";
+        return "Ending_Normal";
     }
 }

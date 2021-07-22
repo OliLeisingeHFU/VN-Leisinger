@@ -28,6 +28,6 @@ namespace MCM {
         await ƒS.Speech.tell(characters.Yuri, "Meet for lunch though?");
         await ƒS.Speech.tell(characters.JJ, "Yes. As always.");
         fadeToBlackMusicOff();
-        return "End_Credits";
+        return "Ending_Normal";
     }
 }

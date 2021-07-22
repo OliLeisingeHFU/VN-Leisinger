@@ -82,6 +82,6 @@ namespace MCM {
         await ƒS.Speech.tell(characters.Yuri, "Yeah, me too. Meet for lunch?");
         await ƒS.Speech.tell(characters.JJ, "Sure!");
         fadeToBlackMusicOff();
-        return "End_Credits";
+        return "Ending_Normal";
     }
 }

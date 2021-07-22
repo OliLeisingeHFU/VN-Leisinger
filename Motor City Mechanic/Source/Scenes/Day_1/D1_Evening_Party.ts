@@ -962,6 +962,6 @@ namespace MCM {
 
         //return "D2_Morning";
         fadeToBlackMusicOff();
-        return "End_Credits";
+        return "Ending_Normal";
     }
 }

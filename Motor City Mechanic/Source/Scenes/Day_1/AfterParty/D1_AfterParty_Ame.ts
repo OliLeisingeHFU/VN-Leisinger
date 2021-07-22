@@ -43,6 +43,6 @@ namespace MCM {
         await ƒS.Speech.tell(characters.JJ, "Hmm...");
         await ƒS.Speech.tell(characters.JJ, "But yes, there is something about her. I haven't figured it out yet, though.");
         fadeToBlackMusicOff();
-        return "End_Credits";
+        return "Ending_Normal";
     }
 }
