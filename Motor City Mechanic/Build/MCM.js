@@ -85,10 +85,10 @@ var MCM;
     }
     MCM.decrementVolume = decrementVolume;
     MCM.music = {
-        moringBGM: "Sound/Music/Alumo - Tapes.wav",
-        noonBGM: "Sound/Music/Alumo - Vice.wav",
-        eveningBGM: "Sound/Music/Alumo - Diotic.wav",
-        partyBGM: "Sound/Music/Alumo - Outlander.wav",
+        moringBGM: "Sound/Music/Alumo - Tapes.mp3",
+        noonBGM: "Sound/Music/Alumo - Vice.mp3",
+        eveningBGM: "Sound/Music/Alumo - Diotic.mp3",
+        partyBGM: "Sound/Music/Alumo - Outlander.mp3",
         synthAdiago: "Sound/Music/.wav"
     };
     // Lazy functions
